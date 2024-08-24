@@ -1,0 +1,36 @@
+{
+	// File saving
+	"files.autoSave": "afterDelay",
+	"files.autoSaveDelay": 1000,
+
+	// Editor
+	"editor.formatOnSaveMode": "modifications",
+	"editor.formatOnSave": true,
+	"editor.bracketPairColorization.enabled": true,
+	"editor.tabSize": 2,
+	"editor.defaultFoldingRangeProvider": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+
+	// Javascript
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"javascript.inlayHints.parameterNames.enabled": "all",
+	"javascript.inlayHints.variableTypes.enabled": true,
+
+	// Typescript
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"typescript.inlayHints.parameterNames.enabled": "all",
+	"typescript.inlayHints.variableTypes.enabled": true,
+
+	// Prettier
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 2,
+	"prettier.singleQuote": false,
+	"prettier.jsxSingleQuote": false,
+	"prettier.trailingComma": "all",
+	"prettier.singleAttributePerLine": true,
+	"prettier.quoteProps": "as-needed",
+	"prettier.printWidth": 80,
+	"prettier.arrowParens": "always",
+	"prettier.semi": true,
+	"git.ignoreLimitWarning": true
+}

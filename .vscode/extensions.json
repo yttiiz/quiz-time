@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"dotenv.dotenv-vscode",
+		"rangav.vscode-thunder-client",
+		"YoavBls.pretty-ts-errors",
+		"ms-azuretools.vscode-docker",
+	]
+}
