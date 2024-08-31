@@ -1,16 +1,24 @@
-import { Button } from "@/components/atoms/Button/mod";
+import { Button, Header } from "@/components/mod";
 import Image from "next/image";
 import { DateFormatter, Age } from "@yttiiz/utils";
 
 export default function Home() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<Button
-				textContent={"Click me"}
-				className={"font-bold"}
-			/>
-			<div>{DateFormatter.display({ date: Date.now() })}</div>
-			<div>{Age.getWithYear("1980-07-24")}</div>
-		</main>
+		<>
+			<Header title="Quiz" items={[
+				{
+					textContent: "Maco",
+					url: "/"
+				}
+			]}/>
+			<main className="flex min-h-screen flex-col items-center justify-between p-24">
+				<Button
+					textContent={"Click me"}
+					className={"font-bold"}
+				/>
+				<div>{DateFormatter.display({ date: Date.now() })}</div>
+				<div>{Age.getWithYear("1980-07-24")}</div>
+			</main>
+		</>
 	);
 }
