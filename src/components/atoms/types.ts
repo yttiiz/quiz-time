@@ -1,10 +1,15 @@
 import { SizeType, SpacingType, VariantType } from "../types";
 
-export type ButtonPropsType = {
+type CommonPropsType = {
+	variant?: VariantType;
+	className?: string;
+};
+
+export type ButtonPropsType = CommonPropsType & {
 	textContent: string;
 	fontSize?: SizeType;
 	radius?: SizeType;
 	spacing?: SpacingType;
-	variant?: VariantType;
-	className?: string;
 };
+
+export type LogoPropsType = CommonPropsType;

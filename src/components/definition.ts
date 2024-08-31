@@ -39,6 +39,26 @@ export const definition = {
 			hover: "hover:text-alert-alt",
 		},
 	},
+	fill: {
+		primary: {
+			content: "fill-primary-content",
+			default: "fill-primary-default",
+			alt: "fill-primary-alt",
+			hover: "hover:fill-primary-alt",
+		},
+		secondary: {
+			content: "fill-secondary-content",
+			default: "fill-secondary-default",
+			alt: "fill-secondary-alt",
+			hover: "hover:fill-secondary-alt",
+		},
+		alert: {
+			content: "fill-alert-content",
+			default: "fill-alert-default",
+			alt: "fill-alert-alt",
+			hover: "hover:fill-alert-alt",
+		},
+	},
 	padding: {
 		2: "p-2",
 		4: "p-4",
@@ -56,7 +76,7 @@ export const definition = {
 		sm: "text-sm",
 		md: "text-md",
 		lg: "text-lg",
-		xl: "text-8=xl",
+		xl: "text-xl",
 		"2xl": "text-2xl",
 	},
 };

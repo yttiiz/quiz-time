@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 :root {
+  /* ==========================| COLORS |========================== */
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  /* ==========================| SIZES |========================== */
+  --base-size: clamp(14px, 2vw, 16px);
+  --site-size: clamp(300px, 80%, 960px)
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +29,20 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.container {
+  margin: auto;
+  width: var(--site-size);
+}
+
+.main-header {
+  height: calc(var(--base-size) * 4);
+}
+
+.header-logotype {
+  width: calc(var(--base-size) * 2.5);
+  height: auto;
 }
 
 @layer utilities {
