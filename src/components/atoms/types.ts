@@ -13,3 +13,9 @@ export type ButtonPropsType = CommonPropsType & {
 };
 
 export type LogoPropsType = CommonPropsType;
+
+export type NavbarItemPropsType = {
+	key: string;
+	textContent: string;
+	url: string;
+};

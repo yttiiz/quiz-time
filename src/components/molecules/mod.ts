@@ -1,2 +1,1 @@
-export * from "./Navbar/mod"
-export * from "./types";
+export * from "./Navbar/mod";

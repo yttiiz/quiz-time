@@ -1,7 +1,8 @@
 import { Logo, Navbar } from "@/components/mod";
-import { HeaderPropsType } from "../mod";
 
-export const Header = ({ title, items }: HeaderPropsType) => {
+const { PAGE_TITLE } = process.env;
+
+export const Header = () => {
 	return (
 		<header className="main-header bg-primary-default">
 			<div className="container flex justify-between h-full">
@@ -10,9 +11,9 @@ export const Header = ({ title, items }: HeaderPropsType) => {
 					className="flex gap-3 items-center"
 				>
 					<Logo />
-					<p>{title}</p>
+					<p>{PAGE_TITLE}</p>
 				</a>
-				<Navbar items={items}/>
+				<Navbar />
 			</div>
 		</header>
 	);
