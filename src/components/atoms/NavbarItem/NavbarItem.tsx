@@ -1,6 +1,6 @@
 import { NavbarItemPropsType } from "../types";
 
-export const NavbarItem = ({ key, textContent, url }: NavbarItemPropsType) => {
+export const NavbarItem = ({ textContent, url }: NavbarItemPropsType, key: string) => {
   return (
     <li
       key={key}
