@@ -1,11 +1,10 @@
-import { Burger, Logo, Navbar } from "@/components/mod";
+import { Burger, Logo } from "@/components/mod";
 
 const { PAGE_TITLE } = process.env;
 
 export const Header = () => {
-
 	return (
-		<header className="main-header bg-primary-default">
+		<header className="main-header">
 			<div className="container flex justify-between items-center h-full">
 				<a
 					href="/"
