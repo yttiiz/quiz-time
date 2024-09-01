@@ -1,4 +1,4 @@
-import { Logo } from "@/components/mod";
+import { Logo, Navbar } from "@/components/mod";
 import { HeaderPropsType } from "../mod";
 
 export const Header = ({ title, items }: HeaderPropsType) => {
@@ -12,15 +12,7 @@ export const Header = ({ title, items }: HeaderPropsType) => {
 					<Logo />
 					<p>{title}</p>
 				</a>
-				<nav>
-					<ul>
-						{items.map((item, index) => (
-							<li key={index}>
-								<a href={item.url}>{item.textContent}</a>
-							</li>
-						))}
-					</ul>
-				</nav>
+				<Navbar items={items}/>
 			</div>
 		</header>
 	);
