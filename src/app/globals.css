@@ -83,10 +83,10 @@ body {
   }
 
   & > nav::before {
-      --height: 1.1rem;
+      --height: calc(var(--base-size) * .8);
       content: '';
       top: calc(var(--height) * -1);
-      width: 2rem;
+      width: calc(var(--height) * 1.75);
       height: var(--height);
       clip-path: polygon(0 100%, 50% 0, 100% 100%);
       border-bottom: 1px solid rgb(var(--foreground-rgb));
