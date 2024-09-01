@@ -1,8 +1,8 @@
 /* eslint-disable react/display-name */
-import { Item, NavbarItem } from "@/components/mod";
+import { NavbarItemType, NavbarItem } from "@/components/mod";
 import { ForwardedRef, forwardRef } from "react";
 
-const items: Item[] = [];
+const items: NavbarItemType[] = [];
 
 for (let i = 0; i <= 3; i++) {
 	items.push({ textContent: "item" + (i + 1), url: "/" });
