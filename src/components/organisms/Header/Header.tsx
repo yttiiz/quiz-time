@@ -1,11 +1,12 @@
-import { Logo, Navbar } from "@/components/mod";
+import { Burger, Logo, Navbar } from "@/components/mod";
 
 const { PAGE_TITLE } = process.env;
 
 export const Header = () => {
+
 	return (
 		<header className="main-header bg-primary-default">
-			<div className="container flex justify-between h-full">
+			<div className="container flex justify-between items-center h-full">
 				<a
 					href="/"
 					className="flex gap-3 items-center"
@@ -13,7 +14,7 @@ export const Header = () => {
 					<Logo />
 					<p>{PAGE_TITLE}</p>
 				</a>
-				<Navbar />
+				<Burger />
 			</div>
 		</header>
 	);
