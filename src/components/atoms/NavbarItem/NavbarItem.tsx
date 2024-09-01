@@ -7,7 +7,7 @@ export const NavbarItem = ({ textContent, url }: NavbarItemPropsType, key: strin
       className="w-full h-max"
     >
       <a
-        className="flex p-2 hover:bg-secondary-default"
+        className="flex p-2"
         href={url}
       >
         {textContent}

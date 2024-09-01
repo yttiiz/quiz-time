@@ -1,2 +1,2 @@
-export * from "./Navbar/mod";
-export * from "./Burger/mod";
+export * from "./Navbar/Navbar";
+export * from "./Burger/Burger";

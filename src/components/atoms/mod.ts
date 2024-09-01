@@ -1,4 +1,4 @@
-export * from "./Button/mod";
-export * from "./Logo/mod";
-export * from "./NavbarItem/mod";
+export * from "./Button/Button";
+export * from "./Logo/Logo";
+export * from "./NavbarItem/NavbarItem";
 export * from "./types";
