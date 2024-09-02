@@ -1,7 +1,7 @@
 "use client"
 
 import { Navbar } from "@/components/mod";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, MouseEvent } from "react";
 
 export const Burger = () => {
 	const line1 = useRef<HTMLSpanElement | null>(null);
@@ -9,6 +9,7 @@ export const Burger = () => {
 	const line3 = useRef<HTMLSpanElement | null>(null);
 	const navBar = useRef<HTMLDivElement | null>(null);
 	const burger = useRef<HTMLDivElement | null>(null);
+	const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
 	const handleBurgerAndNavigationAnimation = () => {
 		if (line1.current && line2.current && line3.current) {
@@ -22,25 +23,35 @@ export const Burger = () => {
 		}
 	};
 
-	const handleClickOutsideBurgerAndNavigation = (event: globalThis.MouseEvent) => {
-		if (event && (event.currentTarget as Element)?.closest("#burger")) {
-			return;
-		} else if (navBar.current && !navBar.current.classList.contains("none")) {
-			handleBurgerAndNavigationAnimation();
-		}
+	const handleClickInsideBurgerAndNavigation = (event: MouseEvent) => {
+		handleBurgerAndNavigationAnimation();
+		setIsNavbarOpen(!isNavbarOpen);
 	};
 	
+	const handleClickOutsideBurgerAndNavigation = (event: globalThis.MouseEvent) => {
+		if ((event.target as HTMLElement).closest("#burger")) return;
+		if (isNavbarOpen) {
+			handleBurgerAndNavigationAnimation();
+			setIsNavbarOpen(!isNavbarOpen);
+		}
+	};
+
 	useEffect(() => {
 		const burgerElement = burger.current;
-		const getBody = (element: Element | null) => element?.closest("body");
 
 		if (burgerElement) {
-			getBody(burgerElement)?.addEventListener("click", handleClickOutsideBurgerAndNavigation);
+			globalThis.addEventListener(
+				"click",
+				handleClickOutsideBurgerAndNavigation,
+			);
 		}
-		
+
 		return () => {
 			if (burgerElement) {
-				getBody(burgerElement)?.removeEventListener("click", handleClickOutsideBurgerAndNavigation);
+				globalThis.removeEventListener(
+					"click",
+					handleClickOutsideBurgerAndNavigation,
+				);
 			}
 		};
 	});
@@ -52,7 +63,8 @@ export const Burger = () => {
 		>
 			<button
 				type="button"
-				onClick={handleBurgerAndNavigationAnimation}
+				className="btn-menu-opener"
+				onClick={handleClickInsideBurgerAndNavigation}
 			>
 				<span ref={line1}></span>
 				<span ref={line2}></span>
