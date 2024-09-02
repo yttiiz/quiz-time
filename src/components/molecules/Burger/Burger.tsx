@@ -1,7 +1,7 @@
 "use client"
 
 import { Navbar } from "@/components/mod";
-import { useRef, useEffect, MouseEvent } from "react";
+import { useRef, useEffect } from "react";
 
 export const Burger = () => {
 	const line1 = useRef<HTMLSpanElement | null>(null);
@@ -22,7 +22,7 @@ export const Burger = () => {
 		}
 	};
 
-	const handleClickOutsideBurgerAndNavigation = (event: MouseEvent) => {
+	const handleClickOutsideBurgerAndNavigation = (event: globalThis.MouseEvent) => {
 		if (event && (event.currentTarget as Element)?.closest("#burger")) {
 			return;
 		} else if (navBar.current && !navBar.current.classList.contains("none")) {
