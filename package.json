@@ -13,7 +13,8 @@
 		"@yttiiz/utils": "npm:@jsr/yttiiz__utils@^0.1.80",
 		"next": "14.2.6",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"zustand": "^4.5.5"
 	},
 	"devDependencies": {
 		"@types/node": "^20",
