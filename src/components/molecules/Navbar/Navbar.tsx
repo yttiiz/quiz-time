@@ -15,7 +15,7 @@ export const Navbar = forwardRef(
 				ref={ref}
 				className="nav none"
 			>
-				<ul className="bg-primary-content text-primary-default">
+				<ul>
 					{items.map(({ textContent, url }, index) => (
 						<NavbarItem
 							key={`${textContent}-${index + 1}`}
