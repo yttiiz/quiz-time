@@ -7,6 +7,7 @@
   --foreground-rgb: 255 255 255;
   --background-rgb: 0 0 0;
   --foreground-opaque: 51 51 51;
+  --box-shadow: 0 0 8px rgb(var(--foreground-rgb) / .15);
   --thin-line: rgb(var(--foreground-rgb) / .2);
   
   /* ==========================| SIZES |========================== */
@@ -59,7 +60,7 @@ body {
   }
 
   & > nav,
-  & > nav::before {
+  & > nav > svg {
     position: absolute;
     right: 50%;
     transform: translateX(50%);
@@ -68,17 +69,23 @@ body {
   & > nav {
     width: max-content;
     top: calc(var(--burger-height) + 30px);
+    box-shadow: var(--box-shadow);
     z-index: 5;
   }
 
-  & > nav::before {
-    --height: calc(var(--base-size) * .8);
-    content: '';
-    top: calc(var(--height) * -1);
-    width: calc(var(--height) * 1.75);
-    height: var(--height);
-    clip-path: polygon(0 100%, 50% 0, 100% 100%);
-    background: rgb(var(--foreground-opaque));
+  & > nav > svg {
+    top: calc(calc(var(--base-size) * -1) + 1px);
+    width: auto;
+    height: var(--base-size);
+    fill: var(--background-rgb);
+    stroke: var(--thin-line);
+    stroke-width: 1px;
+    z-index: 6;
+  }
+
+  & > nav > svg polygon {
+    width: 100%;
+    height: auto;
   }
 
   & > nav.none {
@@ -93,11 +100,11 @@ body {
     overflow: hidden;
     border-radius: var(--btn-border-radius);
     background: rgb(var(--background-rgb));
-    border: 1px solid var(--thin-line);
+    box-shadow: var(--box-shadow);
   }
 
   & > nav > ul li a {
-    transition: background var(--smooth);
+    transition: all var(--smooth);
   }
 
   & > nav > ul li:not(:last-child) {
@@ -183,7 +190,7 @@ body {
 
 @media screen and (max-width: 1200px) {
   #burger > nav,
-  #burger > nav::before {
+  #burger > nav > svg {
       transform: unset;
   }
 
@@ -191,7 +198,7 @@ body {
       right: calc(var(--base-size) * -1);
   }
 
-  #burger > nav::before {
+  #burger > nav > svg {
       right: calc(var(--base-size) * 1.25);
   }
 }
