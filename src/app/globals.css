@@ -56,42 +56,42 @@ body {
   position: relative;
 
   & > button {
-      display: flex;
-      width: calc(var(--base-size) * 1.875);
-      height: var(--burger-height);
-      flex-direction: column;
-      justify-content: space-between;
-      padding: calc(var(--base-size) * .3125);
+    display: flex;
+    width: calc(var(--base-size) * 1.875);
+    height: var(--burger-height);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(var(--base-size) * .3125);
 
-      & > span {
-          background: rgb(var(--foreground-rgb));
-          height: .1rem;
-          width: 100%;
-          transition: var(--smooth);
-      }
+    & > span {
+      background: rgb(var(--foreground-rgb));
+      height: 1px;
+      width: 100%;
+      transition: var(--smooth);
+    }
   }
 
   & > nav,
   & > nav::before {
-      position: absolute;
-      right: 50%;
-      transform: translateX(50%);
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
   }
 
   & > nav {
-      width: max-content;
-      top: calc(var(--burger-height) + 2.5rem);
-      z-index: 5;
+    width: max-content;
+    top: calc(var(--burger-height) + 25px);
+    z-index: 5;
   }
 
   & > nav::before {
-      --height: calc(var(--base-size) * .8);
-      content: '';
-      top: calc(var(--height) * -1);
-      width: calc(var(--height) * 1.75);
-      height: var(--height);
-      clip-path: polygon(0 100%, 50% 0, 100% 100%);
-      border-bottom: 1px solid rgb(var(--foreground-rgb));
+    --height: calc(var(--base-size) * .8);
+    content: '';
+    top: calc(var(--height) * -1);
+    width: calc(var(--height) * 1.75);
+    height: var(--height);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    border-bottom: 1px solid rgb(var(--foreground-rgb));
   }
 
   & > nav.none {
@@ -104,13 +104,13 @@ body {
 
   & > nav::before,
   & > nav > ul {
-      background: rgb(var(--foreground-rgb));
+    background: rgb(var(--foreground-rgb));
   }
 
   & > nav > ul {
-      overflow: hidden;
-      border-radius: var(--btn-border-radius);
-      border: .1rem solid rgb(var(--background-end-rgb) / .1);
+    overflow: hidden;
+    border-radius: var(--btn-border-radius);
+    border: 1px solid rgb(var(--background-end-rgb) / .1);
   }
 
   & > nav > ul li a {
@@ -118,63 +118,63 @@ body {
   }
 
   & > nav > ul li:not(:last-child) {
-      border-bottom: .1rem solid rgb(var(--background-end-rgb) / .1);
+    border-bottom: 1px solid rgb(var(--background-end-rgb) / .1);
   }
 
   & > nav > ul li a,
   & > nav > ul > li > div {
-      display: block;
-      padding: calc(var(--base-size) * .5) calc(var(--base-size) * 1.25);
+    display: block;
+    padding: calc(var(--base-size) * .5) calc(var(--base-size) * 1.25);
   }
 
   & > nav > ul li a:hover,
   & > nav > ul > li > div:hover {
-      background: rgb(var(--background-end-rgb) / .1);
+    background: rgb(var(--background-end-rgb) / .1);
   }
 
   & > nav > ul > li > div {
-      display: flex;
-      gap: var(--base-size);
-      align-items: center;
-      cursor: pointer;
+    display: flex;
+    gap: var(--base-size);
+    align-items: center;
+    cursor: pointer;
   }
 
   & > nav > ul div.arrow {
-      width: calc(var(--base-size) * .6);
-      aspect-ratio: 1.25 / 1;
-      background: rgb(var(--background-end-rgb) / .35);
-      clip-path: polygon(0 0, 50% 100%, 100% 0);
-      transform-origin: center center;
-      transition: transform var(--smooth);
+    width: calc(var(--base-size) * .6);
+    aspect-ratio: 1.25 / 1;
+    background: rgb(var(--background-end-rgb) / .35);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    transform-origin: center center;
+    transition: transform var(--smooth);
   }
 
   & > nav > ul div.arrow.up {
-      transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
   }
 
   & > nav > ul > li > ul {
-      background: rgb(var(--background-end-rgb) / .05);
+    background: rgb(var(--background-end-rgb) / .05);
   }
 
   & > nav > ul > li > ul.none {
-      display: none;
+    display: none;
   }
 
   & > nav > ul > li > ul a {
-      position: relative;
-      padding-left: calc(var(--base-size) * 2);
+    position: relative;
+    padding-left: calc(var(--base-size) * 2);
   }
 
   & > nav > ul > li > ul a:before {
-      content: "";
-      position: absolute;
-      height: 50%;
-      width: calc(var(--base-size) * .1875);
-      border-radius: calc(var(--base-size) * .09375);
-      top: 50%;
-      left: calc(var(--base-size) * 1.25);
-      transform: translateY(-50%);
-      background: var(--secondary-color);
+    content: "";
+    position: absolute;
+    height: 50%;
+    width: calc(var(--base-size) * .1875);
+    border-radius: calc(var(--base-size) * .09375);
+    top: 50%;
+    left: calc(var(--base-size) * 1.25);
+    transform: translateY(-50%);
+    background: var(--secondary-color);
   }
 }
 
