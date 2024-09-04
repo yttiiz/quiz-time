@@ -13,7 +13,7 @@ export const Navbar = forwardRef(
 		return (
 			<nav
 				ref={ref}
-				className="none"
+				className="nav none"
 			>
 				<ul className="bg-primary-content text-primary-default">
 					{items.map(({ textContent, url }, index) => (

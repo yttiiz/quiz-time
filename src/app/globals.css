@@ -7,11 +7,13 @@
   --foreground-rgb: 0 0 0;
   --background-start-rgb: 214 219 220;
   --background-end-rgb: 255 255 255;
+  --box-shadow: 0 0 15px rgb(var(--foreground-rgb) / .1);
 
   /* ==========================| SIZES |========================== */
   --base-size: clamp(14px, 2vw, 16px);
   --site-size: clamp(300px, 80%, 960px);
   --burger-height: calc(var(--base-size) * 1.5);
+  --btn-border-radius: clamp(3px, 1vw, 5px);
 
   /* ==========================| TIMING |========================== */
   --smooth: .3s;
@@ -72,14 +74,13 @@ body {
   & > nav,
   & > nav::before {
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 50%;
+      transform: translateX(50%);
   }
 
   & > nav {
       width: max-content;
       top: calc(var(--burger-height) + 2.5rem);
-      box-shadow: var(--box-shadow);
       z-index: 5;
   }
 
@@ -94,11 +95,11 @@ body {
   }
 
   & > nav.none {
-      display: none;
+    display: none;
   }
-
+  
   & > nav ul {
-      list-style: none;
+    list-style: none;
   }
 
   & > nav::before,
@@ -194,3 +195,21 @@ body {
     text-wrap: balance;
   }
 }
+
+/*=================================================| BREAKPOINTS |=================================================*/
+
+@media screen and (max-width: 1200px) {
+  #burger > nav,
+  #burger > nav::before {
+      transform: unset;
+  }
+
+  #burger > nav {
+      right: calc(var(--base-size) * -1);
+  }
+
+  #burger > nav::before {
+      right: calc(var(--base-size) * 1.25);
+  }
+}
+
