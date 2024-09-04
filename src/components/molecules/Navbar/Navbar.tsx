@@ -1,12 +1,15 @@
 /* eslint-disable react/display-name */
-import { NavbarItemType, NavbarItem } from "@/components/mod";
+import { NavbarItem } from "@/components/mod";
 import { ForwardedRef, forwardRef } from "react";
+import { useHeaderStore } from "@/store/mod";
 
 export const Navbar = forwardRef(
 	(
-		{ items }: { items: NavbarItemType[] },
+		_,
 		ref: ForwardedRef<HTMLDivElement | null>,
 	) => {
+		const items = useHeaderStore((state) => state.items);
+		
 		return (
 			<nav
 				ref={ref}

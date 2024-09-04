@@ -1,15 +1,15 @@
 {
 	"items": [
 		{
-			"textContent": "connexion",
+			"textContent": "Connexion",
 			"url": "/login"
 		},
 		{
-			"textContent": "actualités",
+			"textContent": "Actualités",
 			"url": "/news"
 		},
 		{
-			"textContent": "qui sommes-nous ?",
+			"textContent": "Qui sommes-nous ?",
 			"url": "/about"
 		}
 	]

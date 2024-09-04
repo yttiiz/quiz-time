@@ -1,5 +1,6 @@
 import { Burger, Logo } from "@/components/mod";
 import { Fetcher } from "@/utils/mod";
+
 const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN } = process.env;
 
 export const Header = async () => {
