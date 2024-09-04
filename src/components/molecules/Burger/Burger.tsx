@@ -2,13 +2,12 @@
 
 import { Navbar, NavbarItemType } from "@/components/mod";
 import { SetterType, store, useHeaderStore } from "@/store/mod";
-import { useRef, useEffect, useState, MouseEvent } from "react";
+import { useRef, useEffect, useState } from "react";
 
-export const Burger = ({ items }: { items: NavbarItemType[]}) => {
-	const [setItems] = store(
-		useHeaderStore,
-		"setItems"
-	) as [SetterType<NavbarItemType[]>];
+export const Burger = ({ items }: { items: NavbarItemType[] }) => {
+	const [setItems] = store(useHeaderStore, "setItems") as [
+		SetterType<NavbarItemType[]>,
+	];
 
 	setItems(items);
 
@@ -35,8 +34,10 @@ export const Burger = ({ items }: { items: NavbarItemType[]}) => {
 		handleBurgerAndNavigationAnimation();
 		setIsNavbarOpen(!isNavbarOpen);
 	};
-	
-	const handleClickOutsideBurgerAndNavigation = (event: globalThis.MouseEvent) => {
+
+	const handleClickOutsideBurgerAndNavigation = (
+		event: globalThis.MouseEvent,
+	) => {
 		if ((event.target as HTMLElement).closest("#burger")) return;
 		if (isNavbarOpen) {
 			handleBurgerAndNavigationAnimation();
