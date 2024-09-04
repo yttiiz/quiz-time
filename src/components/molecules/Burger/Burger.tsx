@@ -1,9 +1,17 @@
 "use client"
 
-import { Navbar } from "@/components/mod";
+import { Navbar, NavbarItemType } from "@/components/mod";
+import { SetterType, store, useHeaderStore } from "@/store/mod";
 import { useRef, useEffect, useState, MouseEvent } from "react";
 
-export const Burger = () => {
+export const Burger = ({ items }: { items: NavbarItemType[]}) => {
+	const [setItems] = store(
+		useHeaderStore,
+		"setItems"
+	) as [SetterType<NavbarItemType[]>];
+
+	setItems(items);
+
 	const line1 = useRef<HTMLSpanElement | null>(null);
 	const line2 = useRef<HTMLSpanElement | null>(null);
 	const line3 = useRef<HTMLSpanElement | null>(null);
@@ -23,7 +31,7 @@ export const Burger = () => {
 		}
 	};
 
-	const handleClickInsideBurgerAndNavigation = (event: MouseEvent) => {
+	const handleClickInsideBurgerAndNavigation = () => {
 		handleBurgerAndNavigationAnimation();
 		setIsNavbarOpen(!isNavbarOpen);
 	};

@@ -4,35 +4,25 @@
 
 :root {
   /* ==========================| COLORS |========================== */
-  --foreground-rgb: 0 0 0;
-  --background-start-rgb: 214 219 220;
-  --background-end-rgb: 255 255 255;
-
+  --foreground-rgb: 255 255 255;
+  --background-rgb: 0 0 0;
+  --foreground-opaque: 51 51 51;
+  --box-shadow: 0 0 8px rgb(var(--foreground-rgb) / .15);
+  --thin-line: rgb(var(--foreground-rgb) / .2);
+  
   /* ==========================| SIZES |========================== */
   --base-size: clamp(14px, 2vw, 16px);
   --site-size: clamp(300px, 80%, 960px);
   --burger-height: calc(var(--base-size) * 1.5);
+  --btn-border-radius: clamp(3px, 1vw, 5px);
 
   /* ==========================| TIMING |========================== */
   --smooth: .3s;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255 255 255;
-    --background-start-rgb: 0 0 0;
-    --background-end-rgb: 0 0 0;
-  }
-}
-
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
 }
 
 .container {
@@ -42,7 +32,7 @@ body {
 
 .main-header {
   height: calc(var(--base-size) * 4);
-  border-bottom: 1px solid rgb(var(--foreground-rgb) / .1);
+  border-bottom: 1px solid var(--thin-line);
 }
 
 .header-logotype {
@@ -54,126 +44,127 @@ body {
   position: relative;
 
   & > button {
-      display: flex;
-      width: calc(var(--base-size) * 1.875);
-      height: var(--burger-height);
-      flex-direction: column;
-      justify-content: space-between;
-      padding: calc(var(--base-size) * .3125);
+    display: flex;
+    width: calc(var(--base-size) * 1.875);
+    height: var(--burger-height);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(var(--base-size) * .3125);
 
-      & > span {
-          background: rgb(var(--foreground-rgb));
-          height: .1rem;
-          width: 100%;
-          transition: var(--smooth);
-      }
+    & > span {
+      background: rgb(var(--foreground-rgb));
+      height: 1px;
+      width: 100%;
+      transition: var(--smooth);
+    }
   }
 
   & > nav,
-  & > nav::before {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+  & > nav > svg {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
   }
 
   & > nav {
-      width: max-content;
-      top: calc(var(--burger-height) + 2.5rem);
-      box-shadow: var(--box-shadow);
-      z-index: 5;
+    width: max-content;
+    top: calc(var(--burger-height) + 30px);
+    box-shadow: var(--box-shadow);
+    z-index: 5;
   }
 
-  & > nav::before {
-      --height: calc(var(--base-size) * .8);
-      content: '';
-      top: calc(var(--height) * -1);
-      width: calc(var(--height) * 1.75);
-      height: var(--height);
-      clip-path: polygon(0 100%, 50% 0, 100% 100%);
-      border-bottom: 1px solid rgb(var(--foreground-rgb));
+  & > nav > svg {
+    top: calc(calc(var(--base-size) * -1) + 1px);
+    width: auto;
+    height: var(--base-size);
+    fill: var(--background-rgb);
+    stroke: var(--thin-line);
+    stroke-width: 1px;
+    z-index: 6;
+  }
+
+  & > nav > svg polygon {
+    width: 100%;
+    height: auto;
   }
 
   & > nav.none {
-      display: none;
+    display: none;
   }
-
+  
   & > nav ul {
-      list-style: none;
+    list-style: none;
   }
-
-  & > nav::before,
+  
   & > nav > ul {
-      background: rgb(var(--foreground-rgb));
-  }
-
-  & > nav > ul {
-      overflow: hidden;
-      border-radius: var(--btn-border-radius);
-      border: .1rem solid rgb(var(--background-end-rgb) / .1);
+    overflow: hidden;
+    border-radius: var(--btn-border-radius);
+    background: rgb(var(--background-rgb));
+    box-shadow: var(--box-shadow);
   }
 
   & > nav > ul li a {
-    transition: background var(--smooth);
+    transition: all var(--smooth);
   }
 
   & > nav > ul li:not(:last-child) {
-      border-bottom: .1rem solid rgb(var(--background-end-rgb) / .1);
+    border-bottom: 1px solid var(--thin-line);
   }
 
   & > nav > ul li a,
   & > nav > ul > li > div {
-      display: block;
-      padding: calc(var(--base-size) * .5) calc(var(--base-size) * 1.25);
+    display: block;
+    padding: calc(var(--base-size) * .5) calc(var(--base-size) * 1.25);
   }
 
   & > nav > ul li a:hover,
   & > nav > ul > li > div:hover {
-      background: rgb(var(--background-end-rgb) / .1);
+    background: rgb(var(--foreground-rgb) / .05);
   }
 
   & > nav > ul > li > div {
-      display: flex;
-      gap: var(--base-size);
-      align-items: center;
-      cursor: pointer;
+    display: flex;
+    gap: var(--base-size);
+    align-items: center;
+    cursor: pointer;
   }
 
   & > nav > ul div.arrow {
-      width: calc(var(--base-size) * .6);
-      aspect-ratio: 1.25 / 1;
-      background: rgb(var(--background-end-rgb) / .35);
-      clip-path: polygon(0 0, 50% 100%, 100% 0);
-      transform-origin: center center;
-      transition: transform var(--smooth);
+    width: calc(var(--base-size) * .6);
+    aspect-ratio: 1.25 / 1;
+    background: rgb(var(--background-rgb) / .35);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    transform-origin: center center;
+    transition: transform var(--smooth);
   }
 
   & > nav > ul div.arrow.up {
-      transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
   }
 
   & > nav > ul > li > ul {
-      background: rgb(var(--background-end-rgb) / .05);
+    background: rgb(var(--background-rgb) / .05);
   }
 
   & > nav > ul > li > ul.none {
-      display: none;
+    display: none;
   }
 
   & > nav > ul > li > ul a {
-      position: relative;
-      padding-left: calc(var(--base-size) * 2);
+    position: relative;
+    padding-left: calc(var(--base-size) * 2);
   }
 
   & > nav > ul > li > ul a:before {
-      content: "";
-      position: absolute;
-      height: 50%;
-      width: calc(var(--base-size) * .1875);
-      border-radius: calc(var(--base-size) * .09375);
-      top: 50%;
-      left: calc(var(--base-size) * 1.25);
-      transform: translateY(-50%);
-      background: var(--secondary-color);
+    content: "";
+    position: absolute;
+    height: 50%;
+    width: calc(var(--base-size) * .1875);
+    border-radius: calc(var(--base-size) * .09375);
+    top: 50%;
+    left: calc(var(--base-size) * 1.25);
+    transform: translateY(-50%);
+    background: var(--secondary-color);
   }
 }
 
@@ -194,3 +185,21 @@ body {
     text-wrap: balance;
   }
 }
+
+/*=================================================| BREAKPOINTS |=================================================*/
+
+@media screen and (max-width: 1200px) {
+  #burger > nav,
+  #burger > nav > svg {
+      transform: unset;
+  }
+
+  #burger > nav {
+      right: calc(var(--base-size) * -1);
+  }
+
+  #burger > nav > svg {
+      right: calc(var(--base-size) * 1.25);
+  }
+}
+
