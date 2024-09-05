@@ -29,7 +29,7 @@ export class OpenWeather {
 		} = data;
 
 		return {
-			temperature: OpenWeather.convertKelvinToCelcius(temp),
+			temperature: temp.toFixed(1) + "°C",
 			iconUrl: OpenWeather.getIcon(weather[0]["icon"]),
 			location: name,
 			description: weather[0]["description"],
@@ -48,6 +48,6 @@ export class OpenWeather {
 		longitude: string | number;
 		apiKey: string;
 	}) {
-		return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+		return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
 	}
 }
