@@ -45,6 +45,10 @@ body {
   border-radius: 50%;
 }
 
+.openweather-container {
+  font-size: calc(var(--base-size) * .8);
+}
+
 #burger {
   position: relative;
 

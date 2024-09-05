@@ -7,6 +7,7 @@ import { OpenWeather } from "@/utils/mod";
 import { useEffect, useState } from "react";
 
 export const WeatherWidget = ({ host }: { host: string | undefined }) => {
+	const isFrenchBrowser = globalThis.navigator.language === "fr-FR";
 	const [response, setResponse] = useState<
 		SuccessResponseType | ErrorResponseType | null
 	>(null);
@@ -29,7 +30,7 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 					body.append("coords", JSON.stringify({ latitude, longitude }));
 					retreiveDataFromApi(body);
 				},
-				(err) => {					
+				(err) => {
 					body.append("coords", JSON.stringify({ message: err.message }));
 					retreiveDataFromApi(body);
 				},
@@ -37,14 +38,19 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 		}
 	}, [setResponse, host]);
 
-	if (!response) return <div>Waiting...</div>;
+	if (!response)
+		return (
+			<div className="openweather-container hidden md:block">
+				{isFrenchBrowser ? "Chargement" : "Waiting"}...
+			</div>
+		);
 	if (response.ok) {
 		const { temperature, iconUrl, location } = OpenWeather.getDetails(
 			response.data as unknown as WeatherApiType,
 		);
 
 		return (
-			<div className="flex items-center gap-2">
+			<div className="openweather-container flex items-center gap-2">
 				<span className="hidden md:block">{location}</span>
 				<Image
 					src={iconUrl}
@@ -57,5 +63,10 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 				<span>{temperature}</span>
 			</div>
 		);
-	} else return <div>No weather info avaible</div>;
+	} else
+		return (
+			<div className="openweather-container hidden md:block">
+				{isFrenchBrowser ? "Données non disponibles" : "No weather info avaible"}
+			</div>
+		);
 };
