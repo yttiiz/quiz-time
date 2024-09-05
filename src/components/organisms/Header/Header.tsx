@@ -4,12 +4,6 @@ import { Fetcher, OpenWeather } from "@/utils/mod";
 const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN, OPENWEATHER_API_KEY } = process.env;
 
 export const Header = async () => {
-	const api = OpenWeather.getApi({
-		latitude: 48.849998,
-		longitude: 2.48333,
-		apiKey: OPENWEATHER_API_KEY as string
-	});
-	const weatherResp = await Fetcher.getData(api);
 	const burgerResp = await Fetcher.getData(`${__NEXT_PRIVATE_ORIGIN}/api/json`);
 
 	return (
@@ -22,8 +16,8 @@ export const Header = async () => {
 					<Logo />
 					<p>{PAGE_TITLE}</p>
 				</a>
-				<div className="flex gap-4">
-					<WeatherWidget response={weatherResp} />
+				<div className="flex items-center gap-4">
+					<WeatherWidget apiKey={OPENWEATHER_API_KEY as string} />
 					<Burger response={burgerResp} />
 				</div>
 			</div>

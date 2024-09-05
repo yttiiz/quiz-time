@@ -6,15 +6,34 @@ export class OpenWeather {
 	 * @param temp Temperature in `kelvin`.
 	 */
 	private static convertKelvinToCelcius(temp: number) {
-		return ((temp - 273.15).toFixed(1)) + "°C";
+		return (temp - 273.15).toFixed(1) + "°C";
 	}
 
 	/**
-	 * Returns current temperature.
+	 * Returns icon url according to given `code` parameter.
+	 * @param icon icon code.
+	 */
+	private static getIcon(icon: string) {
+		return `https://openweathermap.org/img/wn/${icon}@2x.png`;
+	}
+
+	/**
+	 * Returns current temperature details.
 	 * @param data Temperature details from a specific point.
 	 */
-	public static getTemperature(data: WeatherApiType) {
-		return OpenWeather.convertKelvinToCelcius(data.main.temp);
+	public static getDetails(data: WeatherApiType) {
+		const {
+			main: { temp },
+			weather,
+			name,
+		} = data;
+
+		return {
+			temperature: OpenWeather.convertKelvinToCelcius(temp),
+			iconUrl: OpenWeather.getIcon(weather[0]["icon"]),
+			location: name,
+			description: weather[0]["description"],
+		};
 	}
 
 	/**
