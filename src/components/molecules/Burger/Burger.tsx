@@ -2,14 +2,21 @@
 
 import { Navbar, NavbarItemType } from "@/components/mod";
 import { SetterType, store, useHeaderStore } from "@/store/mod";
+import { ErrorResponseType, SuccessResponseType } from "@/utils/types";
 import { useRef, useEffect, useState } from "react";
 
-export const Burger = ({ items }: { items: NavbarItemType[] }) => {
-	const [setItems] = store(useHeaderStore, "setItems") as [
-		SetterType<NavbarItemType[]>,
-	];
+export const Burger = ({ response }: { response: SuccessResponseType | ErrorResponseType }) => {
+	let items: NavbarItemType[] = [];
 
-	setItems(items);
+	if (response.ok) {
+		items = [...response.data as unknown as NavbarItemType[]];
+
+		const [setItems] = store(useHeaderStore, "setItems") as [
+			SetterType<NavbarItemType[]>,
+		];
+	
+		setItems(items);
+	}
 
 	const line1 = useRef<HTMLSpanElement | null>(null);
 	const line2 = useRef<HTMLSpanElement | null>(null);
