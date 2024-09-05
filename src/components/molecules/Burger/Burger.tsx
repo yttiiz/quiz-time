@@ -6,16 +6,12 @@ import { ErrorResponseType, SuccessResponseType } from "@/utils/types";
 import { useRef, useEffect, useState } from "react";
 
 export const Burger = ({ response }: { response: SuccessResponseType | ErrorResponseType }) => {
-	let items: NavbarItemType[] = [];
+	const [setItems] = store(useHeaderStore, "setItems") as [
+		SetterType<NavbarItemType[]>,
+	];
 
 	if (response.ok) {
-		items = [...response.data as unknown as NavbarItemType[]];
-
-		const [setItems] = store(useHeaderStore, "setItems") as [
-			SetterType<NavbarItemType[]>,
-		];
-	
-		setItems(items);
+		setItems(response.data as unknown as NavbarItemType[]);
 	}
 
 	const line1 = useRef<HTMLSpanElement | null>(null);
