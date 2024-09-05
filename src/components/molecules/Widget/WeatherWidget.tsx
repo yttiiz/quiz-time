@@ -1,19 +1,17 @@
 "use client";
 
 import { ErrorResponseType, SuccessResponseType } from "@/utils/mod";
+import { WeatherApiType } from "../mod";
+import { OpenWeather } from "@/utils/mod";
 
 export const WeatherWidget = ({
 	response,
 }: {
 	response: SuccessResponseType | ErrorResponseType;
 }) => {
-	let weatherInfo = "";
-
-	if (response.ok) {
-		weatherInfo = (response.data["main"] as unknown as { temp: string })[
-			"temp"
-		];
-	} else weatherInfo = "No weather info"
+	const weatherInfo = response.ok
+		? OpenWeather.getTemperature(response.data as unknown as WeatherApiType)
+		: "No weather info avaible.";
 
 	return <div>{weatherInfo}</div>;
 };
