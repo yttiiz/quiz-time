@@ -1,9 +1,10 @@
-import { Burger, Logo } from "@/components/mod";
+import { Burger, Logo, WeatherWidget } from "@/components/mod";
 import { Fetcher } from "@/utils/mod";
 
-const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN } = process.env;
-
 export const Header = async () => {
+	const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN: host } = process.env;
+	const burgerResp = await Fetcher.getData(`${host}/api/json`);
+
 	return (
 		<header className="main-header">
 			<div className="container flex justify-between items-center h-full">
@@ -14,7 +15,10 @@ export const Header = async () => {
 					<Logo />
 					<p>{PAGE_TITLE}</p>
 				</a>
-				<Burger items={await Fetcher.getData(__NEXT_PRIVATE_ORIGIN)} />
+				<div className="flex items-center gap-4">
+					<WeatherWidget host={host} />
+					<Burger response={burgerResp} />
+				</div>
 			</div>
 		</header>
 	);
