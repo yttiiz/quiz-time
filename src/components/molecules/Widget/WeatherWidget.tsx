@@ -11,17 +11,16 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 		SuccessResponseType | ErrorResponseType | null
 	>(null);
 
-	const retreiveDataFromApi = (body: FormData) => {
-		fetch(host + "/api/weather", {
-			method: "POST",
-			body,
-		})
-			.then((res) => res.json())
-			.then((data) => setResponse(data));
-	};
-
 	useEffect(() => {
 		const body = new FormData();
+		const retreiveDataFromApi = (body: FormData) => {
+			fetch(host + "/api/weather", {
+				method: "POST",
+				body,
+			})
+				.then((res) => res.json())
+				.then((data) => setResponse(data));
+		};
 
 		if (globalThis && globalThis.navigator.geolocation) {
 			globalThis.navigator.geolocation.getCurrentPosition(
@@ -36,7 +35,7 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 				},
 			);
 		}
-	}, [setResponse]);
+	}, [setResponse, host]);
 
 	if (!response) return <div>Waiting...</div>;
 	if (response.ok) {
