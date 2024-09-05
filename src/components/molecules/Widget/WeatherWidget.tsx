@@ -1,26 +1,52 @@
 "use client";
 
-import { Fetcher } from "@/utils/mod";
+import { ErrorResponseType, SuccessResponseType } from "@/utils/mod";
 import { WeatherApiType } from "../mod";
 import Image from "next/image";
 import { OpenWeather } from "@/utils/mod";
+import { useEffect, useState } from "react";
 
-export const WeatherWidget = async ({ apiKey }: { apiKey: string }) => {
-	const api = OpenWeather.getApi({
-		latitude: 16.2333,
-		longitude: -61.3833,
-		apiKey,
-	});
-	const response = await Fetcher.getData(api);
+export const WeatherWidget = ({ host }: { host: string | undefined }) => {
+	const [response, setResponse] = useState<
+		SuccessResponseType | ErrorResponseType | null
+	>(null);
 
-	if (response && response.ok) {
+	const retreiveDataFromApi = (body: FormData) => {
+		fetch(host + "/api/weather", {
+			method: "POST",
+			body,
+		})
+			.then((res) => res.json())
+			.then((data) => setResponse(data));
+	};
+
+	useEffect(() => {
+		const body = new FormData();
+
+		if (globalThis && globalThis.navigator.geolocation) {
+			globalThis.navigator.geolocation.getCurrentPosition(
+				(data) => {
+					const { latitude, longitude } = data.coords;
+					body.append("coords", JSON.stringify({ latitude, longitude }));
+					retreiveDataFromApi(body);
+				},
+				(err) => {					
+					body.append("coords", JSON.stringify({ message: err.message }));
+					retreiveDataFromApi(body);
+				},
+			);
+		}
+	}, [setResponse]);
+
+	if (!response) return <div>Waiting...</div>;
+	if (response.ok) {
 		const { temperature, iconUrl, location } = OpenWeather.getDetails(
 			response.data as unknown as WeatherApiType,
 		);
 
 		return (
 			<div className="flex items-center gap-2">
-				<span className="lg:text-red">{location}</span>
+				<span className="hidden md:block">{location}</span>
 				<Image
 					src={iconUrl}
 					width={30}
