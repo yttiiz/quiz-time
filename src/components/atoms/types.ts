@@ -12,7 +12,7 @@ export type ButtonPropsType = CommonPropsType & {
 	spacing?: SpacingType;
 };
 
-export type LogoPropsType = CommonPropsType;
+export type LogoPropsType = Omit<CommonPropsType, "variant">;
 
 export type NavbarItemPropsType = {
 	key: string;

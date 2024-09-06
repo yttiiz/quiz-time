@@ -1,11 +1,9 @@
-import { definition } from "@/components/definition";
 import { LogoPropsType } from "../types";
 
 export const Logo = ({
-	variant = "primary",
-	className = "header-logotype",
+	className = "main-header-logotype",
 }: LogoPropsType) => {
-	className += ` ${definition.fill[variant]["content"]}`;
+	className += " fill-primary-content";
 
 	return (
 		<svg

@@ -47,21 +47,22 @@ body {
 .main-header {
   height: calc(var(--base-size) * 4);
   border-bottom: 1px solid var(--foreground-20-percent);
+  
+  & .main-header-logotype {
+    width: calc(var(--base-size) * 2.5);
+    height: auto;
+  }
+
+  & .main-header-openweather-icon {
+    background-color: rgb(var(--foreground) / .2);
+    border-radius: 50%;
+  }
+  
+  & .main-header-openweather-container {
+    font-size: calc(var(--base-size) * .8);
+  }
 }
 
-.header-logotype {
-  width: calc(var(--base-size) * 2.5);
-  height: auto;
-}
-
-.openweather-icon {
-  background-color: rgb(var(--foreground) / .2);
-  border-radius: 50%;
-}
-
-.openweather-container {
-  font-size: calc(var(--base-size) * .8);
-}
 
 #burger {
   position: relative;
