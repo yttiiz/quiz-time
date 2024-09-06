@@ -7,7 +7,7 @@ import { OpenWeather } from "@/utils/mod";
 import { useEffect, useState } from "react";
 
 export const WeatherWidget = ({ host }: { host: string | undefined }) => {
-	const isFrenchBrowser = globalThis.navigator.language === "fr-FR";
+	const [isFrenchBrowser, setIsFrenchBrowser] = useState(true);
 	const [response, setResponse] = useState<
 		SuccessResponseType | ErrorResponseType | null
 	>(null);
@@ -23,20 +23,26 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 				.then((data) => setResponse(data));
 		};
 
-		if (globalThis && globalThis.navigator.geolocation) {
-			globalThis.navigator.geolocation.getCurrentPosition(
-				(data) => {
-					const { latitude, longitude } = data.coords;
-					body.append("coords", JSON.stringify({ latitude, longitude }));
-					retreiveDataFromApi(body);
-				},
-				(err) => {
-					body.append("coords", JSON.stringify({ message: err.message }));
-					retreiveDataFromApi(body);
-				},
-			);
+		if (globalThis) {
+			if (globalThis.navigator.language) {
+				setIsFrenchBrowser(globalThis.navigator.language === "fr-FR");
+			}
+
+			if (globalThis.navigator.geolocation) {
+				globalThis.navigator.geolocation.getCurrentPosition(
+					(data) => {
+						const { latitude, longitude } = data.coords;
+						body.append("coords", JSON.stringify({ latitude, longitude }));
+						retreiveDataFromApi(body);
+					},
+					(err) => {
+						body.append("coords", JSON.stringify({ message: err.message }));
+						retreiveDataFromApi(body);
+					},
+				);
+			}
 		}
-	}, [setResponse, host]);
+	}, [setResponse, setIsFrenchBrowser, host]);
 
 	if (!response)
 		return (
