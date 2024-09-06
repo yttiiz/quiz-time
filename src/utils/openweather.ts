@@ -2,14 +2,6 @@ import { WeatherApiType } from "@/components/mod";
 
 export class OpenWeather {
 	/**
-	 * Converts `kelvin` to `celcius`.
-	 * @param temp Temperature in `kelvin`.
-	 */
-	private static convertKelvinToCelcius(temp: number) {
-		return (temp - 273.15).toFixed(1) + "°C";
-	}
-
-	/**
 	 * Returns icon url according to given `code` parameter.
 	 * @param icon icon code.
 	 */
@@ -43,11 +35,13 @@ export class OpenWeather {
 		latitude,
 		longitude,
 		apiKey,
+		units = "metric",
 	}: {
 		latitude: string | number;
 		longitude: string | number;
 		apiKey: string;
+		units: "metric" | "imperial"
 	}) {
-		return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+		return `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;
 	}
 }
