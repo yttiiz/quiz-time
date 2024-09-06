@@ -22,7 +22,8 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(#001329, rgb(var(--background-rgb)));
+  min-height: 100vh;
 }
 
 .container {
@@ -186,6 +187,14 @@ body {
 
 .line-3 {
   transform: rotate(45deg) translate(calc(var(--base-size) * -.3125), calc(var(--base-size) * -.25));
+}
+
+#hero-banner {
+  & h1 {
+    font-size: calc(var(--base-size) * 8);
+    font-weight: 700;
+    line-height: calc(var(--base-size) * 10);
+  }
 }
 
 @layer utilities {

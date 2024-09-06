@@ -1,10 +1,10 @@
-import { MainLayout } from "@/components/mod";
+import { MainLayout, Hero } from "@/components/mod";
 
 export default function Home() {
 	return (
 		<MainLayout>
-			<div className="container flex min-h-screen flex-col pt-24 gap-8">
-				Hero banner here
+			<div className="container flex min-h-screen flex-col">
+				<Hero title={"Quiz time"} />
 			</div>
 		</MainLayout>
 	);
