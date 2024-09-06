@@ -10,10 +10,6 @@ export const Burger = ({ response }: { response: SuccessResponseType | ErrorResp
 		SetterType<NavbarItemType[]>,
 	];
 
-	if (response.ok) {
-		setItems(response.data as unknown as NavbarItemType[]);
-	}
-
 	const line1 = useRef<HTMLSpanElement | null>(null);
 	const line2 = useRef<HTMLSpanElement | null>(null);
 	const line3 = useRef<HTMLSpanElement | null>(null);
@@ -50,6 +46,10 @@ export const Burger = ({ response }: { response: SuccessResponseType | ErrorResp
 
 	useEffect(() => {
 		const burgerElement = burger.current;
+		
+		if (response.ok) {
+			setItems(response.data as unknown as NavbarItemType[]);
+		}
 
 		if (burgerElement) {
 			globalThis.addEventListener(
