@@ -3,7 +3,7 @@ import { Fetcher } from "@/utils/mod";
 
 export const Header = async () => {
 	const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const burgerResp = await Fetcher.getData(`${host}/api/json`);
+	const burgerResp = await Fetcher.getData(`${host}/api/header`);
 
 	return (
 		<header className="main-header">
