@@ -16,22 +16,23 @@ const config: Config = {
 		},
 		colors: {
 			primary: {
-				content: "#FFFFFF",
-				default: "#881600",
-				alt: "#701401",
+				default: "rgb(var(--primary-default) / <alpha-value>)",
+				content: "rgb(var(--primary-content) / <alpha-value>)",
+				alt: "rgb(var(--primary-alt) / <alpha-value>)",
 			},
 			secondary: {
-				content: "#000000",
-				default: "#E3E36A",
-				alt: "#C7C760",
+				default: "rgb(var(--secondary-default) / <alpha-value>)",
+				content: "rgb(var(--secondary-content) / <alpha-value>)",
+				alt: "rgb(var(--secondary-alt) / <alpha-value>)",
 			},
 			alert: {
-				content: "#000000",
-				default: "#CBFF8C",
-				alt: "#B8E680",
+				default: "rgb(var(--alert-default) / <alpha-value>)",
+				content: "rgb(var(--alert-content) / <alpha-value>)",
+				alt: "rgb(var(--alert-alt) / <alpha-value>)",
 			},
 		},
 	},
 	plugins: [],
 };
+
 export default config;
