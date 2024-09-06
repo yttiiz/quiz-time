@@ -18,16 +18,17 @@
   
   --foreground: 255 255 255;
   --background: 0 0 0;
-  --background-alt: 0 19 41;
+  --background-alt: 0 9 125;
 
   --box-shadow: 0 0 4px rgb(var(--foreground) / .15);
   --foreground-20-percent: rgb(var(--foreground) / .2);
   
   /* ==========================| SIZES |========================== */
   --base-size: clamp(14px, 2vw, 16px);
-  --site-size: clamp(300px, 80%, 960px);
+  --web-site-content-boundary: clamp(300px, 80%, 960px);
+  --main-header-height: calc(var(--base-size) * 4);
   --burger-height: calc(var(--base-size) * 1.5);
-  --btn-border-radius: clamp(3px, 1vw, 5px);
+  --base-border-radius: clamp(3px, 1vw, 5px);
 
   /* ==========================| TIMING |========================== */
   --smooth: .3s;
@@ -35,21 +36,22 @@
 
 body {
   color: rgb(var(--foreground));
-  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--background-alt)), rgb(var(--background)));
+  background: rgb(var(--background));
   min-height: 100vh;
 }
 
 button {
   transition: background var(--smooth);
+  font-size: calc(var(--base-size) * 1.25);
 }
 
 .container {
   margin: auto;
-  width: var(--site-size);
+  width: var(--web-site-content-boundary);
 }
 
 .main-header {
-  height: calc(var(--base-size) * 4);
+  height: var(--main-header-height);
   border-bottom: 1px solid var(--foreground-20-percent);
   
   & .main-header-logotype {
@@ -66,7 +68,6 @@ button {
     font-size: calc(var(--base-size) * .8);
   }
 }
-
 
 #burger {
   position: relative;
@@ -125,7 +126,7 @@ button {
   
   & > nav > ul {
     overflow: hidden;
-    border-radius: var(--btn-border-radius);
+    border-radius: var(--base-border-radius);
     background: rgb(var(--background));
     box-shadow: var(--box-shadow);
   }
@@ -208,6 +209,11 @@ button {
 }
 
 #hero-banner {
+  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
+  height: calc(100vh - var(--main-header-height));
+  display: flex;
+  align-items: center;
+
   & h1 {
     font-size: calc(var(--base-size) * 8);
     font-weight: 700;

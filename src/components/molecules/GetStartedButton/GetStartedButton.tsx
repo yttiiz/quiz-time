@@ -15,6 +15,7 @@ export const GetStartedButton = () => {
 				variant={"secondary"}
 				radius={"md"}
 				spacing={"4"}
+        className={"font-semibold"}
 				onClick={onButtonClick}
 			/>
 		</div>

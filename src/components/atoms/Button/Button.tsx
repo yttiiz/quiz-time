@@ -5,7 +5,6 @@ import { definition } from "@/components/definition";
 
 export const Button = ({
 	textContent,
-	fontSize = "xl",
 	radius = "sm",
 	spacing = "2",
 	variant = "primary",
@@ -15,12 +14,11 @@ export const Button = ({
 	const {
 		background,
 		text,
-		"font-size": size,
 		"border-radius": borderRadius,
 		padding,
 	} = definition;
 
-	const buttonClassName = `${padding[spacing]} ${size[fontSize]} ${
+	const buttonClassName = `${padding[spacing]} ${
 		background[variant].default
 	} ${background[variant].hover} ${text[variant].content}${
 		className ? ` ${className}` : ""
