@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import { SizeType, SpacingType, VariantType } from "../types";
 
 type CommonPropsType = {
@@ -10,6 +11,7 @@ export type ButtonPropsType = CommonPropsType & {
 	fontSize?: SizeType;
 	radius?: SizeType;
 	spacing?: SpacingType;
+	onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export type LogoPropsType = Omit<CommonPropsType, "variant">;

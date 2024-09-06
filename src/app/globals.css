@@ -10,7 +10,7 @@
 
   --secondary-default: 27 227 106;
   --secondary-content: 0 0 0;
-  --secondary-alt: 199 199 96;
+  --secondary-alt: 20 173 80;
 
   --alert-default: 203 255 140;
   --alert-content: 0 0 0;
@@ -37,6 +37,10 @@ body {
   color: rgb(var(--foreground));
   background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--background-alt)), rgb(var(--background)));
   min-height: 100vh;
+}
+
+button {
+  transition: background var(--smooth);
 }
 
 .container {
@@ -207,7 +211,19 @@ body {
   & h1 {
     font-size: calc(var(--base-size) * 8);
     font-weight: 700;
-    line-height: calc(var(--base-size) * 10);
+    line-height: calc(var(--base-size) * 9);
+  }
+  
+  & h2 {
+    font-size: calc(var(--base-size) * 2.5);
+    line-height: calc(var(--base-size) * 3.25);
+    font-weight: 700;
+  }
+  
+  & p {
+    font-size: var(--base-size);
+    line-height: calc(var(--base-size) * 2);
+    font-weight: 500;
   }
 }
 

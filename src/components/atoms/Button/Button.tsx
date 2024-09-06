@@ -10,6 +10,7 @@ export const Button = ({
 	spacing = "2",
 	variant = "primary",
 	className,
+	onClick,
 }: ButtonPropsType) => {
 	const {
 		background,
@@ -25,5 +26,12 @@ export const Button = ({
 		className ? ` ${className}` : ""
 	}${radius ? ` ${borderRadius[radius]}` : ""}`;
 
-	return <button className={buttonClassName}>{textContent}</button>;
+	return (
+		<button
+			className={buttonClassName}
+			onClick={onClick}
+		>
+			{textContent}
+		</button>
+	);
 };
