@@ -1,11 +1,15 @@
-import { MainLayout } from "@/components/mod";
+import { MainLayout, Hero } from "@/components/mod";
 
 export default function Home() {
 	return (
 		<MainLayout>
-			<div className="container flex min-h-screen flex-col pt-24 gap-8">
-				Hero banner here
-			</div>
+			<Hero
+				title={"Quiz time"}
+				subtitle={"Lorem ipsum dolor sit amet consectetur, adipisicing elit."}
+				hookContent={
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, repellat ratione! Ut, itaque sit distinctio nulla aliquid id, natus enim hic autem harum incidunt numquam assumenda ex quibusdam commodi velit."
+				}
+			/>
 		</MainLayout>
 	);
 }

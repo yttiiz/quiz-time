@@ -46,7 +46,7 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 
 	if (!response)
 		return (
-			<div className="openweather-container hidden md:block">
+			<div className="main-header-openweather-container hidden md:block">
 				{isFrenchBrowser ? "Chargement" : "Waiting"}...
 			</div>
 		);
@@ -56,14 +56,14 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 		);
 
 		return (
-			<div className="openweather-container flex items-center gap-2">
+			<div className="main-header-openweather-container flex items-center gap-2">
 				<span className="hidden md:block">{location}</span>
 				<Image
 					src={iconUrl}
 					width={30}
 					height={30}
 					alt="icon details"
-					className="openweather-icon w-[30px] h-auto"
+					className="main-header-openweather-icon w-[30px] h-auto"
 					priority={false}
 				/>
 				<span>{temperature}</span>
@@ -71,8 +71,10 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 		);
 	} else
 		return (
-			<div className="openweather-container hidden md:block">
-				{isFrenchBrowser ? "Données non disponibles" : "No weather info avaible"}
+			<div className="main-header-openweather-container hidden md:block">
+				{isFrenchBrowser
+					? "Données non disponibles"
+					: "No weather info avaible"}
 			</div>
 		);
 };

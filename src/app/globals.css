@@ -4,49 +4,69 @@
 
 :root {
   /* ==========================| COLORS |========================== */
-  --foreground-rgb: 255 255 255;
-  --background-rgb: 0 0 0;
-  --foreground-opaque: 51 51 51;
-  --box-shadow: 0 0 4px rgb(var(--foreground-rgb) / .15);
-  --thin-line: rgb(var(--foreground-rgb) / .2);
+  --primary-default: 136 22 0;
+  --primary-content: 255 255 255;
+  --primary-alt: 112 20 1;
+
+  --secondary-default: 27 227 106;
+  --secondary-content: 0 0 0;
+  --secondary-alt: 20 173 80;
+
+  --alert-default: 203 255 140;
+  --alert-content: 0 0 0;
+  --alert-alt: 184 230 128;
+  
+  --foreground: 255 255 255;
+  --background: 0 0 0;
+  --background-alt: 0 9 125;
+
+  --box-shadow: 0 0 4px rgb(var(--foreground) / .15);
+  --foreground-20-percent: rgb(var(--foreground) / .2);
   
   /* ==========================| SIZES |========================== */
   --base-size: clamp(14px, 2vw, 16px);
-  --site-size: clamp(300px, 80%, 960px);
+  --web-site-content-boundary: clamp(300px, 80%, 960px);
+  --main-header-height: calc(var(--base-size) * 4);
   --burger-height: calc(var(--base-size) * 1.5);
-  --btn-border-radius: clamp(3px, 1vw, 5px);
+  --base-border-radius: clamp(3px, 1vw, 5px);
 
   /* ==========================| TIMING |========================== */
   --smooth: .3s;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+  min-height: 100vh;
+}
+
+button {
+  transition: background var(--smooth);
+  font-size: calc(var(--base-size) * 1.25);
 }
 
 .container {
   margin: auto;
-  width: var(--site-size);
+  width: var(--web-site-content-boundary);
 }
 
 .main-header {
-  height: calc(var(--base-size) * 4);
-  border-bottom: 1px solid var(--thin-line);
-}
+  height: var(--main-header-height);
+  border-bottom: 1px solid var(--foreground-20-percent);
+  
+  & .main-header-logotype {
+    width: calc(var(--base-size) * 2.5);
+    height: auto;
+  }
 
-.header-logotype {
-  width: calc(var(--base-size) * 2.5);
-  height: auto;
-}
-
-.openweather-icon {
-  background-color: rgb(var(--foreground-rgb) / .2);
-  border-radius: 50%;
-}
-
-.openweather-container {
-  font-size: calc(var(--base-size) * .8);
+  & .main-header-openweather-icon {
+    background-color: rgb(var(--foreground) / .2);
+    border-radius: 50%;
+  }
+  
+  & .main-header-openweather-container {
+    font-size: calc(var(--base-size) * .8);
+  }
 }
 
 #burger {
@@ -61,7 +81,7 @@ body {
     padding: calc(var(--base-size) * .3125);
 
     & > span {
-      background: rgb(var(--foreground-rgb));
+      background: rgb(var(--foreground));
       height: 1px;
       width: 100%;
       transition: var(--smooth);
@@ -86,7 +106,7 @@ body {
     top: calc(calc(var(--base-size) * -1) + 1px);
     width: auto;
     height: var(--base-size);
-    fill: var(--background-rgb);
+    fill: var(--background);
     filter: drop-shadow(0px -2px 2px rgb(255 255 255 / .15));
     z-index: 6;
   }
@@ -106,8 +126,8 @@ body {
   
   & > nav > ul {
     overflow: hidden;
-    border-radius: var(--btn-border-radius);
-    background: rgb(var(--background-rgb));
+    border-radius: var(--base-border-radius);
+    background: rgb(var(--background));
     box-shadow: var(--box-shadow);
   }
 
@@ -116,7 +136,7 @@ body {
   }
 
   & > nav > ul li:not(:last-child) {
-    border-bottom: 1px solid var(--thin-line);
+    border-bottom: 1px solid var(--foreground-20-percent);
   }
 
   & > nav > ul li a,
@@ -127,7 +147,7 @@ body {
 
   & > nav > ul li a:hover,
   & > nav > ul > li > div:hover {
-    background: rgb(var(--foreground-rgb) / .05);
+    background: rgb(var(--foreground) / .05);
   }
 
   & > nav > ul > li > div {
@@ -140,7 +160,7 @@ body {
   & > nav > ul div.arrow {
     width: calc(var(--base-size) * .6);
     aspect-ratio: 1.25 / 1;
-    background: rgb(var(--background-rgb) / .35);
+    background: rgb(var(--background) / .35);
     clip-path: polygon(0 0, 50% 100%, 100% 0);
     transform-origin: center center;
     transition: transform var(--smooth);
@@ -151,7 +171,7 @@ body {
   }
 
   & > nav > ul > li > ul {
-    background: rgb(var(--background-rgb) / .05);
+    background: rgb(var(--background) / .05);
   }
 
   & > nav > ul > li > ul.none {
@@ -186,6 +206,31 @@ body {
 
 .line-3 {
   transform: rotate(45deg) translate(calc(var(--base-size) * -.3125), calc(var(--base-size) * -.25));
+}
+
+#hero-banner {
+  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
+  height: calc(100vh - var(--main-header-height));
+  display: flex;
+  align-items: center;
+
+  & h1 {
+    font-size: calc(var(--base-size) * 8);
+    font-weight: 700;
+    line-height: calc(var(--base-size) * 9);
+  }
+  
+  & h2 {
+    font-size: calc(var(--base-size) * 2.5);
+    line-height: calc(var(--base-size) * 3.25);
+    font-weight: 700;
+  }
+  
+  & p {
+    font-size: var(--base-size);
+    line-height: calc(var(--base-size) * 2);
+    font-weight: 500;
+  }
 }
 
 @layer utilities {
