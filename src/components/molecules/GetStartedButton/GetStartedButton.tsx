@@ -5,7 +5,9 @@ import { MouseEvent } from "react";
 
 export const GetStartedButton = () => {
 	const onButtonClick = (event: MouseEvent) => {
-		// Doing stuff here.
+		if (window) {
+			window.location.href = "/#quiz-games";
+		}
 	};
 
 	return (
