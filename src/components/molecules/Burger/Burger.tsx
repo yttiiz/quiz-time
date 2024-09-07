@@ -76,7 +76,7 @@ export const Burger = ({ response }: { response: SuccessResponseType | ErrorResp
 		>
 			<button
 				type="button"
-				className="btn-menu-opener"
+				className="cursor-pointer"
 				onClick={handleClickInsideBurgerAndNavigation}
 			>
 				<span ref={line1}></span>
