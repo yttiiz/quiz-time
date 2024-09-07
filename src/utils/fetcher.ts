@@ -59,7 +59,15 @@ export class Fetcher {
             ))
           : (response = await fetch(url, opts));
       } else {
-        opts["body"] = JSON.stringify(data);
+        // Prevent TypeError: Failed to parse body as FormData. 
+        delete opts["headers"];
+				const formData = new FormData();
+				formData.append(
+					"value",
+					typeof data === "string" ? data : JSON.stringify(data),
+				);
+				opts["body"] = formData;
+
         response = await fetch(url, opts);
       }
 

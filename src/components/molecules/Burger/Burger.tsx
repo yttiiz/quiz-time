@@ -48,7 +48,8 @@ export const Burger = ({ response }: { response: SuccessResponseType | ErrorResp
 		const burgerElement = burger.current;
 		
 		if (response.ok) {
-			setItems(response.data as unknown as NavbarItemType[]);
+			const { items } = response.data;
+			setItems(items as unknown as NavbarItemType[]);
 		}
 
 		if (burgerElement) {

@@ -9,3 +9,11 @@ export async function GET(_: NextRequest) {
 
 	return NextResponse.json(items);
 }
+
+export async function POST(req: NextRequest) {
+	const stringifyData = (await req.formData()).get("value");
+	const { file } = JSON.parse(stringifyData as string);
+	const data = await Helper.convertJsonToObject(`src/data/${file}.json`);
+
+	return NextResponse.json(data);
+}

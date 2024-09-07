@@ -3,7 +3,9 @@ import { Fetcher } from "@/utils/mod";
 
 export const Header = async () => {
 	const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const burgerResp = await Fetcher.getData(`${host}/api/header`);
+	const response = await Fetcher.postData(`${host}/api/json`, {
+		file: "header",
+	});
 
 	return (
 		<header className="main-header">
@@ -17,7 +19,7 @@ export const Header = async () => {
 				</a>
 				<div className="flex items-center gap-4">
 					<WeatherWidget host={host} />
-					<Burger response={burgerResp} />
+					<Burger response={response} />
 				</div>
 			</div>
 		</header>
