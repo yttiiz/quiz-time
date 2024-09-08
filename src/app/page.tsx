@@ -4,7 +4,7 @@ export default function Home() {
 	return (
 		<MainLayout>
 			<Hero />
-			<QuizGames content="Target" />
+			<QuizGames />
 		</MainLayout>
 	);
 }

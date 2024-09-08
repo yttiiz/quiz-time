@@ -1,18 +1,15 @@
 "use client";
 
+import { SelectPropsType } from "../types";
+
 export const Select = ({
 	name,
 	options,
 	placeholder,
 	width = "full",
-}: {
-	name: string;
-	options: {value: string, label: string }[];
-	placeholder: string;
-	width?: "full" | "content";
-}) => {
+}: SelectPropsType) => {
 	const containerWClassname = `select-container ${width === "full" ? "w-full" : "w-max"}`;
-	
+
 	return (
 		<div className={containerWClassname}>
 			<select name={name}>

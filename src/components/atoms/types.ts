@@ -20,3 +20,15 @@ export type NavbarItemPropsType = {
 	textContent: string;
 	url: string;
 };
+
+export type SelectOptionsType = {
+	value: string;
+	label: string;
+};
+
+export type SelectPropsType = {
+	name: string;
+	options: SelectOptionsType[];
+	placeholder: string;
+	width?: "full" | "content";
+};
