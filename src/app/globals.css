@@ -24,8 +24,8 @@
   --foreground-20-percent: rgb(var(--foreground) / .2);
   
   /* ==========================| SIZES |========================== */
-  --base-size: clamp(14px, 2vw, 16px);
-  --web-site-content-boundary: clamp(300px, 80%, 960px);
+  --base-size: clamp(.875rem, 2vw, 1rem);
+  --web-site-content-boundary: clamp(18.75rem, 80%, 60rem);
   --main-header-height: calc(var(--base-size) * 4);
   --burger-height: calc(var(--base-size) * 1.5);
   --base-border-radius: clamp(3px, 1vw, 5px);
@@ -61,7 +61,7 @@ button {
 
 .main-header {
   height: var(--main-header-height);
-  border-bottom: 1px solid var(--foreground-20-percent);
+  border-bottom: .1rem solid var(--foreground-20-percent);
   position: sticky;
   top: 0;
   z-index: 1;
@@ -98,7 +98,7 @@ button {
 
     & > span {
       background: rgb(var(--foreground));
-      height: 1px;
+      height: .1rem;
       width: 100%;
       transition: var(--smooth);
     }
@@ -119,7 +119,7 @@ button {
   }
 
   & > nav > svg {
-    top: calc(calc(var(--base-size) * -1) + 1px);
+    top: calc(calc(var(--base-size) * -1) + .1rem);
     width: auto;
     height: var(--base-size);
     fill: var(--background);
@@ -152,7 +152,7 @@ button {
   }
 
   & > nav > ul li:not(:last-child) {
-    border-bottom: 1px solid var(--foreground-20-percent);
+    border-bottom: .1rem solid var(--foreground-20-percent);
   }
 
   & > nav > ul li a,
@@ -255,6 +255,49 @@ button {
 
 #quiz-games {
   height: 100vh;
+
+  & form {
+    display: grid;
+    gap: var(--base-size);
+  }
+
+  & .select-container {
+    position: relative;
+  
+    & select,
+    & select option {
+      color: rgb(var(--primary-content));
+      border-bottom: .1rem solid rgb(var(--foreground) / .2);
+    }
+    
+    & select {
+      width: 100%;
+      background: rgb(var(--foreground) / .1);
+      padding: calc(var(--base-size) * .75);
+      padding-right: calc(var(--base-size) * 2.25);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    
+    & select option {
+      background: rgb(var(--background));
+    }
+
+    & select option:hover {
+      background: rgb(var(--foreground) / .2);
+    }
+
+    & .arrow {
+      top: 50%;
+      right: calc(calc(var(--base-size) * (2.25 / 2)) - calc(var(--base-size) * .75));
+      position: absolute;
+      width: calc(var(--base-size) * .75);
+      aspect-ratio: 1.25 / 1;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: rgb(var(--foreground) / .2);
+      transform: translate(-50%, -50%) rotate(0);
+    }
+  }
 }
 
 @layer utilities {
