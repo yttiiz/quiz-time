@@ -113,7 +113,7 @@ button {
 
   & > nav {
     width: max-content;
-    top: calc(var(--burger-height) + 30px);
+    top: calc(var(--burger-height) + 1.875rem);
     box-shadow: var(--box-shadow);
     z-index: 5;
   }
@@ -262,6 +262,7 @@ button {
   }
 
   & .select-container {
+    --select-padding-right: 2.25;
     position: relative;
   
     & select,
@@ -274,7 +275,7 @@ button {
       width: 100%;
       background: rgb(var(--foreground) / .1);
       padding: calc(var(--base-size) * .75);
-      padding-right: calc(var(--base-size) * 2.25);
+      padding-right: calc(var(--base-size) * var(--select-padding-right));
       -webkit-appearance: none;
       appearance: none;
     }
@@ -289,13 +290,13 @@ button {
 
     & .arrow {
       top: 50%;
-      right: calc(calc(var(--base-size) * (2.25 / 2)) - calc(var(--base-size) * .75));
+      right: calc(calc(var(--base-size) * (var(--select-padding-right) / 2)) - calc(var(--base-size) * .75));
       position: absolute;
       width: calc(var(--base-size) * .75);
       aspect-ratio: 1.25 / 1;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       background: rgb(var(--foreground) / .2);
-      transform: translate(-50%, -50%) rotate(0);
+      transform: translate(-50%, -50%);
     }
   }
 }
