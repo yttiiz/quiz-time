@@ -1,12 +1,11 @@
 "use client";
 
 import { Button } from "@/components/mod";
-import { MouseEvent } from "react";
 
 export const GetStartedButton = () => {
-	const onButtonClick = (event: MouseEvent) => {
-		if (window) {
-			window.location.href = "/#quiz-games";
+	const onButtonClick = () => {
+		if (globalThis) {
+			globalThis.location.href = "/#quiz-games";
 		}
 	};
 
@@ -17,7 +16,7 @@ export const GetStartedButton = () => {
 				variant={"secondary"}
 				radius={"md"}
 				spacing={"4"}
-        className={"font-semibold"}
+				className={"font-semibold"}
 				onClick={onButtonClick}
 			/>
 		</div>
