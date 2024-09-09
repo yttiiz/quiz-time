@@ -13,5 +13,9 @@ export const ErrorMessage = ({
 		setIsFrenchBrowser(globalThis.navigator?.language === "fr-FR" ?? true);
 	}, [setIsFrenchBrowser]);
 
-	return <div>{isFrenchBrowser ? content["FR"] : content["EN"]}</div>;
+	return (
+		<div className="p-4 border-2 border-primary-default rounded-md">
+			{isFrenchBrowser ? content["FR"] : content["EN"]}
+		</div>
+	);
 };
