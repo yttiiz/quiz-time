@@ -1,10 +1,24 @@
-export const selectQuizServerAction = (
+import { Fetcher } from "@/utils/mod";
+
+export const selectQuizServerAction = async (
 	prevState: { message: string },
 	formData: FormData,
 ) => {
-	const choice = formData.get("select-quiz");
+	const quizSelected = formData.get("select-quiz");
 
-	if (!choice) return { message: "No item selected" };
+	if (!quizSelected) return { message: "No item selected" };
 
-	return { message: "Item selected : " + choice };
+	const response = await Fetcher.getData(
+		globalThis.location.protocol + "/api/mongodb",
+	);
+
+	if (response.ok) {
+		console.log(response.data);
+		// Implements logic here.
+	} else {
+		console.log(response.message);
+		// Implements logic here.
+	}
+
+	return { message: "Item selected : " + quizSelected };
 };
