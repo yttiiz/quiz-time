@@ -1,4 +1,4 @@
-import { ErrorMessage, Select, SelectOptionsType } from "@/components/mod";
+import { ErrorMessage, FormSelectQuiz } from "@/components/mod";
 import { Fetcher } from "@/utils/mod";
 
 export const QuizGames = async () => {
@@ -11,14 +11,7 @@ export const QuizGames = async () => {
 		<section id="quiz-games">
 			<div className="container">
 				{response.ok ? (
-					<form action="">
-						<h3>{response.data.title}</h3>
-						<Select
-							name="select-quiz"
-							options={response.data.options as unknown as SelectOptionsType[]}
-							placeholder="Choisissez votre thème..."
-						/>
-					</form>
+					<FormSelectQuiz data={response.data} />
 				) : (
 					<ErrorMessage
 						content={{
