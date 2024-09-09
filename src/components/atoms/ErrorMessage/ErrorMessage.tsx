@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { IconWarning } from "../mod";
+import { VariantType } from "@/components/types";
 
 export const ErrorMessage = ({
 	content,
+	variant = "primary",
 }: {
-	content: { FR: string; EN: string },
+	content: { FR: string; EN: string };
+	variant?: VariantType;
 }) => {
+	const className = `flex gap-4 items-center p-4 border-2 border-${variant}-default rounded-md`;
 	const [isFrenchBrowser, setIsFrenchBrowser] = useState(false);
 
 	useEffect(() => {
@@ -14,8 +19,9 @@ export const ErrorMessage = ({
 	}, [setIsFrenchBrowser]);
 
 	return (
-		<div className="p-4 border-2 border-primary-default rounded-md">
-			{isFrenchBrowser ? content["FR"] : content["EN"]}
+		<div className={className}>
+			<IconWarning variant={variant} />
+			{isFrenchBrowser ? content["FR"] : content["EN"]}.
 		</div>
 	);
 };

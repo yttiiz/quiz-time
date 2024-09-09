@@ -22,8 +22,8 @@ export const QuizGames = async () => {
 				) : (
 					<ErrorMessage
 						content={{
-							FR: "Une erreur est survenue.",
-							EN: "An Error occured.",
+							FR: "Une erreur est survenue",
+							EN: "An Error occured",
 						}}
 					/>
 				)}
