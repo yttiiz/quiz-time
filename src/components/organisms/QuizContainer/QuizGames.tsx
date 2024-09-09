@@ -1,9 +1,9 @@
-import { Select, SelectOptionsType } from "@/components/mod";
+import { ErrorMessage, Select, SelectOptionsType } from "@/components/mod";
 import { Fetcher } from "@/utils/mod";
 
 export const QuizGames = async () => {
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const response = await Fetcher.postData(`${host}/api/json`, {
+	const response = await Fetcher.postData(`${host}/api/jsonr`, {
 		file: "select-quiz",
 	});
 
@@ -20,11 +20,12 @@ export const QuizGames = async () => {
 						/>
 					</form>
 				) : (
-					<div>
-						{globalThis.navigator.language === "fr-FR"
-							? "Une erreur est survenue."
-							: "An Error occured."}
-					</div>
+					<ErrorMessage
+						content={{
+							FR: "Une erreur est survenue.",
+							EN: "An Error occured.",
+						}}
+					/>
 				)}
 			</div>
 		</section>
