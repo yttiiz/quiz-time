@@ -1,6 +1,6 @@
 "use client";
 
-import { Select, SelectOptionsType, SelectPropsType } from "@/components/mod";
+import { Button, Select, SelectOptionsType } from "@/components/mod";
 import { useFormState } from "react-dom";
 import { selectQuizServerAction } from "@/actions/actions";
 
@@ -13,7 +13,7 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 		title: string;
 		options: SelectOptionsType[];
 	};
-  
+
 	return (
 		<form action={formAction}>
 			<h3>{title}</h3>
@@ -23,7 +23,13 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 				placeholder="Choisissez votre thème..."
 			/>
 			<div>Message : {message}</div>
-			<button type="submit">Envoyer</button>
+			<Button
+				textContent="Envoyer"
+        type="submit"
+        spacing="2"
+        radius="md"
+				className="w-max"
+			/>
 		</form>
 	);
 };
