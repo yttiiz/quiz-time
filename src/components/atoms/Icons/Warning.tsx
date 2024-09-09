@@ -1,4 +1,4 @@
-import { VariantType } from "@/components/types";
+import { VariantType } from "@/components/mod";
 
 export const IconWarning = ({
 	variant = "primary",

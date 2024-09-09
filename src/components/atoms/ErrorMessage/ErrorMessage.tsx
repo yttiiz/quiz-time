@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { IconWarning } from "../mod";
-import { VariantType } from "@/components/types";
+import { VariantType } from "@/components/mod";
 
 export const ErrorMessage = ({
 	content,
