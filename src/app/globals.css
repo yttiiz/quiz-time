@@ -273,10 +273,6 @@ button {
     gap: var(--base-size);
   }
 
-  & form h3 {
-
-  }
-
   & .select-container {
     --select-padding-right: 2.25;
     position: relative;

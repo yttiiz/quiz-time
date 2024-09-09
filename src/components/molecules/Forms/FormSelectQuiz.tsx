@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Select, SelectOptionsType } from "@/components/mod";
+import { Button, IconElearning, Select, SelectOptionsType } from "@/components/mod";
 import { useFormState } from "react-dom";
 import { selectQuizServerAction } from "@/actions/actions";
 
@@ -16,7 +16,10 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 
 	return (
 		<form action={formAction}>
-			<h3>{title}</h3>
+			<h3 className="flex gap-4 items-center">
+				<IconElearning />
+				{title}
+			</h3>
 			<Select
 				name="select-quiz"
 				options={options}

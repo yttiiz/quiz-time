@@ -1,5 +1,5 @@
 {
-  "title": "Faites votre choix parmi les themes ci-dessous.",
+  "title": "Faites votre choix parmi les thèmes ci-dessous.",
   "options": [
     { "value": "javascript", "label": "Testez-vous sur le Javascript avancé" },
     { "value": "rust", "label": "Etes-vous un vrai rustecean ?" },
