@@ -49,6 +49,24 @@ body {
   scrollbar-width: none;
 }
 
+h1 {
+  font-size: calc(var(--base-size) * 4);
+  font-weight: 700;
+  line-height: calc(var(--base-size) * 5.125);
+}
+  
+h2 {
+  font-size: calc(var(--base-size) * 2.5);
+  line-height: calc(var(--base-size) * 3.25);
+  font-weight: 700;
+}
+  
+h3 {
+  font-size: calc(var(--base-size) * 1.75);
+  line-height: calc(var(--base-size) * 2.5);
+  font-weight: 700;
+}
+
 button {
   transition: background var(--smooth);
   font-size: calc(var(--base-size) * 1.25);
@@ -240,12 +258,6 @@ button {
     line-height: calc(var(--base-size) * 9);
   }
   
-  & h2 {
-    font-size: calc(var(--base-size) * 2.5);
-    line-height: calc(var(--base-size) * 3.25);
-    font-weight: 700;
-  }
-  
   & p {
     font-size: var(--base-size);
     line-height: calc(var(--base-size) * 2);
@@ -259,6 +271,10 @@ button {
   & form {
     display: grid;
     gap: var(--base-size);
+  }
+
+  & form h3 {
+
   }
 
   & .select-container {
