@@ -8,6 +8,7 @@ type CommonPropsType = {
 
 export type ButtonPropsType = CommonPropsType & {
 	textContent: string;
+	type?: "button" | "submit" | "reset";
 	radius?: SizeType;
 	spacing?: SpacingType;
 	onClick?: MouseEventHandler<HTMLButtonElement>;
