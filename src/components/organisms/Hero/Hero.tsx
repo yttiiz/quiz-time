@@ -6,7 +6,7 @@ export const Hero = async () => {
 	const response = await Fetcher.postData(`${host}/api/json`, { file: "hero" });
 
 	return (
-		<div id="hero-banner">
+		<section id="hero-banner">
 			<div className="container grid py-24 px-6 gap-4">
 				{response.ok ? (
 					<>
@@ -21,6 +21,6 @@ export const Hero = async () => {
 					<h2 className="text-center">Something went wrong !</h2>
 				)}
 			</div>
-		</div>
+		</section>
 	);
 };

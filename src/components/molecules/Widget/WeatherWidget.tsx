@@ -63,7 +63,7 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 					width={30}
 					height={30}
 					alt="icon details"
-					className="main-header-openweather-icon w-[30px] h-auto"
+					className="main-header-openweather-icon w-[1.875rem] h-auto"
 					priority={false}
 				/>
 				<span>{temperature}</span>

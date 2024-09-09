@@ -1,0 +1,8 @@
+{
+  "title": "Faites votre choix parmi les thèmes ci-dessous.",
+  "options": [
+    { "value": "javascript", "label": "Testez-vous sur le Javascript avancé" },
+    { "value": "rust", "label": "Etes-vous un vrai rustecean ?" },
+    { "value": "kotlin", "label": "Kotlin, accostez sur l'ile pour découvrir ce merveilleux language" }
+  ]
+}

@@ -1,3 +1,4 @@
 export * from "./Header/Header";
 export * from "./Hero/Hero";
-export * from "./types";
+export * from "./QuizContainer/QuizGames";
+// export * from "./types";

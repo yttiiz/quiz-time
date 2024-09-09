@@ -2,7 +2,7 @@
 
 import { Navbar, NavbarItemType } from "@/components/mod";
 import { SetterType, store, useHeaderStore } from "@/store/mod";
-import { ErrorResponseType, SuccessResponseType } from "@/utils/types";
+import { ErrorResponseType, SuccessResponseType } from "@/utils/mod";
 import { useRef, useEffect, useState } from "react";
 
 export const Burger = ({ response }: { response: SuccessResponseType | ErrorResponseType }) => {

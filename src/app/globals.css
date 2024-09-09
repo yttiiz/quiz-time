@@ -24,8 +24,8 @@
   --foreground-20-percent: rgb(var(--foreground) / .2);
   
   /* ==========================| SIZES |========================== */
-  --base-size: clamp(14px, 2vw, 16px);
-  --web-site-content-boundary: clamp(300px, 80%, 960px);
+  --base-size: clamp(.875rem, 2vw, 1rem);
+  --web-site-content-boundary: clamp(18.75rem, 80%, 60rem);
   --main-header-height: calc(var(--base-size) * 4);
   --burger-height: calc(var(--base-size) * 1.5);
   --base-border-radius: clamp(3px, 1vw, 5px);
@@ -34,10 +34,37 @@
   --smooth: .3s;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: rgb(var(--foreground));
   background: rgb(var(--background));
   min-height: 100vh;
+  scrollbar-width: none;
+}
+
+h1 {
+  font-size: calc(var(--base-size) * 4);
+  font-weight: 700;
+  line-height: calc(var(--base-size) * 5.125);
+}
+  
+h2 {
+  font-size: calc(var(--base-size) * 2.5);
+  line-height: calc(var(--base-size) * 3.25);
+  font-weight: 700;
+}
+  
+h3 {
+  font-size: calc(var(--base-size) * 1.75);
+  line-height: calc(var(--base-size) * 2.5);
+  font-weight: 700;
 }
 
 button {
@@ -52,7 +79,14 @@ button {
 
 .main-header {
   height: var(--main-header-height);
-  border-bottom: 1px solid var(--foreground-20-percent);
+  border-bottom: .1rem solid var(--foreground-20-percent);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  /* blur effect */
+  -webkit-backdrop-filter: blur(var(--base-size));
+  backdrop-filter: blur(var(--base-size));
   
   & .main-header-logotype {
     width: calc(var(--base-size) * 2.5);
@@ -82,7 +116,7 @@ button {
 
     & > span {
       background: rgb(var(--foreground));
-      height: 1px;
+      height: .1rem;
       width: 100%;
       transition: var(--smooth);
     }
@@ -97,13 +131,13 @@ button {
 
   & > nav {
     width: max-content;
-    top: calc(var(--burger-height) + 30px);
+    top: calc(var(--burger-height) + 1.875rem);
     box-shadow: var(--box-shadow);
     z-index: 5;
   }
 
   & > nav > svg {
-    top: calc(calc(var(--base-size) * -1) + 1px);
+    top: calc(calc(var(--base-size) * -1) + .1rem);
     width: auto;
     height: var(--base-size);
     fill: var(--background);
@@ -136,7 +170,7 @@ button {
   }
 
   & > nav > ul li:not(:last-child) {
-    border-bottom: 1px solid var(--foreground-20-percent);
+    border-bottom: .1rem solid var(--foreground-20-percent);
   }
 
   & > nav > ul li a,
@@ -208,11 +242,15 @@ button {
   transform: rotate(45deg) translate(calc(var(--base-size) * -.3125), calc(var(--base-size) * -.25));
 }
 
+#hero-banner,
+#quiz-games {
+  display: flex;
+  align-items: center;
+}
+
 #hero-banner {
   background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
   height: calc(100vh - var(--main-header-height));
-  display: flex;
-  align-items: center;
 
   & h1 {
     font-size: calc(var(--base-size) * 8);
@@ -220,16 +258,58 @@ button {
     line-height: calc(var(--base-size) * 9);
   }
   
-  & h2 {
-    font-size: calc(var(--base-size) * 2.5);
-    line-height: calc(var(--base-size) * 3.25);
-    font-weight: 700;
-  }
-  
   & p {
     font-size: var(--base-size);
     line-height: calc(var(--base-size) * 2);
     font-weight: 500;
+  }
+}
+
+#quiz-games {
+  height: 100vh;
+
+  & form {
+    display: grid;
+    gap: var(--base-size);
+  }
+
+  & .select-container {
+    --select-padding-right: 2.25;
+    position: relative;
+  
+    & select,
+    & select option {
+      color: rgb(var(--primary-content));
+      border-bottom: .1rem solid rgb(var(--foreground) / .2);
+    }
+    
+    & select {
+      width: 100%;
+      background: rgb(var(--foreground) / .1);
+      padding: calc(var(--base-size) * .75);
+      padding-right: calc(var(--base-size) * var(--select-padding-right));
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    
+    & select option {
+      background: rgb(var(--background));
+    }
+
+    & select option:hover {
+      background: rgb(var(--foreground) / .2);
+    }
+
+    & .arrow {
+      top: 50%;
+      right: calc(calc(var(--base-size) * (var(--select-padding-right) / 2)) - calc(var(--base-size) * .75));
+      position: absolute;
+      width: calc(var(--base-size) * .75);
+      aspect-ratio: 1.25 / 1;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: rgb(var(--foreground) / .2);
+      transform: translate(-50%, -50%);
+    }
   }
 }
 

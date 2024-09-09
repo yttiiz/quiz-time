@@ -5,6 +5,7 @@ import { definition } from "@/components/definition";
 
 export const Button = ({
 	textContent,
+	type = "button",
 	radius = "sm",
 	spacing = "2",
 	variant = "primary",
@@ -26,6 +27,7 @@ export const Button = ({
 
 	return (
 		<button
+			type={type}
 			className={buttonClassName}
 			onClick={onClick}
 		>
