@@ -3,7 +3,11 @@ import { Fetcher } from "@/utils/mod";
 
 export const Hero = async () => {
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const response = await Fetcher.postData(`${host}/api/json`, { file: "hero" });
+	const response = await Fetcher.postData(
+		`${host}/api/json`,
+		{ file: "hero" },
+		"next",
+	);
 
 	return (
 		<section id="hero-banner">

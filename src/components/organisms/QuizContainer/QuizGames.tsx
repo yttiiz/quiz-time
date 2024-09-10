@@ -5,7 +5,7 @@ export const QuizGames = async () => {
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
 	const response = await Fetcher.postData(`${host}/api/json`, {
 		file: "select-quiz",
-	});
+	}, "next");
 
 	return (
 		<section id="quiz-games">
