@@ -1,5 +1,5 @@
 "use server";
-import { Fetcher } from "@/utils/mod";
+import { Fetcher } from "@yttiiz/utils";
 
 export const selectQuizServerAction = async (
 	prevState: { message: string },
