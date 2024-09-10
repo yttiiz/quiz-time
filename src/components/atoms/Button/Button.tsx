@@ -3,15 +3,18 @@
 import { ButtonPropsType } from "../mod";
 import { definition } from "@/components/definition";
 
-export const Button = ({
-	textContent,
-	type = "button",
-	radius = "sm",
-	spacing = "2",
-	variant = "primary",
-	className,
-	onClick,
-}: ButtonPropsType) => {
+export const Button = (
+	{
+		textContent,
+		type = "button",
+		radius = "sm",
+		spacing = "2",
+		variant = "primary",
+		className,
+		onClick,
+	}: ButtonPropsType,
+	key?: string,
+) => {
 	const {
 		background,
 		text,
@@ -27,6 +30,7 @@ export const Button = ({
 
 	return (
 		<button
+			key={key}
 			type={type}
 			className={buttonClassName}
 			onClick={onClick}

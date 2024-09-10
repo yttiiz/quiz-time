@@ -3,11 +3,13 @@
  * see exemple here : https://openweathermap.org/current
  */
 
+import { MouseEventHandler, ReactNode } from "react";
+
 type WeatherType = {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
+	id: number;
+	main: string;
+	description: string;
+	icon: string;
 };
 
 export type WeatherApiType = {
@@ -51,4 +53,20 @@ export type WeatherApiType = {
 	id: number;
 	name: string;
 	cod: number;
+};
+
+export type DialogHeaderPropsType = {
+	title: string;
+	details?: string;
+};
+
+export type DialogMainPropsType = {
+	paragraph: string;
+	buttons?: string[];
+};
+
+export type DialogPropsType = {
+	header: DialogHeaderPropsType;
+	main: DialogMainPropsType;
+	onClick: MouseEventHandler<HTMLButtonElement>;
 };

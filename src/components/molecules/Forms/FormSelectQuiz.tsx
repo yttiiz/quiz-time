@@ -62,7 +62,7 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 				onClick={handleOnClickDialog}
 				ref={dialogRef}
 				header={{ title: "header" }}
-				main={{ textContent: message }}
+				main={{ paragraph: message, buttons: ["fermer"] }}
 			/>
 		</>
 	);
