@@ -10,7 +10,7 @@
 		"reset": "rm -rf .next && next dev"
 	},
 	"dependencies": {
-		"@yttiiz/utils": "npm:@jsr/yttiiz__utils@^0.1.80",
+		"@yttiiz/utils": "npm:@jsr/yttiiz__utils@^0.1.91",
 		"mongodb": "^6.8.1",
 		"next": "14.2.6",
 		"react": "^18",
