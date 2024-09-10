@@ -61,8 +61,11 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 			<Dialog
 				onClick={handleOnClickDialog}
 				ref={dialogRef}
-				header={{ title: "header" }}
-				main={{ paragraph: message, buttons: ["fermer"] }}
+				header={{ title: "Quiz formulaire" }}
+				main={{
+					paragraph: "Vous devez sélectionner un thème pour pouvoir continuer.",
+					buttons: ["fermer"],
+				}}
 			/>
 		</>
 	);

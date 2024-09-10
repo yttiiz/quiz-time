@@ -27,6 +27,7 @@
   --base-size: clamp(.875rem, 2vw, 1rem);
   --web-site-content-boundary: clamp(18.75rem, 80%, 60rem);
   --main-header-height: calc(var(--base-size) * 4);
+  --dialog-content-width: clamp(calc(var(--base-size) * 18.75), 80%, calc(var(--base-size) * 40));
   --burger-height: calc(var(--base-size) * 1.5);
   --base-border-radius: clamp(3px, 1vw, 5px);
 
@@ -73,7 +74,7 @@ button {
 }
 
 dialog {
-  width: calc(var(--base-size) * 22);
+  width: var(--dialog-content-width);
   height: max-content;
   color: rgb(var(--foreground));
   background: rgb(var(--background));
@@ -102,10 +103,6 @@ dialog {
     gap: var(--base-size);
     grid-template: 100% / auto max-content;
     border-bottom: .1rem solid var(--foreground-20-percent);
-
-    & > h2 {
-      line-height: 1;
-    }
 
     & > button {
       position: relative;
@@ -144,7 +141,6 @@ dialog {
     gap: var(--base-size);
   }
 }
-
 
 .container {
   margin: auto;
