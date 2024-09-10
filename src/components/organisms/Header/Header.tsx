@@ -3,9 +3,13 @@ import { Fetcher } from "@/utils/mod";
 
 export const Header = async () => {
 	const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const response = await Fetcher.postData(`${host}/api/json`, {
-		file: "header",
-	});
+	const response = await Fetcher.postData(
+		`${host}/api/json`,
+		{
+			file: "header",
+		},
+		"next",
+	);
 
 	return (
 		<header className="main-header">

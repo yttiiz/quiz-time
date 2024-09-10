@@ -27,6 +27,7 @@
   --base-size: clamp(.875rem, 2vw, 1rem);
   --web-site-content-boundary: clamp(18.75rem, 80%, 60rem);
   --main-header-height: calc(var(--base-size) * 4);
+  --dialog-content-width: clamp(calc(var(--base-size) * 18.75), 80%, calc(var(--base-size) * 40));
   --burger-height: calc(var(--base-size) * 1.5);
   --base-border-radius: clamp(3px, 1vw, 5px);
 
@@ -70,6 +71,75 @@ h3 {
 button {
   transition: background var(--smooth);
   font-size: calc(var(--base-size) * 1.25);
+}
+
+dialog {
+  width: var(--dialog-content-width);
+  height: max-content;
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+  overflow: hidden;
+  z-index: 10;
+  border-radius: var(--base-border-radius);
+  border: .1rem solid var(--foreground-20-percent);
+  box-shadow: var(--box-shadow);
+
+  &::backdrop {
+    background: rgb(var(--background) / .85);
+  }
+
+  & > header,
+  & > div {
+    padding: calc(var(--base-size) * 1.5);
+  }
+
+  & > header {
+    position: sticky;
+    top: 0;
+    background: var(--light);
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--base-size);
+    grid-template: 100% / auto max-content;
+    border-bottom: .1rem solid var(--foreground-20-percent);
+
+    & > button {
+      position: relative;
+      background: var(--foreground-20-percent);
+      border-radius: 50%;
+      width: calc(var(--base-size) * 2.125);
+      aspect-ratio: 1 / 1;
+      transition: background var(--smooth);
+    }
+
+    & > button:hover {
+      background: rgb(var(--foreground) / .4);
+    }
+
+    & > button span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: white;
+      height: .1rem;
+      width: 60%;
+    }
+
+    & > button span:nth-child(1) {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    & > button span:nth-child(2) {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-size);
+  }
 }
 
 .container {

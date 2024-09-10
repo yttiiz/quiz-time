@@ -1,3 +1,4 @@
+"use server";
 import { Fetcher } from "@/utils/mod";
 
 export const selectQuizServerAction = async (
@@ -5,11 +6,16 @@ export const selectQuizServerAction = async (
 	formData: FormData,
 ) => {
 	const quizSelected = formData.get("select-quiz");
-
-	if (!quizSelected) return { message: "No item selected" };
-
+	const messageId = ((Math.random() + 1) * 1000).toFixed();
+	const messageItemNotSelected = "No item selected - id: " + messageId;
+	
+	if (!quizSelected || prevState.message === messageItemNotSelected) {
+		return { message: messageItemNotSelected }
+	};
+	
+	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
 	const response = await Fetcher.getData(
-		globalThis.location.protocol + "/api/mongodb",
+		host + "/api/mongodb",
 	);
 
 	if (response.ok) {
