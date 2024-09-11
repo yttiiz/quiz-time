@@ -1,4 +1,4 @@
-import { Fetcher } from "@/utils/fetcher";
+import { Fetcher } from "@yttiiz/utils";
 import { OpenWeather } from "@/utils/mod";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";

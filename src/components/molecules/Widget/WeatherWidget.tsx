@@ -1,6 +1,6 @@
 "use client";
 
-import { ErrorResponseType, SuccessResponseType } from "@/utils/mod";
+import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 import { WeatherApiType } from "../mod";
 import Image from "next/image";
 import { OpenWeather } from "@/utils/mod";

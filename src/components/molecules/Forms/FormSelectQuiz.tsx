@@ -35,14 +35,17 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 	};
 
 	useEffect(() => {
-		message.includes("No item selected") ? openDialog() : null;
+		if (message.includes("No item selected")) return openDialog();
+		if (message) {
+			globalThis.location.href = "/quiz/" + message;
+		}
 	}, [message]);
 
 	return (
 		<>
 			<form action={formAction}>
 				<h3 className="flex gap-4 items-center">
-					<IconElearning />
+					<IconElearning variant="secondary" />
 					{title}
 				</h3>
 				<Select

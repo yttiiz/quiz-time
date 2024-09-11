@@ -1,5 +1,5 @@
 import { GetStartedButton } from "@/components/mod";
-import { Fetcher } from "@/utils/mod";
+import { Fetcher } from "@yttiiz/utils";
 
 export const Hero = async () => {
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;

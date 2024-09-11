@@ -1,5 +1,5 @@
 import { Burger, Logo, WeatherWidget } from "@/components/mod";
-import { Fetcher } from "@/utils/mod";
+import { Fetcher } from "@yttiiz/utils";
 
 export const Header = async () => {
 	const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN: host } = process.env;

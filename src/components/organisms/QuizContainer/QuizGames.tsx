@@ -1,5 +1,5 @@
 import { ErrorMessage, FormSelectQuiz } from "@/components/mod";
-import { Fetcher } from "@/utils/mod";
+import { Fetcher } from "@yttiiz/utils";
 
 export const QuizGames = async () => {
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;

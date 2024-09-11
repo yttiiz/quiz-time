@@ -1,14 +1,22 @@
-import { Fetcher } from "@/utils/fetcher";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { Mongo } from "@/services/mod";
 
-export async function GET(req: NextRequest) {
-	const { MONGO_API_URL, MONGO_API_KEY } = process.env;
-	const response = await Fetcher.getData(
-		MONGO_API_URL + "?apiKey=" + MONGO_API_KEY,
-	);
+export async function POST(req: NextRequest) {
+	const value = (await req.formData()).get("value");
+	const isValueAString = !!value && !(value instanceof File);
 
-	return response.ok
-		? NextResponse.json(response.data)
-		: NextResponse.json(response.message);
+	if (isValueAString) {
+		const { quiz } = JSON.parse(value);
+		const documents = await Mongo.getDocumentsFrom({
+			db: "quiz",
+			collection: quiz,
+		});
+
+		return documents.length > 0
+			? NextResponse.json(documents)
+			: NextResponse.json({ message: "Collection not found." });
+	}
+
+	return NextResponse.json({ message: "Incorrect value given." });
 }
