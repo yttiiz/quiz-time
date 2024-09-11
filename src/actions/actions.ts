@@ -19,8 +19,11 @@ export const selectQuizServerAction = async (
 	);
 
 	if (response.ok) {
-		console.log(response.data);
-		// Implements logic here.
+		for (const item of response.data as unknown as any[]) {
+			console.log(item.question.title);
+			// Implements logic here.
+		}
+
 	} else {
 		console.log(response.message);
 		// Implements logic here.

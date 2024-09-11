@@ -1,14 +1,14 @@
-import { Fetcher } from "@/utils/fetcher";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { Mongo } from "@/services/mod";
 
 export async function GET(req: NextRequest) {
-	const { MONGO_API_URL, MONGO_API_KEY } = process.env;
-	const response = await Fetcher.getData(
-		MONGO_API_URL + "?apiKey=" + MONGO_API_KEY,
-	);
+	const documents = await Mongo.getDocumentsFrom({
+		db: "quiz",
+		collection: "series_001",
+	});
 
-	return response.ok
-		? NextResponse.json(response.data)
-		: NextResponse.json(response.message);
+	return documents
+		? NextResponse.json(documents)
+		: NextResponse.json({ message: "Mongodb not connected" });
 }
