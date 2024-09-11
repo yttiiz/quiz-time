@@ -2,13 +2,21 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Mongo } from "@/services/mod";
 
-export async function GET(req: NextRequest) {
-	const documents = await Mongo.getDocumentsFrom({
-		db: "quiz",
-		collection: "series_001",
-	});
+export async function POST(req: NextRequest) {
+	const value = (await req.formData()).get("value");
+	const isValueAString = !!value && !(value instanceof File);
 
-	return documents
-		? NextResponse.json(documents)
-		: NextResponse.json({ message: "Mongodb not connected" });
+	if (isValueAString) {
+		const { quiz } = JSON.parse(value);
+		const documents = await Mongo.getDocumentsFrom({
+			db: "quiz",
+			collection: quiz,
+		});
+
+		return documents.length > 0
+			? NextResponse.json(documents)
+			: NextResponse.json({ message: "Collection not found." });
+	}
+
+	return NextResponse.json({ message: "Incorrect value given." });
 }
