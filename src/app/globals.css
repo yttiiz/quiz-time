@@ -312,15 +312,18 @@ dialog {
   transform: rotate(45deg) translate(calc(var(--base-size) * -.3125), calc(var(--base-size) * -.25));
 }
 
-#hero-banner,
+.hero-quiz,
 #quiz-games {
   display: flex;
   align-items: center;
 }
 
+.hero-quiz {
+  height: calc(100vh - var(--main-header-height));
+}
+
 #hero-banner {
   background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
-  height: calc(100vh - var(--main-header-height));
 
   & h1 {
     font-size: calc(var(--base-size) * 8);

@@ -1,0 +1,9 @@
+#hero-js {
+  --js-default: 12 52 8;
+
+  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--js-default)) -10%, rgb(var(--background)) 60%);
+  
+  & h1 {
+    border-bottom: .1rem solid var(--foreground-20-percent);
+  }
+}

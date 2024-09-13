@@ -10,7 +10,10 @@ export const Hero = async () => {
 	);
 
 	return (
-		<section id="hero-banner">
+		<section
+			id="hero-banner"
+			className="hero-quiz"
+		>
 			<div className="container grid py-24 px-6 gap-4">
 				{response.ok ? (
 					<>
