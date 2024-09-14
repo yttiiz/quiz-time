@@ -17,9 +17,11 @@ export const selectItemServerAction = (
 	prevState: { message: string },
 	formData: FormData,
 ) => {
-	for (const questionAndUserResponse of formData) {
-		// To stuff here.
+	const iteratorResult = formData.entries().next();
+
+	if (iteratorResult.done) {
+		return { message: "invalid"}
 	}
 
-	return { message: "Formulaire valide" }
+	return { message: "valid" }
 };

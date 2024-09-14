@@ -5,47 +5,38 @@ import { QuestionType } from "@/services/mod";
 import { MouseEvent, useRef, useState } from "react";
 
 export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
-	const questionsList = useRef<HTMLUListElement | null>(null);
+	const formRef = useRef<HTMLFormElement | null>(null);
 	const [count, setCount] = useState(0);
 
 	const onButtonClickHandler = (event: MouseEvent) => {
-		if (questionsList && questionsList.current) {
-			const forms = questionsList.current.querySelectorAll("form");
-
-			forms[count].requestSubmit();
+		if (formRef && formRef.current && count < list.length) {
+			formRef.current.requestSubmit();
 			setCount(count + 1);
-
-			const slideWidth =
-				questionsList.current.getBoundingClientRect().width / list.length;
-			questionsList.current.style.transform = `translateX(-${slideWidth * (count + 1)}px)`;
 		}
 	};
 
 	return (
 		<>
-			<div className="w-full overflow-hidden">
-				<ul
-					ref={questionsList}
-					className="slider flex"
-					style={{ width: `calc(100% * ${list.length})` }}
-				>
-					{list.map(({ question }, index) => (
-						<li
-							key={index + (Math.random() + 1) * 1000}
-							style={{ width: `calc(100% / ${list.length})` }}
-						>
-							<h3>{question.title}</h3>
-							<QuizItems
-								questions={question.propositions}
-								name={question.title}
-							/>
-						</li>
-					))}
-				</ul>
+			<div className="w-full relative overflow-hidden">
+				{count < list.length ? (
+					<>
+						<h3>{list[count].question.title}</h3>
+						<QuizItems
+							ref={formRef}
+							questions={list[count].question.propositions}
+							name={list[count].question.title}
+						/>
+						<span className="absolute flex justify-center items-center bottom-0 right-0 w-[3.5rem] h-[3.5rem] border-2 rounded-full border-primary-content/20">
+							{`${count + 1}/${list.length}`}
+						</span>
+					</>
+				) : (
+					<div>Fin de la partie. Calcul du résultat...</div>
+				)}
 			</div>
 			<Button
 				type="button"
-				textContent="Suivant"
+				textContent="Question suivante"
 				onClick={onButtonClickHandler}
 			/>
 		</>
