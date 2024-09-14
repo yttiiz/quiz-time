@@ -6,7 +6,7 @@ const {
   PAGE_TITLE: title,
   PAGE_DESCRIPTION: description,
 } = process.env
-const inter = Montserrat({ subsets: ["latin"] });
+const inter = Montserrat({ subsets: ["latin"], preload: false });
 
 export const metadata: Metadata = {
   title,
