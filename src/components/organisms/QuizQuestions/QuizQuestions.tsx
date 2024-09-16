@@ -9,6 +9,7 @@ import { useFormState } from "react-dom";
 export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 	const formRef = useRef<HTMLFormElement | null>(null);
 	const [count, setCount] = useState(0);
+	const isQuizEnded = count < list.length;
 	const [{ message }, formAction] = useFormState(selectItemServerAction, {
 		message: "",
 	});
@@ -28,7 +29,7 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 	return (
 		<>
 			<div className="w-full relative overflow-hidden">
-				{count < list.length ? (
+				{isQuizEnded ? (
 					<>
 						<h3>{list[count].question.title}</h3>
 						<QuizItems
@@ -46,11 +47,27 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 					<div>Fin de la partie. Calcul du résultat...</div>
 				)}
 			</div>
-			<Button
-				type="button"
-				textContent="Question suivante"
-				onClick={onButtonClickHandler}
-			/>
+			<div className="flex gap-4">
+				{isQuizEnded ? (
+					<>
+						<Button
+							type="button"
+							textContent={
+								count < list.length - 1
+									? "Question suivante"
+									: "Terminer le quiz"
+							}
+							onClick={onButtonClickHandler}
+						/>
+						<Button
+							type="button"
+							variant="alert"
+							textContent="Passer"
+							onClick={() => setCount((count) => count + 1)}
+						/>
+					</>
+				) : null}
+			</div>
 		</>
 	);
 };
