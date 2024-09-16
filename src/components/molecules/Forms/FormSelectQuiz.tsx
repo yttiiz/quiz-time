@@ -10,6 +10,7 @@ import {
 import { useFormState } from "react-dom";
 import { selectQuizServerAction } from "@/actions/actions";
 import { useEffect, useRef } from "react";
+import { DomHelper } from "@/utils/mod";
 
 export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 	const [{ message }, formAction] = useFormState(selectQuizServerAction, {
@@ -22,20 +23,11 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-	const openDialog = () => {
-		if (dialogRef && dialogRef.current) {
-			dialogRef.current.showModal();
-		}
-	};
-
-	const handleOnClickDialog = () => {
-		if (dialogRef.current) {
-			dialogRef.current.close();
-		}
-	};
-
 	useEffect(() => {
-		if (message.includes("No item selected")) return openDialog();
+		if (message.includes("No item selected")) {
+			return DomHelper.openDialog(dialogRef);
+		}
+
 		if (message) {
 			globalThis.location.href = "/quiz/" + message;
 		}
@@ -62,7 +54,7 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 				/>
 			</form>
 			<Dialog
-				onClick={handleOnClickDialog}
+				onClick={() => DomHelper.closeDialog(dialogRef)}
 				ref={dialogRef}
 				header={{ title: "Quiz formulaire" }}
 				main={{

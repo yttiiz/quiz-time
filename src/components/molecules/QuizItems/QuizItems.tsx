@@ -2,6 +2,7 @@
 
 import { forwardRef, ForwardedRef, useRef, useEffect } from "react";
 import { Dialog, QuizItemsPropsType } from "../mod";
+import { DomHelper } from "@/utils/mod";
 
 // eslint-disable-next-line react/display-name
 export const QuizItems = forwardRef(
@@ -11,20 +12,8 @@ export const QuizItems = forwardRef(
 	) => {
 		const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-		const openDialog = () => {
-			if (dialogRef && dialogRef.current) {
-				dialogRef.current.showModal();
-			}
-		};
-
-		const handleOnClickDialog = () => {
-			if (dialogRef.current) {
-				dialogRef.current.close();
-			}
-		};
-
 		useEffect(() => {
-			if (message.includes("invalid")) return openDialog();
+			if (message.includes("invalid")) return DomHelper.openDialog(dialogRef);
 		}, [message]);
 
 		return (
@@ -49,7 +38,7 @@ export const QuizItems = forwardRef(
 					))}
 				</form>
 				<Dialog
-					onClick={handleOnClickDialog}
+					onClick={() => DomHelper.closeDialog(dialogRef)}
 					ref={dialogRef}
 					header={{ title: "Selection de la réponse" }}
 					main={{
