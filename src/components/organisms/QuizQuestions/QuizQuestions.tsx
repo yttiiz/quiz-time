@@ -2,18 +2,28 @@
 
 import { Button, QuizItems } from "@/components/mod";
 import { QuestionType } from "@/services/mod";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+import { selectItemServerAction } from "@/actions/actions";
+import { useFormState } from "react-dom";
 
 export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 	const formRef = useRef<HTMLFormElement | null>(null);
 	const [count, setCount] = useState(0);
+	const [{ message }, formAction] = useFormState(selectItemServerAction, {
+		message: "",
+	});
 
 	const onButtonClickHandler = (event: MouseEvent) => {
 		if (formRef && formRef.current && count < list.length) {
 			formRef.current.requestSubmit();
-			setCount(count + 1);
 		}
 	};
+
+	useEffect(() => {
+		if (message) {
+			message.includes("invalid") ? null : setCount((count) => count + 1);
+		}
+	}, [message]);
 
 	return (
 		<>
@@ -23,6 +33,8 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 						<h3>{list[count].question.title}</h3>
 						<QuizItems
 							ref={formRef}
+							formAction={formAction}
+							message={message}
 							questions={list[count].question.propositions}
 							name={list[count].question.title}
 						/>

@@ -3,7 +3,7 @@
  * see exemple here : https://openweathermap.org/current
  */
 
-import { MouseEventHandler, ReactNode } from "react";
+import { MouseEventHandler } from "react";
 
 type WeatherType = {
 	id: number;
@@ -70,3 +70,10 @@ export type DialogPropsType = {
 	main: DialogMainPropsType;
 	onClick: MouseEventHandler<HTMLButtonElement>;
 };
+
+export type QuizItemsPropsType = {
+	questions: string[];
+	name: string;
+	message: string;
+	formAction: (payload: FormData) => void;
+}

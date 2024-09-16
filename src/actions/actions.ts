@@ -1,10 +1,11 @@
+const keyGen = () => ((Math.random() + 1) * 1000).toFixed();
+
 export const selectQuizServerAction = async (
 	prevState: { message: string },
 	formData: FormData,
 ) => {
 	const quizSelected = formData.get("select-quiz");
-	const messageId = ((Math.random() + 1) * 1000).toFixed();
-	const messageItemNotSelected = "No item selected - id: " + messageId;
+	const messageItemNotSelected = "No item selected - id: " + keyGen();
 
 	if (!quizSelected || prevState.message === messageItemNotSelected) {
 		return { message: messageItemNotSelected };
@@ -13,15 +14,15 @@ export const selectQuizServerAction = async (
 	return { message: `${quizSelected}` };
 };
 
-export const selectItemServerAction = (
-	prevState: { message: string },
+export const selectItemServerAction = async (
+	_: { message: string },
 	formData: FormData,
 ) => {
 	const iteratorResult = formData.entries().next();
 
 	if (iteratorResult.done) {
-		return { message: "invalid"}
+		return { message: "invalid - id: " + keyGen() };
 	}
 
-	return { message: "valid" }
+	return { message: "valid - id: " + keyGen() };
 };
