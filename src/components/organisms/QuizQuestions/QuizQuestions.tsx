@@ -20,11 +20,30 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 		}
 	};
 
+	const getUserResponses = (key = "userResponses") => {
+		const responses = globalThis.localStorage
+			.getItem(key)
+			?.split(";")
+			.map((keyAndValue) => keyAndValue.split(","));
+
+		// Remove last element which is an empty string;
+		responses?.pop();
+		globalThis.localStorage.removeItem(key);
+
+		return responses;
+	};
+
 	useEffect(() => {
 		if (message) {
 			message.includes("invalid") ? null : setCount((count) => count + 1);
 		}
-	}, [message]);
+
+		if (!isQuizEnded) {
+			const userResponses = getUserResponses();
+			console.log(userResponses);
+			
+		}
+	}, [message, isQuizEnded]);
 
 	return (
 		<>
