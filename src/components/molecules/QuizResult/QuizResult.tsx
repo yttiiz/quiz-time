@@ -1,3 +1,5 @@
+import { ErrorMessage } from "@/components/mod";
+
 export const QuizResult = ({
 	points,
 	max,
@@ -17,12 +19,23 @@ export const QuizResult = ({
 
 	return (
 		<div className="grid gap-4">
-			<h3>Résultat final</h3>
-			<div>
-				Vous avez obtenu la note de{" "}
-				<b className="text-alert-default">{points} sur 20</b>.{" "}
-				{congrats(points)} !
-			</div>
+			{max ? (
+				<>
+					<h3>Résultat final</h3>
+					<div>
+						Vous avez obtenu la note de{" "}
+						<b className="text-alert-default">{points} sur 20</b>.{" "}
+						{congrats(points)} !
+					</div>
+				</>
+			) : (
+				<ErrorMessage
+					content={{
+						EN: "Connexion to dababase failed",
+						FR: "Erreur de connexion à la base données",
+					}}
+				/>
+			)}
 		</div>
 	);
 };
