@@ -1,3 +1,5 @@
+import { DomHelper } from "@/utils/mod";
+
 const keyGen = () => ((Math.random() + 1) * 1000).toFixed();
 
 export const selectQuizServerAction = async (
@@ -23,6 +25,12 @@ export const selectItemServerAction = async (
 	if (iteratorResult.done) {
 		return { message: "invalid - id: " + keyGen() };
 	}
+
+	const itemsAlreadySet = globalThis.localStorage.getItem("userResponses");
+
+	itemsAlreadySet
+		? DomHelper.setLocalStorage(iteratorResult, itemsAlreadySet)
+		: DomHelper.setLocalStorage(iteratorResult);
 
 	return { message: "valid - id: " + keyGen() };
 };
