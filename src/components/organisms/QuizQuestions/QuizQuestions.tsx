@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, QuizItems } from "@/components/mod";
+import { Button, QuizItems, QuizResult } from "@/components/mod";
 import { QuestionType } from "@/services/mod";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { selectItemServerAction } from "@/actions/actions";
@@ -9,6 +9,8 @@ import { useFormState } from "react-dom";
 export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 	const formRef = useRef<HTMLFormElement | null>(null);
 	const [count, setCount] = useState(0);
+	const [points, setPoints] = useState(0);
+
 	const isQuizEnded = count < list.length;
 	const [{ message }, formAction] = useFormState(selectItemServerAction, {
 		message: "",
@@ -55,11 +57,9 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 
 		if (!isQuizEnded) {
 			const userResponses = getUserResponses();
-			const points = getResult(userResponses, list);
-
-			alert("Vous avez obtenu un total de " + points + "/" + list.length);
+			setPoints((value) => value + getResult(userResponses, list));
 		}
-	}, [message, isQuizEnded, list]);
+	}, [message, isQuizEnded, points, list]);
 
 	return (
 		<>
@@ -79,7 +79,10 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 						</span>
 					</>
 				) : (
-					<div>Fin de la partie. Calcul du résultat...</div>
+					<QuizResult
+						points={points}
+						length={list.length}
+					/>
 				)}
 			</div>
 			<div className="flex gap-4">
