@@ -21,16 +21,31 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 	};
 
 	const getUserResponses = (key = "userResponses") => {
-		const responses = globalThis.localStorage
-			.getItem(key)
-			?.split(";")
-			.map((keyAndValue) => keyAndValue.split(","));
+		const items = globalThis.localStorage.getItem(key);
 
-		// Remove last element which is an empty string;
-		responses?.pop();
-		globalThis.localStorage.removeItem(key);
+		if (items) {
+			const responses = JSON.parse(items);
+			globalThis.localStorage.removeItem(key);
 
-		return responses;
+			return responses;
+		}
+	};
+
+	const getResult = (
+		userResponses: Record<string, string> | undefined,
+		responses: QuestionType[],
+	) => {
+		let points = 0;
+
+		if (userResponses) {
+			for (const response of responses) {
+				if (response.correction === userResponses[response.question.title]) {
+					points++;
+				}
+			}
+		}
+
+		return points;
 	};
 
 	useEffect(() => {
@@ -40,10 +55,11 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 
 		if (!isQuizEnded) {
 			const userResponses = getUserResponses();
-			console.log(userResponses);
-			
+			const points = getResult(userResponses, list);
+
+			alert("Vous avez obtenu un total de " + points + "/" + list.length);
 		}
-	}, [message, isQuizEnded]);
+	}, [message, isQuizEnded, list]);
 
 	return (
 		<>

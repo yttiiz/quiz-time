@@ -24,13 +24,29 @@ export const selectItemServerAction = async (
 		return { message: "invalid - id: " + keyGen() };
 	}
 
-	const itemsAlreadySet = globalThis.localStorage.getItem("userResponse");
+	const itemsAlreadySet = globalThis.localStorage.getItem("userResponses");
 	const setLocalStorage = (
 		iteratorResult: IteratorResult<[string, FormDataEntryValue], any>,
-		itemsAlreadySet: string | null | undefined = "",
+		itemsAlreadySet?: string | null | undefined,
 	) => {
-		const item = iteratorResult.value.toString() + ";";
-		globalThis.localStorage.setItem("userResponses", itemsAlreadySet + item);
+		let item = "";
+
+		if (itemsAlreadySet) {
+			const prevItem = JSON.parse(itemsAlreadySet);
+			item = JSON.stringify({
+				...prevItem,
+				[iteratorResult.value[0]]: iteratorResult.value[1],
+			});
+		} else {
+			item = JSON.stringify({
+				[iteratorResult.value[0]]: iteratorResult.value[1],
+			});
+		}
+
+		globalThis.localStorage.setItem(
+			"userResponses",
+			item,
+		);
 	};
 
 	itemsAlreadySet
