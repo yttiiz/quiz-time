@@ -59,6 +59,26 @@ export const definition = {
 			hover: "hover:fill-alert-alt",
 		},
 	},
+	border: {
+		primary: {
+			content: "border-primary-content",
+			default: "border-primary-default",
+			alt: "border-primary-alt",
+			hover: "hover:border-primary-alt",
+		},
+		secondary: {
+			content: "border-secondary-content",
+			default: "border-secondary-default",
+			alt: "border-secondary-alt",
+			hover: "hover:border-secondary-alt",
+		},
+		alert: {
+			content: "border-alert-content",
+			default: "border-alert-default",
+			alt: "border-alert-alt",
+			hover: "hover:border-alert-alt",
+		},
+	},
 	padding: {
 		2: "p-2",
 		4: "p-4",
