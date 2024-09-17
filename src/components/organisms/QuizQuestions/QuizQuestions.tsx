@@ -81,7 +81,7 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 				) : (
 					<QuizResult
 						points={points}
-						length={list.length}
+						max={list.length}
 					/>
 				)}
 			</div>

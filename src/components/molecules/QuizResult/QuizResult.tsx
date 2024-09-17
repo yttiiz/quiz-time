@@ -1,5 +1,11 @@
-export const QuizResult = ({ points, length }: { points: number; length: number }) => {
-  points = +((points / length) * 20).toFixed();
+export const QuizResult = ({
+	points,
+	max,
+}: {
+	points: number;
+	max: number;
+}) => {
+	points = +((points / max) * 20).toFixed();
 
 	const congrats = (note: number) => {
 		if (note >= 16) return "Félicitations";
