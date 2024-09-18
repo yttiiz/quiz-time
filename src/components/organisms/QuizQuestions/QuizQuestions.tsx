@@ -16,7 +16,7 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 		message: "",
 	});
 
-	const onButtonClickHandler = (event: MouseEvent) => {
+	const onButtonClickHandler = () => {
 		if (formRef && formRef.current && count < list.length) {
 			formRef.current.requestSubmit();
 		}

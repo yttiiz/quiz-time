@@ -1,4 +1,4 @@
-import { ErrorMessage } from "@/components/mod";
+import { Button, ErrorMessage } from "@/components/mod";
 
 export const QuizResult = ({
 	points,
@@ -27,12 +27,20 @@ export const QuizResult = ({
 						<b className="text-alert-default">{points} sur 20</b>.{" "}
 						{congrats(points)} !
 					</div>
+					<Button
+						type="button"
+						variant="alert"
+						onlyBorder={true}
+						className="w-max"
+						textContent="Recommencer"
+						onClick={() => globalThis.location.reload()}
+					/>
 				</>
 			) : (
 				<ErrorMessage
 					content={{
 						EN: "Connexion to dababase failed",
-						FR: "Erreur de connexion à la base données",
+						FR: "Erreur de connexion à la base de données",
 					}}
 				/>
 			)}

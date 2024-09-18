@@ -7,24 +7,37 @@ export const Button = (
 	{
 		textContent,
 		type = "button",
-		radius = "sm",
+		radius = "md",
 		spacing = "2",
 		variant = "primary",
 		className,
+		onlyBorder = false,
 		onClick,
 	}: ButtonPropsType,
 	key?: string,
 ) => {
 	const {
 		background,
+		border,
 		text,
 		"border-radius": borderRadius,
 		padding,
 	} = definition;
 
-	const buttonClassName = `${padding[spacing]} ${
-		background[variant].default
-	} ${background[variant].hover} ${text[variant].content}${
+	let borderOrBackground = "";
+
+	if (onlyBorder) {
+		borderOrBackground = `border-2 ${
+			border[variant].default
+		} ${border[variant].hover} ${text[variant].default}`;
+
+	} else {
+		borderOrBackground = `${
+			background[variant].default
+		} ${background[variant].hover} ${text[variant].content}`;
+	}
+
+	const buttonClassName = `${padding[spacing]} ${borderOrBackground}${
 		className ? ` ${className}` : ""
 	}${radius ? ` ${borderRadius[radius]}` : ""}`;
 

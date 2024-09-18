@@ -11,6 +11,7 @@ export type ButtonPropsType = CommonPropsType & {
 	type?: "button" | "submit" | "reset";
 	radius?: SizeType;
 	spacing?: SpacingType;
+	onlyBorder?: boolean;
 	onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
