@@ -16,7 +16,7 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 		message: "",
 	});
 
-	const onButtonClickHandler = () => {
+	const onClickNextQuestionButtonHandler = () => {
 		if (formRef && formRef.current && count < list.length) {
 			formRef.current.requestSubmit();
 		}
@@ -95,7 +95,7 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 									? "Question suivante"
 									: "Terminer le quiz"
 							}
-							onClick={onButtonClickHandler}
+							onClick={onClickNextQuestionButtonHandler}
 						/>
 						<Button
 							type="button"
