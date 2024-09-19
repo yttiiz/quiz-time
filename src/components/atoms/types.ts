@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { FormEventHandler, HTMLInputTypeAttribute, MouseEventHandler, ReactNode } from "react";
 import { SizeType, SpacingType, VariantType } from "../types";
 
 type CommonPropsType = {
@@ -37,3 +37,14 @@ export type SelectPropsType = {
 	placeholder: string;
 	width?: "full" | "content";
 };
+
+export type InputPropsType = {
+	value: string;
+	label: string;
+	name?: string;
+	type?: HTMLInputTypeAttribute;
+	required?: boolean;
+	leadingIcon?: ReactNode;
+	trailingIcon?: ReactNode;
+	onInput: FormEventHandler<HTMLInputElement>;
+}

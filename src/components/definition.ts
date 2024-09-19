@@ -59,6 +59,26 @@ export const definition = {
 			hover: "hover:fill-alert-alt",
 		},
 	},
+	stroke: {
+		primary: {
+			content: "stroke-primary-content",
+			default: "stroke-primary-default",
+			alt: "stroke-primary-alt",
+			hover: "hover:stroke-primary-alt",
+		},
+		secondary: {
+			content: "stroke-secondary-content",
+			default: "stroke-secondary-default",
+			alt: "stroke-secondary-alt",
+			hover: "hover:stroke-secondary-alt",
+		},
+		alert: {
+			content: "stroke-alert-content",
+			default: "stroke-alert-default",
+			alt: "stroke-alert-alt",
+			hover: "hover:stroke-alert-alt",
+		},
+	},
 	border: {
 		primary: {
 			content: "border-primary-content",

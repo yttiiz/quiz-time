@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/mod";
+import { Button, IconUnlocked, IconUser, Input } from "@/components/mod";
 import { SetterType, store, useUserDataForm } from "@/store/mod";
 import { useFormState } from "react-dom";
 
@@ -27,27 +27,39 @@ export const FormLogin = () => {
 			action={formAction}
 			className="grid gap-4 p-10"
 		>
-			<label>
-				Email :
-				<input
-					type="text"
-					value={email}
-          onInput={(event) => setEmail(event.currentTarget.value)}
-				/>
-			</label>
-			<label>
-				Mot de passe :
-				<input
-					type="password"
-					value={password}
-          onInput={(event) => setPassword(event.currentTarget.value)}
-				/>
-			</label>
+			<Input
+				label="Email"
+				name="email"
+				type="text"
+				value={email}
+				leadingIcon={
+					<IconUser
+						variant="primary"
+						model="content"
+						svgSize="xl"
+					/>
+				}
+				onInput={(event) => setEmail(event.currentTarget.value)}
+			/>
+			<Input
+				label="Mot de passe"
+				name="password"
+				type="password"
+				value={password}
+        leadingIcon={
+					<IconUnlocked
+						variant="primary"
+						model="content"
+						svgSize="xl"
+					/>
+				}
+				onInput={(event) => setPassword(event.currentTarget.value)}
+			/>
 			<Button
 				type="submit"
 				textContent="Connexion"
 				variant="secondary"
-        spacing="4"
+				spacing="4"
 			/>
 		</form>
 	);
