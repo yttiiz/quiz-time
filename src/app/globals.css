@@ -147,7 +147,7 @@ dialog {
   width: var(--web-site-content-boundary);
 }
 
-.main-header {
+#main-header {
   height: var(--main-header-height);
   border-bottom: .1rem solid var(--foreground-20-percent);
   position: sticky;
@@ -384,6 +384,15 @@ dialog {
       transform: translate(-50%, -50%);
     }
   }
+}
+
+.social-media-links {
+  opacity: .3;
+  transition: opacity var(--smooth);
+}
+
+.social-media-links:hover {
+  opacity: .8;
 }
 
 @layer utilities {
