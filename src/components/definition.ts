@@ -79,6 +79,12 @@ export const definition = {
 			hover: "hover:border-alert-alt",
 		},
 	},
+	size: {
+		sm: "size-2",
+		md: "size-4",
+		lg: "size-6",
+		xl: "size-8",
+	},
 	padding: {
 		2: "p-2",
 		4: "p-4",

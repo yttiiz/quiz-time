@@ -386,6 +386,15 @@ dialog {
   }
 }
 
+.social-media-links {
+  opacity: .3;
+  transition: opacity var(--smooth);
+}
+
+.social-media-links:hover {
+  opacity: .8;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
