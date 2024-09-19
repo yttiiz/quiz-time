@@ -318,7 +318,8 @@ dialog {
   align-items: center;
 }
 
-.hero-quiz {
+.hero-quiz,
+.user-login {
   height: calc(100vh - var(--main-header-height));
 }
 
