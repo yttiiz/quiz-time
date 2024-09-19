@@ -1,3 +1,15 @@
 {
-	"copyrights": "Tous droits réservés © yttiiz"
+	"copyrights": "Tous droits réservés © yttiiz",
+	"socialMedia": [
+		{
+			"media": "github",
+			"textContent": "yttiiz",
+			"url": "https://github.com/yttiiz"
+		},
+		{
+			"media": "gitlab",
+			"textContent": "yttiiz",
+			"url": "https://gitlab.com/yttiiz"
+		}
+	]
 }
