@@ -1,0 +1,32 @@
+#form-login-container {
+  margin: auto;
+  border-radius: calc(var(--base-size) * 1.5);
+  border: .1rem solid var(--foreground-20-percent);
+  
+  & h1 {
+    font-size: calc(var(--base-size) * 2.5);
+    text-align: center;
+    border-bottom: .1rem solid var(--foreground-20-percent);
+  }
+  
+  & form {
+    & label {
+      font-size: calc(var(--base-size) * 1.125);
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--base-size) * .5);
+    }
+    
+    & input {
+      padding: var(--base-size);
+      background: none;
+      border-radius: calc(var(--base-size) * .375);
+      border: .1rem solid var(--foreground-20-percent);
+    }
+
+    & button {
+      margin-top: var(--base-size);
+    }
+  }
+}
+

@@ -313,7 +313,8 @@ dialog {
 }
 
 .hero-quiz,
-#quiz-games {
+#quiz-games,
+.user-login {
   display: flex;
   align-items: center;
 }

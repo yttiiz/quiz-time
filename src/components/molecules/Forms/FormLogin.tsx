@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/mod";
+import { SetterType, store, useUserDataForm } from "@/store/mod";
 import { useFormState } from "react-dom";
 
 export const FormLogin = () => {
@@ -13,26 +14,40 @@ export const FormLogin = () => {
 		},
 	);
 
+  const [email, password, setEmail, setPassword] = store(
+		useUserDataForm,
+		"email",
+		"password",
+		"setEmail",
+		"setPassword",
+	) as [string, string, SetterType, SetterType];
+
 	return (
-		<form action={formAction}>
+		<form
+			action={formAction}
+			className="grid gap-4 p-10"
+		>
 			<label>
-				email :
+				Email :
 				<input
 					type="text"
-					value={""}
+					value={email}
+          onInput={(event) => setEmail(event.currentTarget.value)}
 				/>
 			</label>
 			<label>
-				mot de passe :
+				Mot de passe :
 				<input
-					type="text"
-					value={""}
+					type="password"
+					value={password}
+          onInput={(event) => setPassword(event.currentTarget.value)}
 				/>
 			</label>
 			<Button
 				type="submit"
 				textContent="Connexion"
 				variant="secondary"
+        spacing="4"
 			/>
 		</form>
 	);
