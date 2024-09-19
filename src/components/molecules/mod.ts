@@ -6,4 +6,7 @@ export * from "./Forms/FormSelectQuiz";
 export * from "./Dialog/Dialog";
 export * from "./QuizItems/QuizItems";
 export * from "./QuizResult/QuizResult";
+export * from "./FooterLinks/FooterLinks";
+export * from "./FooterCopyrights/FooterCopyrights";
+export * from "./FooterSocialMedia/FooterSocialMedia";
 export * from "./types";
