@@ -2,7 +2,7 @@
 
 import { Button, QuizItems, QuizResult } from "@/components/mod";
 import { QuestionType } from "@/services/mod";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { selectItemServerAction } from "@/actions/actions";
 import { useFormState } from "react-dom";
 
