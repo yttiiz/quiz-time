@@ -12,7 +12,7 @@ export const Header = async () => {
 	);
 
 	return (
-		<header className="main-header">
+		<header id="main-header">
 			<div className="container flex justify-between items-center h-full">
 				<a
 					href="/"
