@@ -2,12 +2,15 @@ import { MainLayout, QuizSection } from "@/components/mod";
 import { Fetcher } from "@yttiiz/utils";
 import style from "../quiz.module.css";
 
-export default async function Javascript() {
+export default async function Page({ params }: { params: { slug: string } }) {
+	const { slug } = params;
+	const title = `${slug[0].toLocaleUpperCase()}${slug.slice(1)} Quiz`;
+	
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
 	const response = await Fetcher.postData(
 		host + "/api/mongodb",
 		{
-			quiz: "rust",
+			quiz: slug,
 		},
 		"next",
 	);
@@ -15,8 +18,8 @@ export default async function Javascript() {
 	return (
 		<MainLayout>
 			<QuizSection
-				id={style["hero-rust"]}
-				title="Rust Quiz"
+				id={style[`hero-${slug}`]}
+				title={title}
 				response={response}
 			/>
 		</MainLayout>
