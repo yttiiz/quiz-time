@@ -24,11 +24,11 @@ export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
 	useEffect(() => {
-		if (message.includes("No item selected")) {
-			return DomHelper.openDialog(dialogRef);
-		}
-
 		if (message) {
+			if (message.includes("No item selected")) {
+				return DomHelper.openDialog(dialogRef);
+			}
+
 			globalThis.location.href = "/quiz/" + message;
 		}
 	}, [message]);
