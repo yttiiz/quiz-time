@@ -34,3 +34,16 @@ export const selectItemServerAction = async (
 
 	return { message: "valid - id: " + keyGen() };
 };
+
+
+export const loginServerAction = async (
+	prevState: { message: string },
+	formData: FormData,
+) => {
+	for (const item of formData.values()) {
+		console.log(item);
+		// WIP
+	}
+
+	return { message: "user connected" };
+};

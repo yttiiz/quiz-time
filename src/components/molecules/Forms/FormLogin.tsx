@@ -1,5 +1,6 @@
 "use client";
 
+import { loginServerAction } from "@/actions/actions";
 import {
 	Button,
 	IconCrossEye,
@@ -8,28 +9,42 @@ import {
 	IconUser,
 	Input,
 } from "@/components/mod";
-import { SetterType, store, useUserDataForm } from "@/store/mod";
-import { useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useFormState } from "react-dom";
 
 export const FormLogin = () => {
-	const [{ message }, formAction] = useFormState(
-		(prevState: { message: string }, formData: FormData) => {
-			return { message: "" };
+	const [{ message }, formAction] = useFormState(loginServerAction, {
+		message: "",
+	});
+
+	const [isEyeOpen, setIsEyeOpen] = useState(false);
+	const [{ email, password }, dispatch] = useReducer(
+		(
+			state: { email: string; password: string },
+			action: { type: "email" | "password"; payload: string },
+		) => {
+			switch (action.type) {
+				case "email": {
+					return { ...state, email: action.payload };
+				}
+
+				case "password": {
+					return { ...state, password: action.payload };
+				}
+			}
 		},
 		{
-			message: "",
+			email: "",
+			password: "",
 		},
 	);
 
-	const [isEyeOpen, setIsEyeOpen] = useState(false);
-	const [email, password, setEmail, setPassword] = store(
-		useUserDataForm,
-		"email",
-		"password",
-		"setEmail",
-		"setPassword",
-	) as [string, string, SetterType, SetterType];
+	useEffect(() => {
+		if (message.includes("connected")) {
+			dispatch({ type: "email", payload: "" });
+			dispatch({ type: "password", payload: "" });
+		}
+	}, [message]);
 
 	return (
 		<form
@@ -49,7 +64,9 @@ export const FormLogin = () => {
 						svgSize="xl"
 					/>
 				}
-				onInput={(event) => setEmail(event.currentTarget.value)}
+				onInput={(event) =>
+					dispatch({ type: "email", payload: event.currentTarget.value })
+				}
 			/>
 			<Input
 				label="Mot de passe"
@@ -80,7 +97,9 @@ export const FormLogin = () => {
 					)
 				}
 				onClickPasswordButton={() => setIsEyeOpen(!isEyeOpen)}
-				onInput={(event) => setPassword(event.currentTarget.value)}
+				onInput={(event) =>
+					dispatch({ type: "password", payload: event.currentTarget.value })
+				}
 			/>
 			<Button
 				type="submit"

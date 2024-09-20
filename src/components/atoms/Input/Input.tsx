@@ -27,7 +27,12 @@ export const Input = ({
 					/>
 					{trailingIcon ? (
 						name === "password" ? (
-							<button onClick={onClickPasswordButton}>{trailingIcon}</button>
+							<button
+								type="button"
+								onClick={onClickPasswordButton}
+							>
+								{trailingIcon}
+							</button>
 						) : (
 							trailingIcon
 						)
