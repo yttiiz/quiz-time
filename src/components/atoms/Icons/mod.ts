@@ -4,3 +4,5 @@ export * from "./Gitlab";
 export * from "./Github";
 export * from "./User";
 export * from "./Unlocked";
+export * from "./CrossEye";
+export * from "./Eye";

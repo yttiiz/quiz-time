@@ -47,4 +47,5 @@ export type InputPropsType = {
 	leadingIcon?: ReactNode;
 	trailingIcon?: ReactNode;
 	onInput: FormEventHandler<HTMLInputElement>;
-}
+	onClickPasswordButton?: () => void;
+};

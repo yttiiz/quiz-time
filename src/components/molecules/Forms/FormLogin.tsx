@@ -1,7 +1,15 @@
 "use client";
 
-import { Button, IconUnlocked, IconUser, Input } from "@/components/mod";
+import {
+	Button,
+	IconCrossEye,
+	IconEye,
+	IconUnlocked,
+	IconUser,
+	Input,
+} from "@/components/mod";
 import { SetterType, store, useUserDataForm } from "@/store/mod";
+import { useState } from "react";
 import { useFormState } from "react-dom";
 
 export const FormLogin = () => {
@@ -14,7 +22,8 @@ export const FormLogin = () => {
 		},
 	);
 
-  const [email, password, setEmail, setPassword] = store(
+	const [isEyeOpen, setIsEyeOpen] = useState(false);
+	const [email, password, setEmail, setPassword] = store(
 		useUserDataForm,
 		"email",
 		"password",
@@ -32,6 +41,7 @@ export const FormLogin = () => {
 				name="email"
 				type="text"
 				value={email}
+				required={true}
 				leadingIcon={
 					<IconUser
 						variant="primary"
@@ -44,15 +54,32 @@ export const FormLogin = () => {
 			<Input
 				label="Mot de passe"
 				name="password"
-				type="password"
+				type={isEyeOpen ? "text" : "password"}
 				value={password}
-        leadingIcon={
+				required={true}
+				leadingIcon={
 					<IconUnlocked
 						variant="primary"
 						model="content"
 						svgSize="xl"
 					/>
 				}
+				trailingIcon={
+					isEyeOpen ? (
+						<IconEye
+							variant="primary"
+							model="content"
+							svgSize="lg"
+						/>
+					) : (
+						<IconCrossEye
+							variant="primary"
+							model="content"
+							svgSize="lg"
+						/>
+					)
+				}
+				onClickPasswordButton={() => setIsEyeOpen(!isEyeOpen)}
 				onInput={(event) => setPassword(event.currentTarget.value)}
 			/>
 			<Button

@@ -21,6 +21,7 @@
 
     & label > div {
       display: flex;
+      align-items: center;
       gap: calc(var(--base-size) * .5);
       padding: calc(var(--base-size) * .5);
       border-radius: calc(var(--base-size) * .375);
@@ -31,6 +32,12 @@
       font-size: var(--base-size);
       width: 100%;
     }
+
+    & input[type=password] {
+      font: small-caption;
+      font-size: calc(var(--base-size) * 1.25);
+      letter-spacing: calc(var(--base-size) * .25);
+    }
     
     & input,
     & input:focus {
@@ -38,7 +45,11 @@
       background: none;
     }
 
-    & button {
+    & svg[data-name=daily-youth] {
+      padding: calc(var(--base-size) * .125);
+    }
+
+    & button[type="submit"] {
       margin-top: var(--base-size);
     }
   }

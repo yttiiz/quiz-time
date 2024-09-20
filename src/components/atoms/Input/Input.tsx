@@ -1,3 +1,5 @@
+"use client";
+
 import { InputPropsType } from "../mod";
 
 export const Input = ({
@@ -5,15 +7,16 @@ export const Input = ({
 	type,
 	label,
 	name,
-	required,
+	required = false,
 	leadingIcon,
 	trailingIcon,
+	onClickPasswordButton,
 	onInput,
 }: InputPropsType) => {
 	return (
 		<div>
 			<label>
-				{required ? `${label}*` : label}
+				{required ? `${label} *` : label}
 				<div>
 					{leadingIcon ? leadingIcon : null}
 					<input
@@ -21,8 +24,14 @@ export const Input = ({
 						value={value}
 						name={name}
 						onInput={onInput}
-          />
-          {trailingIcon ? trailingIcon : null}
+					/>
+					{trailingIcon ? (
+						name === "password" ? (
+							<button onClick={onClickPasswordButton}>{trailingIcon}</button>
+						) : (
+							trailingIcon
+						)
+					) : null}
 				</div>
 			</label>
 		</div>

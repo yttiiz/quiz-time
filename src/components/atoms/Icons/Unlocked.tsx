@@ -10,7 +10,7 @@ export const IconUnlocked = ({
 	model?: ModelType;
 }) => {
 	const { stroke, size } = definition;
-	let className = `${size[svgSize as keyof typeof size]} ${stroke[variant][model]}`;
+	let className = `${size[svgSize as keyof typeof size]} ${stroke[variant][model]} stroke-2`;
 
 	return (
 		<svg
@@ -18,7 +18,6 @@ export const IconUnlocked = ({
 			y="0px"
 			viewBox="0 0 32 32"
 			className={className}
-			style={{ strokeWidth: "1px" }}
 		>
 			<g>
 				<rect
