@@ -36,13 +36,13 @@ export const selectItemServerAction = async (
 	return { message: "valid - id: " + keyGen() };
 };
 
-export const loginServerAction = async (
+export const signInServerAction = async (
 	_: { message: string },
 	formData: FormData,
 ) => {
 	let messageWarning = "";
 	let email = "";
-	let	password = "";
+	let password = "";
 	const entries = formData.entries();
 
 	for (const [key, value] of entries) {

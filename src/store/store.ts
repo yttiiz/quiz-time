@@ -1,10 +1,15 @@
 import { create, UseBoundStore, StoreApi } from "zustand";
-import { HeaderAppStateType } from "./mod";
+import { HeaderAppStateType, UserDataAppStateType } from "./mod";
 import { NavbarItemType } from "@/components/types";
 
 export const useHeaderStore = create<HeaderAppStateType>((set) => ({
 	items: [],
 	setItems: (items: NavbarItemType[]) => set({ items }),
+}));
+
+export const useUserDataStore = create<UserDataAppStateType>((set) => ({
+	firstname: "",
+	setFirstname: (firstname: string) => set({ firstname }),
 }));
 
 /**

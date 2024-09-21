@@ -1,6 +1,6 @@
 "use client";
 
-import { loginServerAction } from "@/actions/actions";
+import { signInServerAction } from "@/actions/actions";
 import {
 	Button,
 	IconCrossEye,
@@ -9,17 +9,24 @@ import {
 	IconUser,
 	Input,
 } from "@/components/mod";
+import { SetterType, store, useUserDataStore } from "@/store/mod";
 import { useEffect, useReducer, useState } from "react";
 import { useFormState } from "react-dom";
 
 export const FormLogin = () => {
-	const [{ message }, formAction] = useFormState(loginServerAction, {
-		message: "",
-	});
-
 	const [isEyeOpen, setIsEyeOpen] = useState(false);
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
 	const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
+
+	const [{ message }, formAction] = useFormState(signInServerAction, {
+		message: "",
+	});
+
+	const [firstname, setFirstname] = store(useUserDataStore, "firstname", "setFirstname") as [
+		string,
+		SetterType<string>,
+	];
+	
 	const [{ email, password }, dispatch] = useReducer(
 		(
 			state: { email: string; password: string },
@@ -46,12 +53,14 @@ export const FormLogin = () => {
 			if (message.includes("connected")) {
 				dispatch({ type: "email", payload: "" });
 				dispatch({ type: "password", payload: "" });
-	
-				const firstname = message.split(": ")[1];
-				// Do stuff				
 
+				const userFirstname = message.split(": ")[1].trim();
+				setFirstname(userFirstname);
+
+				console.log(firstname);
+				
 			} else {
-				setErrorEmailMessage("Email inconnu")
+				setErrorEmailMessage("Email inconnu");
 			}
 
 			return;
@@ -66,7 +75,8 @@ export const FormLogin = () => {
 				? setErrorPasswordMessage("Veuillez renseigner ce champ.")
 				: setErrorPasswordMessage("Votre mot de passe est incorrect");
 		}
-	}, [message]);
+
+	}, [message, firstname, setFirstname]);
 
 	return (
 		<form
