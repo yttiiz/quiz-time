@@ -10,11 +10,12 @@ export const Input = ({
 	required = false,
 	leadingIcon,
 	trailingIcon,
+	feedbackMessage,
 	onClickPasswordButton,
 	onInput,
 }: InputPropsType) => {
 	return (
-		<div>
+		<div className="grid gap-4">
 			<label>
 				{required ? `${label} *` : label}
 				<div>
@@ -39,6 +40,7 @@ export const Input = ({
 					) : null}
 				</div>
 			</label>
+			<span className="text-[#ff0000]">{feedbackMessage ? feedbackMessage : ""}</span>
 		</div>
 	);
 };

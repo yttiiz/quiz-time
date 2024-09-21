@@ -18,6 +18,8 @@ export const FormLogin = () => {
 	});
 
 	const [isEyeOpen, setIsEyeOpen] = useState(false);
+	const [errorEmailMessage, setErrorEmailMessage] = useState("");
+	const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
 	const [{ email, password }, dispatch] = useReducer(
 		(
 			state: { email: string; password: string },
@@ -43,6 +45,16 @@ export const FormLogin = () => {
 		if (message.includes("connected")) {
 			dispatch({ type: "email", payload: "" });
 			dispatch({ type: "password", payload: "" });
+
+			return;
+		}
+
+		if (message.includes("email")) {
+			setErrorEmailMessage("Veuillez renseigner ce champ.");
+		}
+
+		if (message.includes("password")) {
+			setErrorPasswordMessage("Veuillez renseigner ce champ.");
 		}
 	}, [message]);
 
@@ -54,7 +66,7 @@ export const FormLogin = () => {
 			<Input
 				label="Email"
 				name="email"
-				type="text"
+				type="email"
 				value={email}
 				required={true}
 				leadingIcon={
@@ -64,9 +76,11 @@ export const FormLogin = () => {
 						svgSize="xl"
 					/>
 				}
-				onInput={(event) =>
-					dispatch({ type: "email", payload: event.currentTarget.value })
-				}
+				feedbackMessage={errorEmailMessage}
+				onInput={(event) => {
+					dispatch({ type: "email", payload: event.currentTarget.value });
+					if (errorEmailMessage) setErrorEmailMessage("");
+				}}
 			/>
 			<Input
 				label="Mot de passe"
@@ -96,10 +110,12 @@ export const FormLogin = () => {
 						/>
 					)
 				}
+				feedbackMessage={errorPasswordMessage}
 				onClickPasswordButton={() => setIsEyeOpen(!isEyeOpen)}
-				onInput={(event) =>
-					dispatch({ type: "password", payload: event.currentTarget.value })
-				}
+				onInput={(event) => {
+					dispatch({ type: "password", payload: event.currentTarget.value });
+					if (errorPasswordMessage) setErrorPasswordMessage("");
+				}}
 			/>
 			<Button
 				type="submit"

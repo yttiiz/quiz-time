@@ -1,4 +1,5 @@
 import { DomHelper } from "@/utils/mod";
+import { Fetcher } from "@yttiiz/utils";
 
 const keyGen = () => ((Math.random() + 1) * 1000).toFixed();
 
@@ -40,10 +41,32 @@ export const loginServerAction = async (
 	prevState: { message: string },
 	formData: FormData,
 ) => {
-	for (const item of formData.values()) {
-		console.log(item);
-		// WIP
+	let messageWarning = "";
+	let email = "", password = "";
+	const entries = formData.entries();
+
+	for (const [key, value] of entries) {
+		if (!value) {
+			messageWarning += `key ${key} is missing. `;
+		}
+
+		key === "email"
+			? email = value.toString()
+			: password = value.toString();
 	}
 
+	if (messageWarning) return { message: messageWarning };
+
+	const response = await Fetcher.postData(
+		globalThis.location.origin + "/api/mongodb/user",
+		{
+			email,
+			password,
+		},
+		"next",
+	);
+
+	// Do stuff
+	
 	return { message: "user connected" };
 };
