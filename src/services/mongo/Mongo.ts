@@ -1,4 +1,4 @@
-import { Db, MongoClient } from "mongodb";
+import { Db, Filter, MongoClient } from "mongodb";
 import bcrypt from "bcrypt";
 import {
 	GetDocumentsFromParameterType,
@@ -47,7 +47,7 @@ export class Mongo {
 	}: GetDocumentFromParameterType<T>) {
 		return await (await Mongo.getDatabase(db))
 			.collection<T>(collection)
-			.findOne({ [key]: identifier });
+			.findOne({ [key]: identifier } as Filter<T>);
 	}
 
 	public static async hashPassword(password: string, sizeSalt: number = 10) {

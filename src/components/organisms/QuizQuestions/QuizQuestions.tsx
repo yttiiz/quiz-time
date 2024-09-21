@@ -1,12 +1,12 @@
 "use client";
 
 import { Button, QuizItems, QuizResult } from "@/components/mod";
-import { QuestionType } from "@/services/mod";
+import { QuestionSchemaType } from "@/services/mod";
 import { useEffect, useRef, useState } from "react";
 import { selectItemServerAction } from "@/actions/actions";
 import { useFormState } from "react-dom";
 
-export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
+export const QuizQuestions = ({ list }: { list: QuestionSchemaType[] }) => {
 	const formRef = useRef<HTMLFormElement | null>(null);
 	const [count, setCount] = useState(0);
 	const [points, setPoints] = useState(0);
@@ -35,7 +35,7 @@ export const QuizQuestions = ({ list }: { list: QuestionType[] }) => {
 
 	const getResult = (
 		userResponses: Record<string, string> | undefined,
-		responses: QuestionType[],
+		responses: QuestionSchemaType[],
 	) => {
 		let points = 0;
 

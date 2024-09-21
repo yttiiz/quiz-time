@@ -16,7 +16,7 @@ export type QuestionDetailsType = {
 	propositions: string[];
 };
 
-export type QuestionType = {
+export type QuestionSchemaType = {
 	_id: ObjectId;
 	question: QuestionDetailsType;
 	correction: string;
@@ -24,6 +24,7 @@ export type QuestionType = {
 
 // User Schema
 export type UserType = {
+	_id: ObjectId;
 	firstname: string;
 	lastname: string;
 	email: string;
