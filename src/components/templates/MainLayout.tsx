@@ -1,5 +1,5 @@
 import { Fetcher } from "@yttiiz/utils";
-import { Header, Footer } from "../mod";
+import { Header, Footer, UserDetails } from "../mod";
 import { ReactNode } from "react";
 
 export const MainLayout = async ({ children }: { children: ReactNode }) => {
@@ -19,7 +19,10 @@ export const MainLayout = async ({ children }: { children: ReactNode }) => {
 				host={host}
 				response={response}
 			/>
-			<main>{children}</main>
+			<main>
+				<UserDetails />
+				{children}
+			</main>
 			<Footer
 				host={host}
 				response={response}

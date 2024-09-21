@@ -55,10 +55,11 @@ export const FormLogin = () => {
 				dispatch({ type: "password", payload: "" });
 
 				const userFirstname = message.split(": ")[1].trim();
-				setFirstname(userFirstname);
 
-				console.log(firstname);
-				
+				// Set firstname.
+				setFirstname(userFirstname);
+				globalThis.localStorage.setItem("userFirstname", userFirstname);
+
 			} else {
 				setErrorEmailMessage("Email inconnu");
 			}

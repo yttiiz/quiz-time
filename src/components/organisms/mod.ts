@@ -5,4 +5,5 @@ export * from "./QuizContainer/QuizGames";
 export * from "./QuizQuestions/QuizQuestions";
 export * from "./QuizSection/QuizSection";
 export * from "./Login/Login";
+export * from "./UserDetails/UserDetails";
 export * from "./types";

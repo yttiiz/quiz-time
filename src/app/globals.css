@@ -147,16 +147,20 @@ dialog {
   width: var(--web-site-content-boundary);
 }
 
-#main-header {
-  height: var(--main-header-height);
-  border-bottom: .1rem solid var(--foreground-20-percent);
+#main-header,
+#user-details {
   position: sticky;
-  top: 0;
-  z-index: 1;
 
   /* blur effect */
   -webkit-backdrop-filter: blur(var(--base-size));
   backdrop-filter: blur(var(--base-size));
+}
+
+#main-header {
+  height: var(--main-header-height);
+  border-bottom: .1rem solid var(--foreground-20-percent);
+  top: 0;
+  z-index: 1;
   
   & .main-header-logotype {
     width: calc(var(--base-size) * 2.5);
@@ -171,6 +175,10 @@ dialog {
   & .main-header-openweather-container {
     font-size: calc(var(--base-size) * .8);
   }
+}
+
+#user-details {
+  top: var(--main-header-height);
 }
 
 #burger {
