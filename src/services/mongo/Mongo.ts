@@ -33,4 +33,8 @@ export class Mongo {
 			.find()
 			.toArray();
 	}
+
+	public static async checkId() {
+		
+	}
 }
