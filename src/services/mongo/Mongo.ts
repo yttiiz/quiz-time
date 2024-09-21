@@ -1,10 +1,10 @@
-import { Db, MongoClient, WithId } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 import bcrypt from "bcrypt";
 import {
 	GetDocumentsFromParameterType,
 	GetDocumentFromParameterType,
 } from "./types";
-import { Document, Filter } from "mongodb";
+import { Document } from "mongodb";
 
 export class Mongo {
 	private static client = Mongo.initClient();

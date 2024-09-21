@@ -36,13 +36,13 @@ export const selectItemServerAction = async (
 	return { message: "valid - id: " + keyGen() };
 };
 
-
 export const loginServerAction = async (
-	prevState: { message: string },
+	_: { message: string },
 	formData: FormData,
 ) => {
 	let messageWarning = "";
-	let email = "", password = "";
+	let email = "";
+	let	password = "";
 	const entries = formData.entries();
 
 	for (const [key, value] of entries) {
@@ -51,8 +51,8 @@ export const loginServerAction = async (
 		}
 
 		key === "email"
-			? email = value.toString()
-			: password = value.toString();
+			? (email = value.toString())
+			: (password = value.toString());
 	}
 
 	if (messageWarning) return { message: messageWarning };
@@ -66,7 +66,24 @@ export const loginServerAction = async (
 		"next",
 	);
 
-	// Do stuff
-	
-	return { message: "user connected" };
+	if (response.ok) {
+		let message = "";
+
+		switch (response.data["message"]) {
+			case "Incorrect password":
+			case "User not found": {
+				message = response.data["message"];
+				break;
+			}
+
+			default: {
+				message = "User connected | firstname: " + response.data["message"];
+				break;
+			}
+		}
+
+		return { message };
+	}
+
+	return { message: response.message };
 };

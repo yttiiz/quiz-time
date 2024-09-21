@@ -42,9 +42,17 @@ export const FormLogin = () => {
 	);
 
 	useEffect(() => {
-		if (message.includes("connected")) {
-			dispatch({ type: "email", payload: "" });
-			dispatch({ type: "password", payload: "" });
+		if (message.includes("User")) {
+			if (message.includes("connected")) {
+				dispatch({ type: "email", payload: "" });
+				dispatch({ type: "password", payload: "" });
+	
+				const firstname = message.split(": ")[1];
+				// Do stuff				
+
+			} else {
+				setErrorEmailMessage("Email inconnu")
+			}
 
 			return;
 		}
@@ -54,7 +62,9 @@ export const FormLogin = () => {
 		}
 
 		if (message.includes("password")) {
-			setErrorPasswordMessage("Veuillez renseigner ce champ.");
+			message.includes("is missing")
+				? setErrorPasswordMessage("Veuillez renseigner ce champ.")
+				: setErrorPasswordMessage("Votre mot de passe est incorrect");
 		}
 	}, [message]);
 

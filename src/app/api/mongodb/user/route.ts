@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { RouteHelper } from "@/utils/route-helper";
 import { Mongo, UserSchemaType } from "@/services/mod";
@@ -15,9 +15,11 @@ export async function POST(req: NextRequest) {
 			identifier: email,
 		});
 
-		if (user && await Mongo.isPasswordOk(password, user.hash)) {
-			
-		}
+		if (!user) return NextResponse.json({ message: "User not found"});
+		
+		return (user && await Mongo.isPasswordOk(password, user.hash))
+			? NextResponse.json({ message: user.firstname })
+			: NextResponse.json({ message: "Incorrect password" });
 	}
 
 	return NextResponse.json({ message: "Incorrect value given." });
