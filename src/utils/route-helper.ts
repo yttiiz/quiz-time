@@ -10,7 +10,7 @@ export class RouteHelper {
 		const isValueAstring = !!value && !(value instanceof File);
 
 		return {
-			value: isValueAstring ? value : "value is not a string",
+			value: isValueAstring ? value : "",
 			isValueAstring,
 		};
 	}
