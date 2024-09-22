@@ -154,20 +154,16 @@ dialog {
   width: var(--web-site-content-boundary);
 }
 
-#main-header,
-#user-details {
-  position: sticky;
-
-  /* blur effect */
-  -webkit-backdrop-filter: blur(var(--base-size));
-  backdrop-filter: blur(var(--base-size));
-}
-
 #main-header {
+  position: sticky;
   height: var(--main-header-height);
   border-bottom: .1rem solid var(--foreground-20-percent);
   top: 0;
   z-index: 1;
+  
+  /* blur effect */
+  -webkit-backdrop-filter: blur(var(--base-size));
+  backdrop-filter: blur(var(--base-size));
   
   & .main-header-logotype {
     width: calc(var(--base-size) * 2.5);
@@ -182,10 +178,6 @@ dialog {
   & .main-header-openweather-container {
     font-size: calc(var(--base-size) * .8);
   }
-}
-
-#user-details {
-  top: var(--main-header-height);
 }
 
 #burger {
@@ -341,8 +333,8 @@ dialog {
   transform: rotate(45deg) translate(calc(var(--base-size) * -.3125), calc(var(--base-size) * -.25));
 }
 
-.hero-quiz,
 #quiz-games,
+.hero-quiz,
 .user-login {
   display: flex;
   align-items: center;

@@ -26,13 +26,13 @@ export const UserDetails = () => {
 	}, [firstname, setFirstname]);
 
 	return !!firstname ? (
-		<div
-			id="user-details"
-			className="bg-primary-content/5 text-alert-default"
-		>
-			<div className="container py-2">
-				{greets()} <b>{firstname}</b>
-			</div>
+		<div className="flex items-center gap-3">
+			<span>|</span>
+			<span className="py-2">
+				<strong className="text-alert-default font-normal">
+					{greets()} <b>{firstname}</b>
+				</strong>
+			</span>
 		</div>
 	) : null;
 };
