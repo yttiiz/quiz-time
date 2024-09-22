@@ -1,11 +1,11 @@
 "use client";
 
 import { SetterType } from "@/store/mod";
-import { store, useUserDataStore } from "@/store/store";
+import { store, useUserDataStore } from "@/store/mod";
 import { useEffect } from "react";
 
 export const UserDetails = () => {
-	let firstname = useUserDataStore((state) => state.firstname);
+	const firstname = useUserDataStore((state) => state.firstname);
 	const [setFirstname] = store(useUserDataStore, "setFirstname") as [
 		SetterType<string>,
 	];
@@ -23,7 +23,7 @@ export const UserDetails = () => {
 				);
 			}
 		}
-	}, [firstname]);
+	}, [firstname, setFirstname]);
 
 	return !!firstname ? (
 		<div

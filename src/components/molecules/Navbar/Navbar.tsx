@@ -2,7 +2,7 @@
 
 /* eslint-disable react/display-name */
 import { NavbarItem } from "@/components/mod";
-import { ForwardedRef, forwardRef, useEffect, useState } from "react";
+import { ForwardedRef, forwardRef, useEffect } from "react";
 import { useHeaderStore } from "@/store/mod";
 
 export const Navbar = forwardRef(

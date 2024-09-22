@@ -1,3 +1,4 @@
+import { SetterType, store, useUserDataStore } from "@/store/mod";
 import { DomHelper } from "@/utils/mod";
 import { Fetcher } from "@yttiiz/utils";
 
@@ -87,3 +88,9 @@ export const signInServerAction = async (
 
 	return { message: response.message };
 };
+
+export const signOutServerAction = () => {
+	globalThis.localStorage.removeItem("userFirstname");
+	
+	return { message: "User disconnected" };
+} 
