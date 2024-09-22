@@ -1,4 +1,5 @@
 import { Button, ErrorMessage } from "@/components/mod";
+import { useUserDataStore } from "@/store/store";
 
 export const QuizResult = ({
 	points,
@@ -9,6 +10,7 @@ export const QuizResult = ({
 }) => {
 	points = +((points / max) * 20).toFixed();
 
+	const firstname = useUserDataStore((state) => state.firstname);
 	const congrats = (note: number) => {
 		if (note >= 16) return "Félicitations";
 		if (note >= 12 && note < 16) return "C'est très bien";
@@ -24,8 +26,10 @@ export const QuizResult = ({
 					<h3>Résultat final</h3>
 					<div>
 						Vous avez obtenu la note de{" "}
-						<b className="text-alert-default">{points} sur 20</b>.{" "}
-						{congrats(points)} !
+						<b className="text-alert-default">{points} sur 20</b>.
+						<br />
+						{firstname ? <b>{`${firstname}, `}</b> : ""}
+						{firstname ? congrats(points).toLowerCase() : congrats(points)} !
 					</div>
 					<Button
 						type="button"
