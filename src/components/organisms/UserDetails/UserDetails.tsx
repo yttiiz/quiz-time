@@ -5,8 +5,8 @@ import { store, useUserDataStore } from "@/store/mod";
 import { useEffect } from "react";
 
 export const UserDetails = () => {
-	const firstname = useUserDataStore((state) => state.firstname);
-	const [setFirstname] = store(useUserDataStore, "setFirstname") as [
+	const [firstname, setFirstname] = store(useUserDataStore, "firstname", "setFirstname") as [
+		string,
 		SetterType<string>,
 	];
 

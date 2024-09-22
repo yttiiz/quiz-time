@@ -9,7 +9,6 @@ import {
 	IconUser,
 	Input,
 } from "@/components/mod";
-import { SetterType, store, useUserDataStore } from "@/store/mod";
 import { useEffect, useReducer, useState } from "react";
 import { useFormState } from "react-dom";
 
@@ -21,11 +20,6 @@ export const FormLogin = () => {
 	const [{ message }, formAction] = useFormState(signInServerAction, {
 		message: "",
 	});
-
-	const [firstname, setFirstname] = store(useUserDataStore, "firstname", "setFirstname") as [
-		string,
-		SetterType<string>,
-	];
 	
 	const [{ email, password }, dispatch] = useReducer(
 		(
@@ -55,10 +49,12 @@ export const FormLogin = () => {
 				dispatch({ type: "password", payload: "" });
 
 				const userFirstname = message.split(": ")[1].trim();
-
+				
 				// Set firstname.
-				setFirstname(userFirstname);
 				globalThis.localStorage.setItem("userFirstname", userFirstname);
+
+				// Redirect to home page.
+				globalThis.location.href = "/";
 
 			} else {
 				setErrorEmailMessage("Email inconnu");
@@ -77,7 +73,7 @@ export const FormLogin = () => {
 				: setErrorPasswordMessage("Votre mot de passe est incorrect");
 		}
 
-	}, [message, firstname, setFirstname]);
+	}, [message]);
 
 	return (
 		<form
