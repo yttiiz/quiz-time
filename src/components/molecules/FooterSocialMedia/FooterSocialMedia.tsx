@@ -1,10 +1,6 @@
-import { IconGithub, IconGitlab, ItemsType } from "@/components/atoms/mod";
+import { IconGithub, IconGitlab, ItemType } from "@/components/atoms/mod";
 
-export const FooterSocialMedia = ({
-	socialMedia,
-}: {
-	socialMedia: ItemsType[];
-}) => {
+export const FooterSocialMedia = ({ socialMedia }: { socialMedia: ItemType[] }) => {
 	return (
 		<>
 			<ul className="flex gap-4 justify-center">

@@ -1,13 +1,17 @@
 "use client"
 
-import { Navbar, NavbarItemType } from "@/components/mod";
+import { Navbar, ItemType } from "@/components/mod";
 import { SetterType, store, useHeaderStore } from "@/store/mod";
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 import { useRef, useEffect, useState } from "react";
 
-export const Burger = ({ response }: { response: SuccessResponseType | ErrorResponseType }) => {
+export const Burger = ({
+	response,
+}: {
+	response: SuccessResponseType | ErrorResponseType;
+}) => {
 	const [setItems] = store(useHeaderStore, "setItems") as [
-		SetterType<NavbarItemType[]>,
+		SetterType<ItemType[]>,
 	];
 
 	const line1 = useRef<HTMLSpanElement | null>(null);
@@ -46,10 +50,10 @@ export const Burger = ({ response }: { response: SuccessResponseType | ErrorResp
 
 	useEffect(() => {
 		const burgerElement = burger.current;
-		
+
 		if (response.ok) {
 			const { items } = response.data;
-			setItems(items as unknown as NavbarItemType[]);
+			setItems(items as unknown as ItemType[]);
 		}
 
 		if (burgerElement) {

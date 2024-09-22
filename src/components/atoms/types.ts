@@ -17,12 +17,13 @@ export type ButtonPropsType = CommonPropsType & {
 
 export type LogoPropsType = Omit<CommonPropsType, "variant">;
 
-export type ItemsType = {
+export type ItemType = {
 	textContent: string;
 	url: string;
+	isFormConnexion?: boolean;
 };
 
-export type NavbarItemPropsType = ItemsType & {
+export type NavbarItemPropsType = ItemType & {
 	key: string;
 };
 

@@ -15,7 +15,7 @@ export const Navbar = forwardRef(
 					(item) => item.textContent === "Connexion",
 				);
 
-				items[index] = { textContent: "Déconnexion", url: "#" };
+				items[index] = { textContent: "Déconnexion", url: "", isFormConnexion: true };
 			}
 		}, [items]);
 
@@ -32,10 +32,11 @@ export const Navbar = forwardRef(
 					<polygon points="0,16 8,0 22,16" />
 				</svg>
 				<ul>
-					{items.map(({ textContent, url }, index) => (
+					{items.map(({ textContent, url, isFormConnexion }, index) => (
 						<NavbarItem
 							key={`${textContent}-${index + 1}`}
 							textContent={textContent}
+							isFormConnexion={isFormConnexion}
 							url={url}
 						/>
 					))}

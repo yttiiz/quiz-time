@@ -5,4 +5,5 @@ export * from "./Github";
 export * from "./User";
 export * from "./Unlocked";
 export * from "./CrossEye";
+export * from "./OnOff";
 export * from "./Eye";

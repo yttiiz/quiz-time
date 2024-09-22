@@ -1,6 +1,6 @@
-import { ItemsType } from "@/components/mod";
+import { ItemType } from "@/components/mod";
 
-export const FooterLinks = ({ links }: { links: ItemsType[] }) => {
+export const FooterLinks = ({ links }: { links: ItemType[] }) => {
 	return (
 		<div>
 			<h3 className="mb-2">Catégories</h3>
