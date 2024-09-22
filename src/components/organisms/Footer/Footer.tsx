@@ -1,4 +1,4 @@
-import { FooterLinks, FooterSocialMedia, ItemsType } from "@/components/mod";
+import { FooterLinks, FooterSocialMedia, ItemType } from "@/components/mod";
 import { FooterCopyrights } from "@/components/molecules/FooterCopyrights/FooterCopyrights";
 import { ErrorResponseType, Fetcher, SuccessResponseType } from "@yttiiz/utils";
 
@@ -18,20 +18,20 @@ export const Footer = async ({
 	);
 
 	let copyrights: string = "copyrights not found";
-	let socialMedia = [] as ItemsType[];
+	let socialMedia = [] as ItemType[];
 	let links = [];
 
 	if (footerResponse.ok) {
 		copyrights = footerResponse.data["copyrights"];
 		socialMedia = [
-			...(footerResponse.data["socialMedia"] as unknown as (ItemsType & {
+			...(footerResponse.data["socialMedia"] as unknown as (ItemType & {
 				media: string;
 			})[]),
 		];
 	}
 
 	response.ok
-		? (links = [...response.data["items"]] as unknown as ItemsType[])
+		? (links = [...response.data["items"]] as unknown as ItemType[])
 		: (links = [{ textContent: "accueil", url: "/" }]);
 
 	return (

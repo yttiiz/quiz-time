@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { FormEventHandler, HTMLInputTypeAttribute, MouseEventHandler, ReactNode } from "react";
 import { SizeType, SpacingType, VariantType } from "../types";
 
 type CommonPropsType = {
@@ -17,12 +17,13 @@ export type ButtonPropsType = CommonPropsType & {
 
 export type LogoPropsType = Omit<CommonPropsType, "variant">;
 
-export type ItemsType = {
+export type ItemType = {
 	textContent: string;
 	url: string;
+	isFormConnexion?: boolean;
 };
 
-export type NavbarItemPropsType = ItemsType & {
+export type NavbarItemPropsType = ItemType & {
 	key: string;
 };
 
@@ -36,4 +37,17 @@ export type SelectPropsType = {
 	options: SelectOptionsType[];
 	placeholder: string;
 	width?: "full" | "content";
+};
+
+export type InputPropsType = {
+	value: string;
+	label: string;
+	name?: string;
+	type?: HTMLInputTypeAttribute;
+	required?: boolean;
+	leadingIcon?: ReactNode;
+	trailingIcon?: ReactNode;
+	feedbackMessage?: string;
+	onInput: FormEventHandler<HTMLInputElement>;
+	onClickPasswordButton?: () => void;
 };

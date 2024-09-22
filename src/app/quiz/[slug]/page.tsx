@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 	
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
 	const response = await Fetcher.postData(
-		host + "/api/mongodb",
+		host + "/api/mongodb/quiz",
 		{
 			quiz: slug,
 		},

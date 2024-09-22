@@ -1,12 +1,12 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Mongo } from "@/services/mod";
+import { RouteHelper } from "@/utils/mod";
 
 export async function POST(req: NextRequest) {
-	const value = (await req.formData()).get("value");
-	const isValueAString = !!value && !(value instanceof File);
+  const { value, isValueAstring } = await RouteHelper.getValueAsString(req);
 
-	if (isValueAString) {
+	if (isValueAstring) {
 		const { quiz } = JSON.parse(value);
 		const documents = await Mongo.getDocumentsFrom({
 			db: "quiz",

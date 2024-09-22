@@ -1,15 +1,24 @@
+"use client";
+
 /* eslint-disable react/display-name */
 import { NavbarItem } from "@/components/mod";
-import { ForwardedRef, forwardRef } from "react";
+import { ForwardedRef, forwardRef, useEffect } from "react";
 import { useHeaderStore } from "@/store/mod";
 
 export const Navbar = forwardRef(
-	(
-		_,
-		ref: ForwardedRef<HTMLDivElement | null>,
-	) => {
+	(_, ref: ForwardedRef<HTMLDivElement | null>) => {
 		const items = useHeaderStore((state) => state.items);
-		
+
+		useEffect(() => {
+			if (globalThis.localStorage.getItem("userFirstname")) {
+				const index = items.findIndex(
+					(item) => item.textContent === "Connexion",
+				);
+
+				items[index] = { textContent: "Déconnexion", url: "", isFormConnexion: true };
+			}
+		}, [items]);
+
 		return (
 			<nav
 				ref={ref}
@@ -23,10 +32,11 @@ export const Navbar = forwardRef(
 					<polygon points="0,16 8,0 22,16" />
 				</svg>
 				<ul>
-					{items.map(({ textContent, url }, index) => (
+					{items.map(({ textContent, url, isFormConnexion }, index) => (
 						<NavbarItem
 							key={`${textContent}-${index + 1}`}
 							textContent={textContent}
+							isFormConnexion={isFormConnexion}
 							url={url}
 						/>
 					))}

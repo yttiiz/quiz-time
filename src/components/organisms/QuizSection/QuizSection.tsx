@@ -1,5 +1,5 @@
 import { QuizQuestions, QuizSectionPropsType } from "../mod";
-import { QuestionType } from "@/services/mod";
+import { QuestionSchemaType } from "@/services/mod";
 
 export const QuizSection = ({ title, response, id }: QuizSectionPropsType) => {
 	return (
@@ -11,7 +11,9 @@ export const QuizSection = ({ title, response, id }: QuizSectionPropsType) => {
 				<h1>{title}</h1>
 				<div>
 					{response.ok ? (
-						<QuizQuestions list={response.data as unknown as QuestionType[]} />
+						<QuizQuestions
+							list={response.data as unknown as QuestionSchemaType[]}
+						/>
 					) : (
 						"No items found"
 					)}

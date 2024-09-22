@@ -70,7 +70,14 @@ h3 {
 
 button {
   transition: background var(--smooth);
+}
+
+button:not([data-user=deconnexion]) {
   font-size: calc(var(--base-size) * 1.25);
+}
+
+button[data-user=deconnexion] {
+  text-align: left;
 }
 
 dialog {
@@ -147,16 +154,20 @@ dialog {
   width: var(--web-site-content-boundary);
 }
 
-#main-header {
-  height: var(--main-header-height);
-  border-bottom: .1rem solid var(--foreground-20-percent);
+#main-header,
+#user-details {
   position: sticky;
-  top: 0;
-  z-index: 1;
 
   /* blur effect */
   -webkit-backdrop-filter: blur(var(--base-size));
   backdrop-filter: blur(var(--base-size));
+}
+
+#main-header {
+  height: var(--main-header-height);
+  border-bottom: .1rem solid var(--foreground-20-percent);
+  top: 0;
+  z-index: 1;
   
   & .main-header-logotype {
     width: calc(var(--base-size) * 2.5);
@@ -171,6 +182,10 @@ dialog {
   & .main-header-openweather-container {
     font-size: calc(var(--base-size) * .8);
   }
+}
+
+#user-details {
+  top: var(--main-header-height);
 }
 
 #burger {
@@ -235,8 +250,16 @@ dialog {
     box-shadow: var(--box-shadow);
   }
 
-  & > nav > ul li a {
+  & > nav > ul li a,
+  & > nav > ul li form > button {
     transition: all var(--smooth);
+  }
+
+  & > nav > ul li form > button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--base-size) * .5);
   }
 
   & > nav > ul li:not(:last-child) {
@@ -246,10 +269,16 @@ dialog {
   & > nav > ul li a,
   & > nav > ul > li > div {
     display: block;
+  }
+  
+  & > nav > ul li a,
+  & > nav > ul li form > button,
+  & > nav > ul > li > div {
     padding: calc(var(--base-size) * .5) calc(var(--base-size) * 1.25);
   }
-
+  
   & > nav > ul li a:hover,
+  & > nav > ul li form > button:hover,
   & > nav > ul > li > div:hover {
     background: rgb(var(--foreground) / .05);
   }
@@ -313,12 +342,14 @@ dialog {
 }
 
 .hero-quiz,
-#quiz-games {
+#quiz-games,
+.user-login {
   display: flex;
   align-items: center;
 }
 
-.hero-quiz {
+.hero-quiz,
+.user-login {
   height: calc(100vh - var(--main-header-height));
 }
 
