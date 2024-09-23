@@ -1,4 +1,4 @@
-import { FormLogin } from "@/components/mod";
+import { FormLogin, SignupLink } from "@/components/mod";
 
 export const Login = ({ id }: { id: string }) => {
 	return (
@@ -7,6 +7,7 @@ export const Login = ({ id }: { id: string }) => {
 				<div id={id}>
 					<h1 className="px-10 py-4">Connectez-vous</h1>
 					<FormLogin />
+					<SignupLink />
 				</div>
 			</div>
 		</section>

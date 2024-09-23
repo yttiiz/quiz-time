@@ -4,6 +4,8 @@ export * from "./Widget/WeatherWidget";
 export * from "./GetStartedButton/GetStartedButton";
 export * from "./Forms/FormSelectQuiz";
 export * from "./Forms/FormLogin";
+export * from "./Forms/FormSignup";
+export * from "./SignupLink/SignupLink";
 export * from "./Dialog/Dialog";
 export * from "./QuizItems/QuizItems";
 export * from "./QuizResult/QuizResult";
