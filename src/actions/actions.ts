@@ -89,6 +89,10 @@ export const signInServerAction = async (
 	return { message: response.message };
 };
 
+export const signUpServerAction = () => {
+	return { message: "" }; // Work in progress
+};
+
 export const signOutServerAction = () => {
 	globalThis.localStorage.removeItem("userFirstname");
 	

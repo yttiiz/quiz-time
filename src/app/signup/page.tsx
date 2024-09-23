@@ -1,12 +1,13 @@
 import { Login, MainLayout } from "@/components/mod";
-import style from "./login.module.css";
+import style from "../login/login.module.css";
 
 export default function Page() {
-  return (
+	return (
 		<MainLayout>
 			<Login
 				id={style["form-log-container"]}
-				title="Connectez-vous"
+				title="Créer votre compte"
+				form="signup"
 			/>
 		</MainLayout>
 	);

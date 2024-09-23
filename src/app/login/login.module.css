@@ -1,4 +1,4 @@
-#form-login-container {
+#form-log-container {
   width: clamp(calc(var(--base-size) * 18.75), 100%, calc(var(--base-size) * 30));
   margin: auto;
   border-radius: calc(var(--base-size) * 1.5);
