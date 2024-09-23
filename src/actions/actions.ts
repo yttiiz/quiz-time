@@ -48,6 +48,7 @@ export const signInServerAction = async (
 	for (const [key, value] of entries) {
 		if (!value) {
 			messageWarning += `key ${key} is missing. `;
+			continue;
 		}
 
 		key === "email"
@@ -57,13 +58,9 @@ export const signInServerAction = async (
 
 	if (messageWarning) return { message: messageWarning };
 
-	const response = await Fetcher.postData(
+	const response = await Fetcher.getData(
 		globalThis.location.origin + "/api/mongodb/user",
-		{
-			email,
-			password,
-		},
-		"next",
+		`email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
 	);
 
 	if (response.ok) {
@@ -88,22 +85,32 @@ export const signInServerAction = async (
 	return { message: response.message };
 };
 
-export const signUpServerAction = (
+export const signUpServerAction = async (
 	prevState: { message: string },
 	formData: FormData,
 ) => {
 	let messageWarning = "";
+	const data: Record<string, string | string> = {};
 	const entries = formData.entries();
 
 	for (const [key, value] of entries) {
 		if (!value) {
 			messageWarning += `key ${key} is missing. `;
+			continue;
 		}
+
+		data[key] = value as string;
 	}
 
 	if (messageWarning) return { message: messageWarning };
 
-	return { message: "" };
+	const response = await Fetcher.postData(
+		globalThis.location.origin + "/api/mongodb/user",
+		data,
+		"next",
+	);
+
+	return { message: "User connected | firstname: Test" };
 };
 
 export const signOutServerAction = () => {

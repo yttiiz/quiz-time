@@ -10,7 +10,7 @@ import {
 	IconUser,
 	Input,
 } from "@/components/mod";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import { useFormState } from "react-dom";
 
 export const FormSignup = () => {
@@ -24,11 +24,18 @@ export const FormSignup = () => {
 		message: "",
 	});
 
+	const initializerArg = useMemo(() => ({
+		firstname: "",
+		lastname: "",
+		email: "",
+		password: "",
+	}), []);
+
 	const [{ firstname, lastname, email, password }, dispatch] = useReducer(
 		(
 			state: FormSignupState,
 			action: {
-				type: "firstname" | "lastname" | "email" | "password";
+				type: keyof FormSignupState;
 				payload: string;
 			},
 		) => {
@@ -50,19 +57,16 @@ export const FormSignup = () => {
 				}
 			}
 		},
-		{
-			firstname: "",
-			lastname: "",
-			email: "",
-			password: "",
-		},
+		initializerArg,
 	);
 
 	useEffect(() => {
 		if (message.includes("User")) {
 			if (message.includes("connected")) {
-				dispatch({ type: "email", payload: "" });
-				dispatch({ type: "password", payload: "" });
+				
+				for (const key of (Object.keys(initializerArg) as (keyof typeof initializerArg)[])) {
+					dispatch({ type: key, payload: "" });
+				}
 
 				const userFirstname = message.split(": ")[1].trim();
 
@@ -93,7 +97,7 @@ export const FormSignup = () => {
 		if (message.includes("password")) {
 			setErrorPasswordMessage("Veuillez renseigner ce champ");
 		}
-	}, [message]);
+	}, [message, initializerArg]);
 
 	return (
 		<form
