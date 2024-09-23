@@ -3,6 +3,7 @@
 import { signUpServerAction } from "@/actions/actions";
 import {
 	Button,
+	FormSignupState,
 	IconCrossEye,
 	IconEye,
 	IconUnlocked,
@@ -14,21 +15,18 @@ import { useFormState } from "react-dom";
 
 export const FormSignup = () => {
 	const [isEyeOpen, setIsEyeOpen] = useState(false);
+	const [errorFirstnameMessage, setErrorFirstnameMessage] = useState("");
+	const [errorLastnameMessage, setErrorLastnameMessage] = useState("");
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
 	const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
 
 	const [{ message }, formAction] = useFormState(signUpServerAction, {
 		message: "",
 	});
-	
+
 	const [{ firstname, lastname, email, password }, dispatch] = useReducer(
 		(
-			state: {
-				firstname: string;
-				lastname: string;
-				email: string;
-				password: string;
-			},
+			state: FormSignupState,
 			action: {
 				type: "firstname" | "lastname" | "email" | "password";
 				payload: string;
@@ -67,13 +65,12 @@ export const FormSignup = () => {
 				dispatch({ type: "password", payload: "" });
 
 				const userFirstname = message.split(": ")[1].trim();
-				
+
 				// Set firstname.
 				globalThis.localStorage.setItem("userFirstname", userFirstname);
 
 				// Redirect to home page.
 				globalThis.location.href = "/";
-
 			} else {
 				setErrorEmailMessage("Email inconnu");
 			}
@@ -81,16 +78,21 @@ export const FormSignup = () => {
 			return;
 		}
 
+		if (message.includes("firstname")) {
+			setErrorFirstnameMessage("Veuillez renseigner ce champ");
+		}
+
+		if (message.includes("lastname")) {
+			setErrorLastnameMessage("Veuillez renseigner ce champ");
+		}
+
 		if (message.includes("email")) {
-			setErrorEmailMessage("Veuillez renseigner ce champ.");
+			setErrorEmailMessage("Veuillez renseigner ce champ");
 		}
 
 		if (message.includes("password")) {
-			message.includes("is missing")
-				? setErrorPasswordMessage("Veuillez renseigner ce champ.")
-				: setErrorPasswordMessage("Votre mot de passe est incorrect");
+			setErrorPasswordMessage("Veuillez renseigner ce champ");
 		}
-
 	}, [message]);
 
 	return (
@@ -111,10 +113,10 @@ export const FormSignup = () => {
 						svgSize="xl"
 					/>
 				}
-				feedbackMessage={errorEmailMessage}
+				feedbackMessage={errorFirstnameMessage}
 				onInput={(event) => {
 					dispatch({ type: "firstname", payload: event.currentTarget.value });
-					if (errorEmailMessage) setErrorEmailMessage("");
+					if (errorFirstnameMessage) setErrorFirstnameMessage("");
 				}}
 			/>
 			<Input
@@ -130,10 +132,10 @@ export const FormSignup = () => {
 						svgSize="xl"
 					/>
 				}
-				feedbackMessage={errorEmailMessage}
+				feedbackMessage={errorLastnameMessage}
 				onInput={(event) => {
 					dispatch({ type: "lastname", payload: event.currentTarget.value });
-					if (errorEmailMessage) setErrorEmailMessage("");
+					if (errorLastnameMessage) setErrorLastnameMessage("");
 				}}
 			/>
 			<Input
@@ -192,7 +194,7 @@ export const FormSignup = () => {
 			/>
 			<Button
 				type="submit"
-				textContent="Connexion"
+				textContent="Envoyer"
 				variant="secondary"
 				spacing="4"
 			/>

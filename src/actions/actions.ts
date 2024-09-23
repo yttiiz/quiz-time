@@ -1,4 +1,3 @@
-import { SetterType, store, useUserDataStore } from "@/store/mod";
 import { DomHelper } from "@/utils/mod";
 import { Fetcher } from "@yttiiz/utils";
 
@@ -89,12 +88,26 @@ export const signInServerAction = async (
 	return { message: response.message };
 };
 
-export const signUpServerAction = () => {
-	return { message: "" }; // Work in progress
+export const signUpServerAction = (
+	prevState: { message: string },
+	formData: FormData,
+) => {
+	let messageWarning = "";
+	const entries = formData.entries();
+
+	for (const [key, value] of entries) {
+		if (!value) {
+			messageWarning += `key ${key} is missing. `;
+		}
+	}
+
+	if (messageWarning) return { message: messageWarning };
+
+	return { message: "" };
 };
 
 export const signOutServerAction = () => {
 	globalThis.localStorage.removeItem("userFirstname");
-	
+
 	return { message: "User disconnected" };
-} 
+};

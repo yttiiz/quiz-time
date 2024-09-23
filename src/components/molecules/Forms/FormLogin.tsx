@@ -3,6 +3,7 @@
 import { signInServerAction } from "@/actions/actions";
 import {
 	Button,
+	FormLoginState,
 	IconCrossEye,
 	IconEye,
 	IconUnlocked,
@@ -23,7 +24,7 @@ export const FormLogin = () => {
 	
 	const [{ email, password }, dispatch] = useReducer(
 		(
-			state: { email: string; password: string },
+			state: FormLoginState,
 			action: { type: "email" | "password"; payload: string },
 		) => {
 			switch (action.type) {
