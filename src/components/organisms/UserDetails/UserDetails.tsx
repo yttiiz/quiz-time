@@ -29,7 +29,7 @@ export const UserDetails = () => {
 		<div className="flex items-center gap-3">
 			<span>|</span>
 			<span className="py-2">
-				<strong className="text-alert-default font-normal">
+				<strong className="text-secondary-default font-normal">
 					{greets()} <b>{firstname}</b>
 				</strong>
 			</span>
