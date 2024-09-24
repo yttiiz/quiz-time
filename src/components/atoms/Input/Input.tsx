@@ -16,7 +16,10 @@ export const Input = ({
 	feedbackMessage,
 	onClickPasswordButton,
 	onInput,
-}: InputPropsType) => {
+	isLoginForm = false,
+}: InputPropsType & {
+	isLoginForm?: boolean;
+}) => {
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
 	return (
@@ -44,7 +47,7 @@ export const Input = ({
 						)
 					) : null}
 				</div>
-				{type === "password" ? (
+				{type === "password" && isLoginForm ? (
 					<button
 						className="text-left font-bold"
 						onClick={() => DomHelper.openDialog(dialogRef)}

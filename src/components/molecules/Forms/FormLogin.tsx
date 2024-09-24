@@ -106,6 +106,7 @@ export const FormLogin = () => {
 				type={isEyeOpen ? "text" : "password"}
 				value={password}
 				required={true}
+				isLoginForm={true}
 				leadingIcon={
 					<IconUnlocked
 						variant="primary"
