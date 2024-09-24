@@ -1,19 +1,19 @@
 #hero-javascript {
   --js-default: 12 52 8;
 
-  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--js-default)) -10%, rgb(var(--background)) 60%);
+  background: url(/img/stars.svg), radial-gradient(rgb(var(--js-default)) -10%, rgb(var(--background)) 60%);
 }
 
 #hero-rust {
   --rust-default: 42 9 12;
   
-  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--rust-default)) -10%, rgb(var(--background)) 60%);
+  background: url(/img/stars.svg), radial-gradient(rgb(var(--rust-default)) -10%, rgb(var(--background)) 60%);
 }
 
 #hero-kotlin {
   --rust-default: 29 39 42;
   
-  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--rust-default)) -10%, rgb(var(--background)) 60%);
+  background: url(/img/stars.svg), radial-gradient(rgb(var(--rust-default)) -10%, rgb(var(--background)) 60%);
 }
 
 #hero-javascript,

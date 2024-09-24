@@ -346,7 +346,7 @@ dialog {
 }
 
 #hero-banner {
-  background: url(https://dominiquetalis.com/images/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
+  background: url(/img/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
 
   & h1 {
     font-size: calc(var(--base-size) * 8);

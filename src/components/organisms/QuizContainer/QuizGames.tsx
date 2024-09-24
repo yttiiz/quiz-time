@@ -33,16 +33,16 @@ export const QuizGames = async () => {
 				)}
 			</div>
 			<div className="video-container">
-			<video
-				autoPlay
-				loop
-				muted
-			>
-				<source
-					src="videos/quiz-room.mp4"
-					type="video/mp4"
-				/>
-			</video>
+				<video
+					autoPlay
+					loop
+					muted
+				>
+					<source
+						src="videos/quiz-room.mp4"
+						type="video/mp4"
+					/>
+				</video>
 			</div>
 		</section>
 	);
