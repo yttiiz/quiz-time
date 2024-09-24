@@ -1,4 +1,3 @@
-import { SetterType, store, useUserDataStore } from "@/store/mod";
 import { DomHelper } from "@/utils/mod";
 import { Fetcher } from "@yttiiz/utils";
 
@@ -49,6 +48,7 @@ export const signInServerAction = async (
 	for (const [key, value] of entries) {
 		if (!value) {
 			messageWarning += `key ${key} is missing. `;
+			continue;
 		}
 
 		key === "email"
@@ -58,13 +58,9 @@ export const signInServerAction = async (
 
 	if (messageWarning) return { message: messageWarning };
 
-	const response = await Fetcher.postData(
+	const response = await Fetcher.getData<{ message: string }>(
 		globalThis.location.origin + "/api/mongodb/user",
-		{
-			email,
-			password,
-		},
-		"next",
+		`email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
 	);
 
 	if (response.ok) {
@@ -89,8 +85,54 @@ export const signInServerAction = async (
 	return { message: response.message };
 };
 
+export const signUpServerAction = async (
+	prevState: { message: string },
+	formData: FormData,
+) => {
+	let messageWarning = "";
+	const data: Record<string, string | string> = {};
+	const entries = formData.entries();
+
+	for (const [key, value] of entries) {
+		if (!value) {
+			messageWarning += `key ${key} is missing. `;
+			continue;
+		}
+
+		data[key] = value as string;
+	}
+
+	if (messageWarning) return { message: messageWarning };
+
+	const response = await Fetcher.postData<{ message: string }>(
+		globalThis.location.origin + "/api/mongodb/user",
+		data,
+		"next",
+	);
+
+	if (response.ok) {
+		let message = ""
+
+		switch (response.data["message"]) {
+			case "User not created": {
+				message = response.data["message"];
+				break;
+			}
+
+			default: {
+				message = "User connected | firstname: " + response.data["message"];
+				break;
+			}
+		}
+
+		return { message };
+	}
+	
+	return { message: response.message };
+};
+
 export const signOutServerAction = () => {
 	globalThis.localStorage.removeItem("userFirstname");
-	
+
 	return { message: "User disconnected" };
-} 
+};

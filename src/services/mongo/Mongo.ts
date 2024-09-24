@@ -1,8 +1,14 @@
-import { Db, Filter, MongoClient } from "mongodb";
+import {
+	Db,
+	Filter,
+	MongoClient,
+	OptionalUnlessRequiredId,
+} from "mongodb";
 import bcrypt from "bcrypt";
 import {
 	GetDocumentsFromParameterType,
 	GetDocumentFromParameterType,
+	PostDocumentFromParameterType,
 } from "./types";
 import { Document } from "mongodb";
 
@@ -48,6 +54,18 @@ export class Mongo {
 		return await (await Mongo.getDatabase(db))
 			.collection<T>(collection)
 			.findOne({ [key]: identifier } as Filter<T>);
+	}
+
+	public static async postDocumentTo<T extends Document = Document>({
+		db,
+		collection,
+		data,
+	}: PostDocumentFromParameterType<T>) {
+		return await (await Mongo.getDatabase(db))
+			.collection<T>(collection)
+			.insertOne({
+				...data,
+			} as unknown as OptionalUnlessRequiredId<T>);
 	}
 
 	public static async hashPassword(password: string, sizeSalt: number = 10) {

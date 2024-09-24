@@ -76,4 +76,14 @@ export type QuizItemsPropsType = {
 	name: string;
 	message: string;
 	formAction: (payload: FormData) => void;
-}
+};
+
+export type FormLoginState = {
+	email: string;
+	password: string;
+};
+
+export type FormSignupState = FormLoginState & {
+	firstname: string;
+	lastname: string;
+};

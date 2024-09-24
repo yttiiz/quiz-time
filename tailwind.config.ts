@@ -31,6 +31,9 @@ const config: Config = {
 				alt: "rgb(var(--alert-alt) / <alpha-value>)",
 			},
 		},
+		transitionDuration: {
+			default: "var(--smooth)",
+		}
 	},
 	plugins: [],
 };

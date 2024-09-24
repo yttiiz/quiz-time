@@ -14,4 +14,19 @@ export class RouteHelper {
 			isValueAstring,
 		};
 	}
+
+	/**
+	 * Returns an object containing the data of the user.
+	 * @param req
+	 */
+	public static async getUserData(req: NextRequest) {
+		const { searchParams } = new URL(req.url);
+		const email = searchParams.get("email");
+		const password = searchParams.get("password");
+
+		return {
+			email,
+			password,
+		};
+	}
 }
