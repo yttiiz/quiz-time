@@ -363,6 +363,7 @@ dialog {
 
 #quiz-games {
   height: 100vh;
+  position: relative;
 
   & form {
     display: grid;
@@ -405,6 +406,34 @@ dialog {
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       background: rgb(var(--foreground) / .2);
       transform: translate(-50%, -50%);
+    }
+  }
+
+  .video-container {
+    position: absolute;
+    height: inherit;
+    z-index: -1;
+    width: 100%;
+    
+    & video,
+    &::before {
+      height: inherit;
+      position: inherit;
+      width: inherit;
+
+    }
+
+    & video {
+      opacity: .15;
+      object-fit: cover;
+      z-index: -2;
+    }
+    
+    &::before {
+      content: "";
+      display: block;
+      height: inherit;
+      background: radial-gradient(transparent -10%, rgb(var(--background)) 60%);
     }
   }
 }
