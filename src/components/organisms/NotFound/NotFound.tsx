@@ -4,7 +4,7 @@ export const NotFound = () => {
 	return (
 		<section className="not-found">
 			<div className="container text-center">
-				<p className="text-alert-default font-bold border-4 border-alert-default">
+				<p className="text-alert-default font-bold">
 					404
 				</p>
 				<div className="grid gap-4">
