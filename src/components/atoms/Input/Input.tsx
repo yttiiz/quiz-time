@@ -3,7 +3,8 @@
 import { Dialog } from "@/components/mod";
 import { InputPropsType } from "../mod";
 import { useRef } from "react";
-import { DomHelper } from "@/utils/mod";
+import { Crypto, DomHelper } from "@/utils/mod";
+import { NodeMailer } from "@/services/mod";
 
 export const Input = ({
 	value,
@@ -21,6 +22,15 @@ export const Input = ({
 	isLoginForm?: boolean;
 }) => {
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+	const sendEmailHandler = async () => {
+		const newPassword = Crypto.generatePassword();
+		await NodeMailer.send({
+			to: "john.doe@test.us",
+			receiver: "John",
+			newPassword,
+		});
+	};
 
 	return (
 		<div className="grid gap-4">
@@ -62,7 +72,7 @@ export const Input = ({
 			</span>
 			<Dialog
 				onCrossButtonClick={() => DomHelper.closeDialog(dialogRef)}
-				onMainButtonClick={() => {  }} // Do stuff
+				onMainButtonClick={sendEmailHandler}
 				ref={dialogRef}
 				header={{ title: "Mot de passe oublié ?" }}
 				main={{

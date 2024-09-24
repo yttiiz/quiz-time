@@ -8,7 +8,11 @@ export class NodeMailer {
 		secure: true,
 	};
 
-	public static async send({ to, receiver }: SendParameterType) {
+	public static async send({
+		to,
+		receiver,
+		newPassword,
+	}: SendParameterType & { newPassword?: string }) {
 		const {
 			EMAIL_ADDRESS: email,
 			EMAIL_USERNAME: username,
@@ -29,19 +33,19 @@ export class NodeMailer {
 			from: `${username} - <${email}>`,
 			to,
 			subject: "Réinitialisiation de votre mot de passe",
-			text: NodeMailer.plainText(receiver),
-			html: NodeMailer.html(receiver),
+			text: NodeMailer.plainText(receiver, newPassword),
+			html: NodeMailer.html(receiver, newPassword),
 		});
 
 		// WIP
 		console.log(info);
 	}
 
-	private static plainText(receiver: string) {
-		return `${receiver}, \nLorem ispum dolor...`;
+	private static plainText(receiver: string, newPassword?: string) {
+		return `${receiver}, \nLorem ispum dolor... ${newPassword ? `password : ${newPassword}` : ""}`;
 	}
-	
-	private static html(receiver: string) {
-		return `<h1>${receiver}</h1>,\n<p>Lorem ispum dolor...</p>`;
+
+	private static html(receiver: string, newPassword?: string) {
+		return `<h1>${receiver}</h1>,\n<p>Lorem ispum dolor...</p>${newPassword ? `password : ${newPassword}` : ""}`;
 	}
 }
