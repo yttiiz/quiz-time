@@ -12,16 +12,16 @@ type CoordsType =
 
 export async function POST(req: NextRequest) {
 	const { OPENWEATHER_API_KEY } = process.env;
-	const stringifyCoords = (await req.formData()).get("coords");
-	const coords: CoordsType = JSON.parse(stringifyCoords as string);
+	const stringifyCoords = (await req.formData()).get("value");
+	const value: CoordsType = JSON.parse(stringifyCoords as string);
 
-  // Sainte-Anne coordonates
+  // Sainte-Anne coordonates (default).
 	let latitude = 16.2333;
 	let longitude = -61.3833;
-
-	if ("latitude" in coords) {
-		latitude = coords.latitude;
-		longitude = coords.longitude;
+	
+	if ("latitude" in value) {
+		latitude = value.latitude;
+		longitude = value.longitude;
 	}
 
 	const api = OpenWeather.getApi({

@@ -1,26 +1,26 @@
 "use client";
 
-import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
+import { ErrorResponseType, Fetcher, SuccessResponseType } from "@yttiiz/utils";
 import { WeatherApiType } from "../mod";
 import Image from "next/image";
 import { OpenWeather } from "@/utils/mod";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
+
+type ResponseType = SuccessResponseType | ErrorResponseType | null;
 
 export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 	const [isFrenchBrowser, setIsFrenchBrowser] = useState(true);
-	const [response, setResponse] = useState<
-		SuccessResponseType | ErrorResponseType | null
-	>(null);
+	const [response, setResponse] = useState<ResponseType>(null);
 
 	useEffect(() => {
-		const body = new FormData();
-		const retreiveDataFromApi = (body: FormData) => {
-			fetch(host + "/api/weather", {
-				method: "POST",
+		const retreiveDataFromApi = (body: string | Record<string, string>) => {
+			Fetcher.postData<SetStateAction<ResponseType>>(
+				host + "/api/weather",
 				body,
-			})
-				.then((res) => res.json())
-				.then((data) => setResponse(data));
+				"next",
+			)
+				.then((res) => (res.ok ? res.data : null))
+				.then((res) => setResponse(res));
 		};
 
 		if (globalThis) {
@@ -32,12 +32,10 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 				globalThis.navigator.geolocation.getCurrentPosition(
 					(data) => {
 						const { latitude, longitude } = data.coords;
-						body.append("coords", JSON.stringify({ latitude, longitude }));
-						retreiveDataFromApi(body);
+						retreiveDataFromApi(JSON.stringify({ latitude, longitude }));
 					},
 					(err) => {
-						body.append("coords", JSON.stringify({ message: err.message }));
-						retreiveDataFromApi(body);
+						retreiveDataFromApi(JSON.stringify({ message: err.message }));
 					},
 				);
 			}
