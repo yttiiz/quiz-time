@@ -1,8 +1,8 @@
 import type { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 
-export type QuizSectionPropsType = {
+export type QuizSectionPropsType<T> = {
 	title: string;
-	response: SuccessResponseType | ErrorResponseType;
+	response: SuccessResponseType<T> | ErrorResponseType;
 	id: string;
 };
 

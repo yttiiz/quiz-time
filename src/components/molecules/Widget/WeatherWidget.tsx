@@ -6,7 +6,7 @@ import Image from "next/image";
 import { OpenWeather } from "@/utils/mod";
 import { SetStateAction, useEffect, useState } from "react";
 
-type ResponseType = SuccessResponseType | ErrorResponseType | null;
+type ResponseType = SuccessResponseType<WeatherApiType> | ErrorResponseType | null;
 
 export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 	const [isFrenchBrowser, setIsFrenchBrowser] = useState(true);
@@ -50,7 +50,7 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 		);
 	if (response.ok) {
 		const { temperature, iconUrl, location } = OpenWeather.getDetails(
-			response.data as unknown as WeatherApiType,
+			response.data,
 		);
 
 		return (

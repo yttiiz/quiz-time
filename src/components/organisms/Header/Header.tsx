@@ -1,4 +1,4 @@
-import { Burger, Logo, UserDetails, WeatherWidget } from "@/components/mod";
+import { Burger, ItemType, Logo, UserDetails, WeatherWidget } from "@/components/mod";
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 
 export const Header = async ({
@@ -8,7 +8,7 @@ export const Header = async ({
 }: {
 	title: string | undefined;
 	host: string | undefined;
-	response: SuccessResponseType | ErrorResponseType;
+	response: SuccessResponseType<{ items: ItemType[] }> | ErrorResponseType;
 }) => {
 	return (
 		<header id="main-header">

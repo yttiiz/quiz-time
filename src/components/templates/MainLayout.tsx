@@ -1,10 +1,10 @@
 import { Fetcher } from "@yttiiz/utils";
-import { Header, Footer } from "../mod";
+import { Header, Footer, ItemType } from "../mod";
 import { ReactNode } from "react";
 
 export const MainLayout = async ({ children }: { children: ReactNode }) => {
 	const { PAGE_TITLE, __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const response = await Fetcher.postData(
+	const response = await Fetcher.postData<{ items: ItemType[] }>(
 		`${host}/api/json`,
 		{
 			file: "header",

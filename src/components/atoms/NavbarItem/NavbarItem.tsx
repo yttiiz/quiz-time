@@ -26,7 +26,7 @@ export const NavbarItem = (
 
 	useEffect(() => {
 		if (message.includes("disconnected")) {
-			Fetcher.postData(
+			Fetcher.postData<{ items: ItemType[] }>(
 				`${globalThis.location.origin}/api/json`,
 				{
 					file: "header",
@@ -34,9 +34,9 @@ export const NavbarItem = (
 				"next",
 			)
 				.then((res) => (res.ok ? res.data : res.message))
-				.then((data) => {
-					setItems(data["items" as keyof typeof data] as unknown as ItemType[]);
-				});
+				.then((data) =>
+					typeof data !== "string" ? setItems(data["items"]) : null,
+				);
 
 			setFirstname("");
 		}

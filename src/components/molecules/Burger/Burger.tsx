@@ -8,7 +8,7 @@ import { useRef, useEffect, useState } from "react";
 export const Burger = ({
 	response,
 }: {
-	response: SuccessResponseType | ErrorResponseType;
+	response: SuccessResponseType<{ items: ItemType[] }> | ErrorResponseType;
 }) => {
 	const [setItems] = store(useHeaderStore, "setItems") as [
 		SetterType<ItemType[]>,
@@ -53,7 +53,7 @@ export const Burger = ({
 
 		if (response.ok) {
 			const { items } = response.data;
-			setItems(items as unknown as ItemType[]);
+			setItems(items);
 		}
 
 		if (burgerElement) {

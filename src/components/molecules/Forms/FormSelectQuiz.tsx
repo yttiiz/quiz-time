@@ -12,15 +12,18 @@ import { selectQuizServerAction } from "@/actions/actions";
 import { useEffect, useRef } from "react";
 import { DomHelper } from "@/utils/mod";
 
-export const FormSelectQuiz = ({ data }: { data: Record<string, string> }) => {
-	const [{ message }, formAction] = useFormState(selectQuizServerAction, {
-		message: "",
-	});
-	const { title, options } = data as unknown as {
+export const FormSelectQuiz = ({
+	data,
+}: {
+	data: {
 		title: string;
 		options: SelectOptionsType[];
 	};
-
+}) => {
+	const [{ message }, formAction] = useFormState(selectQuizServerAction, {
+		message: "",
+	});
+	const { title, options } = data;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
 	useEffect(() => {

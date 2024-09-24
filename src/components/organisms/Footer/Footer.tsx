@@ -6,10 +6,15 @@ export const Footer = async ({
 	response,
 	host,
 }: {
-	response: SuccessResponseType | ErrorResponseType;
+	response: SuccessResponseType<{ items: ItemType[] }> | ErrorResponseType;
 	host: string | undefined;
 }) => {
-	const footerResponse = await Fetcher.postData(
+	const footerResponse = await Fetcher.postData<{
+		copyrights: string;
+		socialMedia: (ItemType & {
+			media: string;
+		})[];
+	}>(
 		`${host}/api/json`,
 		{
 			file: "footer",
@@ -23,15 +28,11 @@ export const Footer = async ({
 
 	if (footerResponse.ok) {
 		copyrights = footerResponse.data["copyrights"];
-		socialMedia = [
-			...(footerResponse.data["socialMedia"] as unknown as (ItemType & {
-				media: string;
-			})[]),
-		];
+		socialMedia = [...footerResponse.data["socialMedia"]];
 	}
 
 	response.ok
-		? (links = [...response.data["items"]] as unknown as ItemType[])
+		? (links = [...response.data["items"]])
 		: (links = [{ textContent: "accueil", url: "/" }]);
 
 	return (
