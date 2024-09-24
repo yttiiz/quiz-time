@@ -202,8 +202,7 @@ dialog {
   & > nav,
   & > nav > svg {
     position: absolute;
-    right: 50%;
-    transform: translateX(50%);
+    transform: unset;
   }
 
   & > nav {
@@ -211,6 +210,7 @@ dialog {
     top: calc(var(--burger-height) + 1.875rem);
     box-shadow: var(--box-shadow);
     z-index: 5;
+    right: calc(var(--base-size) * -1);
   }
 
   & > nav > svg {
@@ -220,6 +220,7 @@ dialog {
     fill: var(--background);
     filter: drop-shadow(0px -2px 2px rgb(255 255 255 / .15));
     z-index: 6;
+    right: calc(var(--base-size) * 1.25);
   }
 
   & > nav > svg polygon {
@@ -335,13 +336,15 @@ dialog {
 
 #quiz-games,
 .hero-quiz,
-.user-login {
+.user-login,
+.not-found {
   display: flex;
   align-items: center;
 }
 
 .hero-quiz,
-.user-login {
+.user-login,
+.not-found {
   height: calc(100vh - var(--main-header-height));
 }
 
@@ -446,6 +449,14 @@ dialog {
   opacity: .8;
 }
 
+.not-found {
+  & p {
+    font-size: calc(var(--base-size) * 5);
+    transform: rotateZ(-5deg);
+    margin-bottom: calc(var(--base-size) * 3);
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -454,18 +465,19 @@ dialog {
 
 /*=================================================| BREAKPOINTS |=================================================*/
 
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 1200px) {
   #burger > nav,
   #burger > nav > svg {
-      transform: unset;
+    right: 50%;
+    transform: translateX(50%);
   }
+}
 
-  #burger > nav {
-      right: calc(var(--base-size) * -1);
-  }
-
-  #burger > nav > svg {
-      right: calc(var(--base-size) * 1.25);
+@media screen and (min-width: 500px) {
+  .not-found {
+    & p {
+      font-size: calc(var(--base-size) * 10);
+    }
   }
 }
 
