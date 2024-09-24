@@ -335,13 +335,15 @@ dialog {
 
 #quiz-games,
 .hero-quiz,
-.user-login {
+.user-login,
+.not-found {
   display: flex;
   align-items: center;
 }
 
 .hero-quiz,
-.user-login {
+.user-login,
+.not-found {
   height: calc(100vh - var(--main-header-height));
 }
 
@@ -446,6 +448,15 @@ dialog {
   opacity: .8;
 }
 
+.not-found {
+  & p {
+    font-size: calc(var(--base-size) * 5);
+    transform: rotateZ(-5deg);
+    border-radius: calc(var(--base-size) * 2);
+    margin-bottom: calc(var(--base-size) * 3);
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -466,6 +477,14 @@ dialog {
 
   #burger > nav > svg {
       right: calc(var(--base-size) * 1.25);
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .not-found {
+    & p {
+      font-size: calc(var(--base-size) * 10);
+    }
   }
 }
 
