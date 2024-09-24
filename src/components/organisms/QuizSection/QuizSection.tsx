@@ -1,7 +1,12 @@
+import { ErrorMessage } from "@/components/mod";
 import { QuizQuestions, QuizSectionPropsType } from "../mod";
 import { QuestionSchemaType } from "@/services/mod";
 
-export const QuizSection = ({ title, response, id }: QuizSectionPropsType<QuestionSchemaType[]>) => {
+export const QuizSection = ({
+	title,
+	response,
+	id,
+}: QuizSectionPropsType<QuestionSchemaType[]>) => {
 	return (
 		<section
 			id={id}
@@ -11,11 +16,15 @@ export const QuizSection = ({ title, response, id }: QuizSectionPropsType<Questi
 				<h1>{title}</h1>
 				<div>
 					{response.ok ? (
-						<QuizQuestions
-							list={response.data }
-						/>
+						<QuizQuestions list={response.data} />
 					) : (
-						"No items found"
+						<ErrorMessage
+							variant="primary"
+							content={{
+								FR: "Aucun élément trouvé. Veuillez réessayer ultérieurement",
+								EN: "No items found. Please retry later",
+							}}
+						/>
 					)}
 				</div>
 			</div>
