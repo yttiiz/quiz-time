@@ -1,11 +1,22 @@
-import { ErrorMessage, FormSelectQuiz } from "@/components/mod";
+import {
+	ErrorMessage,
+	FormSelectQuiz,
+	SelectOptionsType,
+} from "@/components/mod";
 import { Fetcher } from "@yttiiz/utils";
 
 export const QuizGames = async () => {
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const response = await Fetcher.postData(`${host}/api/json`, {
-		file: "select-quiz",
-	}, "next");
+	const response = await Fetcher.postData<{
+		title: string;
+		options: SelectOptionsType[];
+	}>(
+		`${host}/api/json`,
+		{
+			file: "select-quiz",
+		},
+		"next",
+	);
 
 	return (
 		<section id="quiz-games">

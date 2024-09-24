@@ -3,11 +3,11 @@ import { Fetcher } from "@yttiiz/utils";
 
 export const Hero = async () => {
 	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const response = await Fetcher.postData(
-		`${host}/api/json`,
-		{ file: "hero" },
-		"next",
-	);
+	const response = await Fetcher.postData<{
+		title: string;
+		subtitle: string;
+		hookContent: string;
+	}>(`${host}/api/json`, { file: "hero" }, "next");
 
 	return (
 		<section
