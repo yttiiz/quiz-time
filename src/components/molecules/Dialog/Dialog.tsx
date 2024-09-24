@@ -8,7 +8,8 @@ export const Dialog = forwardRef(
 		{
 			header: { title, details },
 			main: { paragraph, buttons },
-			onClick,
+			onCrossButtonClick,
+			onMainButtonClick,
 		}: DialogPropsType,
 		ref: ForwardedRef<HTMLDialogElement | null>,
 	) => {
@@ -17,12 +18,12 @@ export const Dialog = forwardRef(
 				<DialogHeader
 					title={title}
 					details={details}
-					onClick={onClick}
+					onClick={onCrossButtonClick}
 				/>
 				<DialogBody
 					paragraph={paragraph}
 					buttons={buttons}
-					onClick={onClick}
+					onClick={onMainButtonClick}
 				/>
 			</dialog>
 		);
