@@ -58,7 +58,7 @@ export const signInServerAction = async (
 
 	if (messageWarning) return { message: messageWarning };
 
-	const response = await Fetcher.getData(
+	const response = await Fetcher.getData<{ message: string }>(
 		globalThis.location.origin + "/api/mongodb/user",
 		`email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
 	);
@@ -104,13 +104,31 @@ export const signUpServerAction = async (
 
 	if (messageWarning) return { message: messageWarning };
 
-	const response = await Fetcher.postData(
+	const response = await Fetcher.postData<{ message: string }>(
 		globalThis.location.origin + "/api/mongodb/user",
 		data,
 		"next",
 	);
 
-	return { message: "User connected | firstname: Test" };
+	if (response.ok) {
+		let message = ""
+
+		switch (response.data["message"]) {
+			case "User not created": {
+				message = response.data["message"];
+				break;
+			}
+
+			default: {
+				message = "User connected | firstname: " + response.data["message"];
+				break;
+			}
+		}
+
+		return { message };
+	}
+	
+	return { message: response.message };
 };
 
 export const signOutServerAction = () => {

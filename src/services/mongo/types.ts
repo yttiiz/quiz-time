@@ -10,6 +10,10 @@ export type GetDocumentFromParameterType<T> = GetDocumentsFromParameterType & {
 	key: keyof T;
 };
 
+export type PostDocumentFromParameterType<T> = GetDocumentsFromParameterType & {
+	data: T;
+};
+
 // Question Schema
 export type QuestionDetailsType = {
 	title: string;
