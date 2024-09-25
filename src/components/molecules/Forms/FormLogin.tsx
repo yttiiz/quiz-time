@@ -9,6 +9,7 @@ import {
 	IconUnlocked,
 	IconUser,
 	Input,
+	InputWithForgotPassword,
 } from "@/components/mod";
 import { useEffect, useReducer, useState } from "react";
 import { useFormState } from "react-dom";
@@ -100,13 +101,10 @@ export const FormLogin = () => {
 					if (errorEmailMessage) setErrorEmailMessage("");
 				}}
 			/>
-			<Input
-				label="Mot de passe"
-				name="password"
+			<InputWithForgotPassword
 				type={isEyeOpen ? "text" : "password"}
 				value={password}
 				required={true}
-				isLoginForm={true}
 				leadingIcon={
 					<IconUnlocked
 						variant="primary"
