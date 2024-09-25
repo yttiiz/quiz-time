@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 		const { email } = JSON.parse(value);
 
 		const newPassword = Crypto.generatePassword();
-		const newHash = await Mongo.hashPassword(newPassword);
+		const newHash = await Crypto.hashPassword(newPassword);
 
 		NodeMailer.send({
 			to: email,

@@ -4,7 +4,6 @@ import {
 	MongoClient,
 	OptionalUnlessRequiredId,
 } from "mongodb";
-import bcrypt from "bcrypt";
 import {
 	GetDocumentsFromParameterType,
 	GetDocumentFromParameterType,
@@ -68,12 +67,5 @@ export class Mongo {
 			} as unknown as OptionalUnlessRequiredId<T>);
 	}
 
-	public static async hashPassword(password: string, sizeSalt: number = 10) {
-		const salt = await bcrypt.genSalt(sizeSalt);
-		return await bcrypt.hash(password, salt);
-	}
 
-	public static async isPasswordOk(password: string, hash: string) {
-		return await bcrypt.compare(password, hash);
-	}
 }

@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 export class Crypto {
 	private static characters =
 		"abcdefghijkmnopqrsqrstuvwxyZABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
@@ -17,5 +19,24 @@ export class Crypto {
 		}
 
 		return password;
+	}
+
+	/**
+	 * Creates a hash bind to the given password.
+	 * @param password 
+	 * @param sizeSalt 
+	 */
+	public static async hashPassword(password: string, sizeSalt: number = 10) {
+		const salt = await bcrypt.genSalt(sizeSalt);
+		return await bcrypt.hash(password, salt);
+	}
+
+	/**
+	 * Checks if password is correct comparing to the hash.
+	 * @param password 
+	 * @param hash 
+	 */
+	public static async isPasswordOk(password: string, hash: string) {
+		return await bcrypt.compare(password, hash);
 	}
 }
