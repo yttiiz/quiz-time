@@ -1,8 +1,8 @@
 "use client";
 
-import { Dialog } from "@/components/mod";
+import { DialogWithFieldText } from "@/components/mod";
 import { InputPropsType } from "../mod";
-import { useRef, useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 import { DomHelper } from "@/utils/mod";
 import { Fetcher } from "@yttiiz/utils";
 
@@ -23,18 +23,30 @@ export const InputWithForgotPassword = ({
 		originalMessage,
 	);
 
-	const sendEmailHandler = async () => {
-		const response = await Fetcher.postData(
-			globalThis.location.origin + "/api/forgot-password",
-			{ firstname: "John" },
-			"next",
-		);
+	const sendEmailHandler = async (event: MouseEvent<HTMLButtonElement>) => {
+		const email = event.currentTarget.dataset["bind"];
 
-		setDialogParagraph(
-			response.ok
-				? "Un message a été envoyé à l'adresse 'john@doe.us'."
-				: "Une erreur est survenue, par consequent, aucun message de réinitialisation ne vous a été envoyé.",
-		);
+		if (email) {
+			const response = await Fetcher.postData(
+				globalThis.location.origin + "/api/forgot-password",
+				{ email },
+				"next",
+			);
+
+			if (response.ok && dialogRef.current) {
+				setDialogParagraph(
+					`Un message a été envoyé à l'adresse ${email}.`,
+				);
+
+				return;
+			} else {
+				setDialogParagraph(
+					"Une erreur est survenue, par consequent, aucun message de réinitialisation ne vous a été envoyé.",
+				);
+			}
+		}
+
+		setDialogParagraph("Veuillez saisir votre email.");
 	};
 
 	return (
@@ -69,7 +81,7 @@ export const InputWithForgotPassword = ({
 			<span className="text-[#ff0000]">
 				{feedbackMessage ? feedbackMessage : ""}
 			</span>
-			<Dialog
+			<DialogWithFieldText
 				onCrossButtonClick={() => {
 					DomHelper.closeDialog(dialogRef);
 					setDialogParagraph(originalMessage);

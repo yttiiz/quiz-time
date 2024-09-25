@@ -7,14 +7,14 @@ export async function POST(req: NextRequest) {
 	const { value, isValueAstring } = await RouteHelper.getValueAsString(req);
 
 	if (isValueAstring) {
-		const { firstname } = JSON.parse(value);
+		const { email } = JSON.parse(value);
 
 		const newPassword = Crypto.generatePassword();
 		const newHash = await Mongo.hashPassword(newPassword);
 
 		NodeMailer.send({
-			to: "dominique.talis@proton.me",
-			receiver: firstname,
+			to: email,
+			receiver: email, // Will change for real firstname.
 			newPassword,
 		});
 
