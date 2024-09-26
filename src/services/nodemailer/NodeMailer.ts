@@ -1,6 +1,6 @@
 import { createTransport, SentMessageInfo } from "nodemailer";
 import { MailConfigType, SendParameterType } from "./types";
-import { Helper } from "@/utils/file-helper";
+import { FileHelper } from "@/utils/file-helper";
 import { DateFormatter } from "@yttiiz/utils";
 
 export class NodeMailer {
@@ -41,7 +41,7 @@ export class NodeMailer {
 
 		const content = NodeMailer.generateLogContent(info, to);
 
-		return await Helper.writeLog("src/logs/emails.txt", content);
+		return await FileHelper.writeLog("src/logs/emails.txt", content);
 	}
 
 	private static generateLogContent(

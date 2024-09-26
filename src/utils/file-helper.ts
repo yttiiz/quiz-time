@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "fs/promises";
 
-export class Helper {
+export class FileHelper {
 	/**
 	 * Parses string to prevent relative path error.
 	 * @param path
@@ -14,7 +14,7 @@ export class Helper {
 	 * @param path
 	 */
 	public static async convertJsonToObject(path: string) {
-		const data = await readFile(process.cwd() + Helper.parsePath(path), {
+		const data = await readFile(process.cwd() + FileHelper.parsePath(path), {
 			encoding: "utf-8",
 		});
 
@@ -31,7 +31,7 @@ export class Helper {
 		let isOk = false;
 
 		try {
-			writeFile(process.cwd() + Helper.parsePath(path), content, {
+			writeFile(process.cwd() + FileHelper.parsePath(path), content, {
 				encoding: "utf-8",
 				flag: "a+",
 			});
