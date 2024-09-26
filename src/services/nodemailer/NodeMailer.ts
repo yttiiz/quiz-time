@@ -1,5 +1,7 @@
-import { createTransport } from "nodemailer";
+import { createTransport, SentMessageInfo } from "nodemailer";
 import { MailConfigType, SendParameterType } from "./types";
+import { Helper } from "@/utils/file-helper";
+import { DateFormatter } from "@yttiiz/utils";
 
 export class NodeMailer {
 	private static HOSTINGER_CONFIG: MailConfigType = {
@@ -37,8 +39,18 @@ export class NodeMailer {
 			html: NodeMailer.html(receiver, newPassword),
 		});
 
-		// WIP
-		console.log(info);
+		const content = NodeMailer.generateLogContent(info, to);
+
+		return await Helper.writeLog("src/logs/emails.txt", content);
+	}
+
+	private static generateLogContent(
+		info: SentMessageInfo,
+		email: string | undefined,
+	) {
+		const { messageId, response } = info;
+
+		return `Email envoyé le : ${DateFormatter.display({ date: Date.now() })}.\nemail: ${email};\nid: ${messageId};\nresponse: ${response}\n\n`;
 	}
 
 	private static plainText(receiver: string, newPassword?: string) {

@@ -1,14 +1,44 @@
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 
 export class Helper {
-  /**
-   * Converts json file into a javascript object.
-   * @param path 
-   */
+	/**
+	 * Parses string to prevent relative path error.
+	 * @param path
+	 */
+	private static parsePath(path: string) {
+		return path.indexOf("/") === 0 ? path : `/${path}`;
+	}
+
+	/**
+	 * Converts json file into a javascript object.
+	 * @param path
+	 */
 	public static async convertJsonToObject(path: string) {
-    path = path.indexOf("/") === 0 ? path : `/${path}`;
-    
-		const data = await readFile(process.cwd() + path, { encoding: "utf-8" });
+		const data = await readFile(process.cwd() + Helper.parsePath(path), {
+			encoding: "utf-8",
+		});
+
 		return JSON.parse(data);
+	}
+
+	/**
+	 * Writes some content into a file bind to the given `path`.
+	 * @param path
+	 * @param data
+	 */
+	public static async writeLog(path: string, data: string) {
+		const content = new Uint8Array(Buffer.from(data));
+		let isOk = false;
+
+		try {
+			writeFile(process.cwd() + Helper.parsePath(path), content, {
+				encoding: "utf-8",
+				flag: "a+",
+			});
+			return (isOk = true);
+		} catch (error) {
+			console.log(error);
+			return isOk;
+		}
 	}
 }

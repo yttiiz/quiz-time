@@ -31,16 +31,19 @@ export async function POST(req: NextRequest) {
 		});
 
 		let message = "";
+		let isWriteLogOk = false;
 
 		acknowledged
-			? NodeMailer.send({
+			? isWriteLogOk = await NodeMailer.send({
 					to: email,
 					receiver: user.firstname,
 					newPassword,
 				})
 			: (message = "Modification failed.");
 
-		return NextResponse.json({ message: message ?? "Email send" });
+		return isWriteLogOk
+			? NextResponse.json({ message: message ?? "Email send & write log successfully" })
+			: NextResponse.json({ message: message ?? "Email send" })
 	}
 
 	return NextResponse.json({ message: "Incorrect value given." });
