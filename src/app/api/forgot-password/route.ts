@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { NodeMailer, Mongo, UserSchemaType } from "@/services/mod";
 import { RouteHelper } from "@/utils/mod";
 import { Crypto } from "@/utils/crypto";
+
 export async function POST(req: NextRequest) {
 	const { value, isValueAstring } = await RouteHelper.getValueAsString(req);
 
