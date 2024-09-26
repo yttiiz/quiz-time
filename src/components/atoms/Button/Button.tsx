@@ -13,7 +13,10 @@ export const Button = (
 		className,
 		onlyBorder = false,
 		onClick,
-	}: ButtonPropsType,
+		dataBind,
+	}: ButtonPropsType & {
+		dataBind?: string;
+	},
 	key?: string,
 ) => {
 	const {
@@ -30,7 +33,6 @@ export const Button = (
 		borderOrBackground = `border-2 ${
 			border[variant].default
 		} ${border[variant].hover} ${text[variant].default}`;
-
 	} else {
 		borderOrBackground = `${
 			background[variant].default
@@ -41,7 +43,17 @@ export const Button = (
 		className ? ` ${className}` : ""
 	}${radius ? ` ${borderRadius[radius]}` : ""}`;
 
-	return (
+	return dataBind ? (
+		<button
+			data-bind={dataBind}
+			key={key}
+			type={type}
+			className={buttonClassName}
+			onClick={onClick}
+		>
+			{textContent}
+		</button>
+	) : (
 		<button
 			key={key}
 			type={type}

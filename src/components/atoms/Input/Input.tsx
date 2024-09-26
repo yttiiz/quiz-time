@@ -40,7 +40,9 @@ export const Input = ({
 					) : null}
 				</div>
 			</label>
-			<span className="text-[#ff0000]">{feedbackMessage ? feedbackMessage : ""}</span>
+			<span className="text-[#ff0000]">
+				{feedbackMessage ? feedbackMessage : ""}
+			</span>
 		</div>
 	);
 };

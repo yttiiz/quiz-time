@@ -10,8 +10,12 @@ export type GetDocumentFromParameterType<T> = GetDocumentsFromParameterType & {
 	key: keyof T;
 };
 
-export type PostDocumentFromParameterType<T> = GetDocumentsFromParameterType & {
+export type PostDocumentToParameterType<T> = GetDocumentsFromParameterType & {
 	data: T;
+};
+
+export type PutDocumentToParameterType<T> = GetDocumentFromParameterType<T> & {
+	id: ObjectId;
 };
 
 // Question Schema

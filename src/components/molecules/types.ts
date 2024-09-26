@@ -68,7 +68,8 @@ export type DialogMainPropsType = {
 export type DialogPropsType = {
 	header: DialogHeaderPropsType;
 	main: DialogMainPropsType;
-	onClick: MouseEventHandler<HTMLButtonElement>;
+	onCrossButtonClick: MouseEventHandler<HTMLButtonElement>;
+	onMainButtonClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 export type QuizItemsPropsType = {

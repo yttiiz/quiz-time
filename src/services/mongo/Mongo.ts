@@ -1,14 +1,15 @@
 import {
 	Db,
 	Filter,
+	MatchKeysAndValues,
 	MongoClient,
 	OptionalUnlessRequiredId,
 } from "mongodb";
-import bcrypt from "bcrypt";
 import {
 	GetDocumentsFromParameterType,
 	GetDocumentFromParameterType,
-	PostDocumentFromParameterType,
+	PostDocumentToParameterType,
+	PutDocumentToParameterType,
 } from "./types";
 import { Document } from "mongodb";
 
@@ -60,7 +61,7 @@ export class Mongo {
 		db,
 		collection,
 		data,
-	}: PostDocumentFromParameterType<T>) {
+	}: PostDocumentToParameterType<T>) {
 		return await (await Mongo.getDatabase(db))
 			.collection<T>(collection)
 			.insertOne({
@@ -68,12 +69,17 @@ export class Mongo {
 			} as unknown as OptionalUnlessRequiredId<T>);
 	}
 
-	public static async hashPassword(password: string, sizeSalt: number = 10) {
-		const salt = await bcrypt.genSalt(sizeSalt);
-		return await bcrypt.hash(password, salt);
-	}
-
-	public static async isPasswordOk(password: string, hash: string) {
-		return await bcrypt.compare(password, hash);
+	public static async putDocumentTo<T extends Document = Document>({
+		db,
+		collection,
+		identifier,
+		key,
+		id,
+	}: PutDocumentToParameterType<T>) {
+		return await (await Mongo.getDatabase(db))
+			.collection<T>(collection)
+			.updateOne({ _id: id } as Filter<T>, {
+				$set: { [key]: identifier } as unknown as MatchKeysAndValues<T>,
+			});
 	}
 }

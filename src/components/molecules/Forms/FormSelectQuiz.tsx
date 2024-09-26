@@ -57,7 +57,8 @@ export const FormSelectQuiz = ({
 				/>
 			</form>
 			<Dialog
-				onClick={() => DomHelper.closeDialog(dialogRef)}
+				onCrossButtonClick={() => DomHelper.closeDialog(dialogRef)}
+				onMainButtonClick={() => DomHelper.closeDialog(dialogRef)}
 				ref={dialogRef}
 				header={{ title: "Quiz formulaire" }}
 				main={{

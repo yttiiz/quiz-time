@@ -12,13 +12,16 @@ export const DialogHeader = ({
 		<header>
 			{details ? (
 				<div className="flex flex-col gap-2">
-					<h2>{title}</h2>
+					<h3>{title}</h3>
 					<span>{details}</span>
 				</div>
 			) : (
-				<h2>{title}</h2>
+				<h3>{title}</h3>
 			)}
-			<button onClick={onClick}>
+			<button
+				onClick={onClick}
+				type="button"
+			>
 				<span></span>
 				<span></span>
 			</button>

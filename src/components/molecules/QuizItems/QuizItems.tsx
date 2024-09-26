@@ -38,7 +38,8 @@ export const QuizItems = forwardRef(
 					))}
 				</form>
 				<Dialog
-					onClick={() => DomHelper.closeDialog(dialogRef)}
+					onCrossButtonClick={() => DomHelper.closeDialog(dialogRef)}
+					onMainButtonClick={() => DomHelper.closeDialog(dialogRef)}
 					ref={dialogRef}
 					header={{ title: "Selection de la réponse" }}
 					main={{

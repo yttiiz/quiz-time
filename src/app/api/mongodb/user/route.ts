@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { RouteHelper } from "@/utils/route-helper";
 import { Mongo, UserSchemaType } from "@/services/mod";
 import { ObjectId } from "mongodb";
+import { Crypto } from "@/utils/crypto";
 
 export async function GET(req: NextRequest) {
   const { email, password } = await RouteHelper.getUserData(req);
@@ -17,7 +18,7 @@ export async function GET(req: NextRequest) {
 	
 		if (!user) return NextResponse.json({ message: "User not found" });
 		
-		return (user && await Mongo.isPasswordOk(password, user.hash))
+		return (user && await Crypto.isPasswordOk(password, user.hash))
 			? NextResponse.json({ message: user.firstname })
 			: NextResponse.json({ message: "Incorrect password" });
 	}
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
 
 	if (isValueAstring) {
 		const { firstname, lastname, email, password } = JSON.parse(value);
-		const hash = await Mongo.hashPassword(password);
+		const hash = await Crypto.hashPassword(password);
 
 		const { acknowledged } = await Mongo.postDocumentTo<UserSchemaType>({
 			db: "main",

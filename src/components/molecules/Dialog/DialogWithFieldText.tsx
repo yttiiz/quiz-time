@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
 import { ForwardedRef, forwardRef, MouseEventHandler } from "react";
+import { DialogHeader } from "./mod";
+import { DialogBodyWithFieldText } from "./Body/BobyWithFieldText";
 import { DialogPropsType } from "../types";
-import { DialogBody, DialogHeader } from "./mod";
 
-export const Dialog = forwardRef(
+export const DialogWithFieldText = forwardRef(
 	(
 		{
 			header: { title, details },
@@ -20,7 +21,7 @@ export const Dialog = forwardRef(
 					details={details}
 					onClick={onCrossButtonClick}
 				/>
-				<DialogBody
+				<DialogBodyWithFieldText
 					paragraph={paragraph}
 					buttons={buttons}
 					onClick={onMainButtonClick}
