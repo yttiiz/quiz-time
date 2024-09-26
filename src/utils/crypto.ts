@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import { genSalt, compare, hash } from "bcrypt";
 
 export class Crypto {
 	private static characters =
@@ -27,8 +27,8 @@ export class Crypto {
 	 * @param sizeSalt 
 	 */
 	public static async hashPassword(password: string, sizeSalt: number = 10) {
-		const salt = await bcrypt.genSalt(sizeSalt);
-		return await bcrypt.hash(password, salt);
+		const salt = await genSalt(sizeSalt);
+		return await hash(password, salt);
 	}
 
 	/**
@@ -37,6 +37,6 @@ export class Crypto {
 	 * @param hash 
 	 */
 	public static async isPasswordOk(password: string, hash: string) {
-		return await bcrypt.compare(password, hash);
+		return await compare(password, hash);
 	}
 }
