@@ -11,9 +11,9 @@
 }
 
 #hero-kotlin {
-  --rust-default: 29 39 42;
+  --kotlin-default: 29 39 42;
   
-  background: url(/img/stars.svg), radial-gradient(rgb(var(--rust-default)) -10%, rgb(var(--background)) 60%);
+  background: url(/img/stars.svg), radial-gradient(rgb(var(--kotlin-default)) -10%, rgb(var(--background)) 60%);
 }
 
 #hero-javascript,

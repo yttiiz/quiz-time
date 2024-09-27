@@ -6,5 +6,6 @@ export * from "./QuizQuestions/QuizQuestions";
 export * from "./QuizSection/QuizSection";
 export * from "./Login/Login";
 export * from "./NotFound/NotFound";
+export * from "./UserDetailsLink/UserDetailsLink";
 export * from "./UserDetails/UserDetails";
 export * from "./types";

@@ -1,4 +1,4 @@
-import { Burger, ItemType, Logo, UserDetails, WeatherWidget } from "@/components/mod";
+import { Burger, ItemType, Logo, UserDetailsLink, WeatherWidget } from "@/components/mod";
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 
 export const Header = async ({
@@ -21,7 +21,7 @@ export const Header = async ({
 						<Logo />
 						<p>{title}</p>
 					</a>
-					<UserDetails />
+					<UserDetailsLink />
 				</div>
 				<div className="flex items-center gap-4">
 					<WeatherWidget host={host} />
