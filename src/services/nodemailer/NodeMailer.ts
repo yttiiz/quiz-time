@@ -1,7 +1,7 @@
 import { createTransport, SentMessageInfo } from "nodemailer";
 import { MailConfigType, SendParameterType } from "./types";
 import { FileHelper } from "@/utils/file-helper";
-import { DateFormatter } from "@yttiiz/utils";
+import { DateFormatter, Fetcher } from "@yttiiz/utils";
 
 export class NodeMailer {
 	private static HOSTINGER_CONFIG: MailConfigType = {
@@ -12,9 +12,8 @@ export class NodeMailer {
 
 	public static async send({
 		to,
-		receiver,
-		newPassword,
-	}: SendParameterType & { newPassword?: string }) {
+		emailContent,
+	}: SendParameterType) {
 		const {
 			EMAIL_ADDRESS: email,
 			EMAIL_USERNAME: username,
@@ -31,12 +30,13 @@ export class NodeMailer {
 			},
 		});
 
+		const { subject, messagePlainText, messageHtml } = emailContent;
 		const info = await transporter.sendMail({
 			from: `${username} - <${email}>`,
 			to,
-			subject: "Réinitialisiation de votre mot de passe",
-			text: NodeMailer.plainText(receiver, newPassword),
-			html: NodeMailer.html(receiver, newPassword),
+			subject,
+			text: messagePlainText,
+			html: messageHtml,
 		});
 
 		const content = NodeMailer.generateLogContent(info, to);
@@ -53,11 +53,54 @@ export class NodeMailer {
 		return `Email envoyé le : ${DateFormatter.display({ date: Date.now() })}.\nemail: ${email};\nid: ${messageId};\nresponse: ${response}\n\n`;
 	}
 
-	private static plainText(receiver: string, newPassword?: string) {
-		return `${receiver}, \nLorem ispum dolor... ${newPassword ? `password : ${newPassword}` : ""}`;
-	}
+	public static async createResetPasswordEmailContent(
+		receiver: string,
+		newPassword: string | undefined,
+	) {
+		const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
+		const response = await Fetcher.postData<{
+			title: string;
+			contentText: string;
+			contentHtml: string;
+			greetings: string;
+			team: string;
+		}>(
+			host + "/api/json",
+			{
+				file: "reset-password-email-content",
+			},
+			"next",
+		);
 
-	private static html(receiver: string, newPassword?: string) {
-		return `<h1>${receiver}</h1>,\n<p>Lorem ispum dolor...</p>${newPassword ? `password : ${newPassword}` : ""}`;
+		let subject = "";
+		let messagePlainText = "";
+		let messageHtml = "";
+
+		if (response.ok) {
+			const { title, contentText, contentHtml, greetings, team } =
+				response.data;
+			subject = title;
+
+			// Plain text.
+			messagePlainText = contentText.replace("{{ userFirstname }}", receiver);
+			messagePlainText = messagePlainText.replace(
+				"{{ newPassword }}",
+				newPassword as string,
+			);
+			messagePlainText += `${greetings}`;
+			messagePlainText += `${team}`;
+
+			// Html text.
+			messageHtml = contentHtml.replace("{{ userFirstname }}", `${receiver}`);
+			messageHtml = messageHtml.replace("{{ newPassword }}", `${newPassword}`);
+			messageHtml += `${greetings}`;
+			messageHtml += `${team}`;
+		}
+
+		return {
+			subject,
+			messageHtml,
+			messagePlainText,
+		};
 	}
 }
