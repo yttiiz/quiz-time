@@ -36,8 +36,7 @@ export async function POST(req: NextRequest) {
 		acknowledged
 			? isWriteLogOk = await NodeMailer.send({
 					to: email,
-					receiver: user.firstname,
-					newPassword,
+					emailContent: await NodeMailer.createResetPasswordEmailContent(user.firstname, newPassword),
 				})
 			: (message = "Modification failed.");
 

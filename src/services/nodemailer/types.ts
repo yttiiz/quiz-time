@@ -1,6 +1,10 @@
 export type SendParameterType = {
-  to: string;
-  receiver: string;
+	to: string;
+	emailContent: {
+		subject: string;
+		messagePlainText: string;
+		messageHtml: string;
+	};
 };
 
 export type MailConfigType = {

@@ -12,9 +12,8 @@ export class NodeMailer {
 
 	public static async send({
 		to,
-		receiver,
-		newPassword,
-	}: SendParameterType & { newPassword?: string }) {
+		emailContent,
+	}: SendParameterType) {
 		const {
 			EMAIL_ADDRESS: email,
 			EMAIL_USERNAME: username,
@@ -31,9 +30,7 @@ export class NodeMailer {
 			},
 		});
 
-		const { subject, messagePlainText, messageHtml } =
-			await NodeMailer.createResetPasswordEmailContent(receiver, newPassword);
-
+		const { subject, messagePlainText, messageHtml } = emailContent;
 		const info = await transporter.sendMail({
 			from: `${username} - <${email}>`,
 			to,
@@ -56,7 +53,7 @@ export class NodeMailer {
 		return `Email envoyé le : ${DateFormatter.display({ date: Date.now() })}.\nemail: ${email};\nid: ${messageId};\nresponse: ${response}\n\n`;
 	}
 
-	private static async createResetPasswordEmailContent(
+	public static async createResetPasswordEmailContent(
 		receiver: string,
 		newPassword: string | undefined,
 	) {
