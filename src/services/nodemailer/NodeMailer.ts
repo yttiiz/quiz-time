@@ -32,14 +32,14 @@ export class NodeMailer {
 		});
 
 		const { subject, messagePlainText, messageHtml } =
-			await NodeMailer.createEmailContent(receiver, newPassword);
+			await NodeMailer.createResetPasswordEmailContent(receiver, newPassword);
 
 		const info = await transporter.sendMail({
 			from: `${username} - <${email}>`,
 			to,
 			subject,
-			text: NodeMailer.plainText(messagePlainText),
-			html: NodeMailer.html(messageHtml),
+			text: messagePlainText,
+			html: messageHtml,
 		});
 
 		const content = NodeMailer.generateLogContent(info, to);
@@ -56,7 +56,7 @@ export class NodeMailer {
 		return `Email envoyé le : ${DateFormatter.display({ date: Date.now() })}.\nemail: ${email};\nid: ${messageId};\nresponse: ${response}\n\n`;
 	}
 
-	private static async createEmailContent(
+	private static async createResetPasswordEmailContent(
 		receiver: string,
 		newPassword: string | undefined,
 	) {
@@ -105,13 +105,5 @@ export class NodeMailer {
 			messageHtml,
 			messagePlainText,
 		};
-	}
-
-	private static plainText(message: string) {
-		return message;
-	}
-
-	private static html(message: string) {
-		return message;
 	}
 }
