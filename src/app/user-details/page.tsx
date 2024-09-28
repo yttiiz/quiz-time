@@ -1,14 +1,11 @@
-import { MainLayout, UserDetails } from "@/components/mod";
+import { MainLayout } from "@/components/mod";
+import { UserDetailsSection } from "@/components/mod";
 import style from "./user-details.module.css";
 
-export default function Page() {
+export default async function Page() {
 	return (
 		<MainLayout>
-			<section className="user-details">
-        <div className="container grid h-full items-center">
-          <UserDetails user={"test"}/>
-        </div>
-      </section>
+			<UserDetailsSection id={style["user-details"]} />
 		</MainLayout>
 	);
 }
