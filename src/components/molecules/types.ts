@@ -88,3 +88,5 @@ export type FormSignupState = FormLoginState & {
 	firstname: string;
 	lastname: string;
 };
+
+export type FormModifyState = Omit<FormSignupState, "password">;

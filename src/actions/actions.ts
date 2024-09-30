@@ -111,7 +111,7 @@ export const signUpServerAction = async (
 	);
 
 	if (response.ok) {
-		let message = ""
+		let message = "";
 
 		switch (response.data["message"]) {
 			case "User not created": {
@@ -127,7 +127,7 @@ export const signUpServerAction = async (
 
 		return { message };
 	}
-	
+
 	return { message: response.message };
 };
 
@@ -135,4 +135,11 @@ export const signOutServerAction = () => {
 	globalThis.localStorage.removeItem("userFirstname");
 
 	return { message: "User disconnected" };
+};
+
+export const userModificationServerAction = async (
+	prevState: { message: string },
+	formData: FormData,
+) => {
+	return { message: "Ok" };
 };
