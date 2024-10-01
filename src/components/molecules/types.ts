@@ -1,8 +1,3 @@
-/**
- * OpenWeather api model.
- * see exemple here : https://openweathermap.org/current
- */
-
 import { MouseEventHandler } from "react";
 
 type WeatherType = {
@@ -12,6 +7,10 @@ type WeatherType = {
 	icon: string;
 };
 
+/**
+ * OpenWeather api model.
+ * see exemple here : https://openweathermap.org/current
+ */
 export type WeatherApiType = {
 	coord: {
 		lon: number;

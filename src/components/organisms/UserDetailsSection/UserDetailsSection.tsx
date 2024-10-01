@@ -3,8 +3,8 @@ import { UserType } from "@/services/mod";
 import { Fetcher } from "@yttiiz/utils";
 
 export const UserDetailsSection = async () => {
-	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const email = "dimitri.talis@orange.fr"; // WIP way to retreive user email.
+	const { EMAIL_TEST, __NEXT_PRIVATE_ORIGIN: host } = process.env;
+	const email = EMAIL_TEST as string; // WIP way to retreive user email.
 
 	let user: UserType | null;
 	const response = await Fetcher.getData<UserType>(

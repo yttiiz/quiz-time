@@ -8,11 +8,21 @@ import {
 	Input,
 } from "@/components/mod";
 import { useUserDetailsStore } from "@/store/store";
-import { useEffect, useMemo, useReducer, useState } from "react";
+import {
+	FormEvent,
+	useEffect,
+	useMemo,
+	useReducer,
+	useRef,
+	useState,
+} from "react";
 import { useFormState } from "react-dom";
 
 export const FormUserDetails = () => {
+	const formRef = useRef<HTMLFormElement | null>(null);
 	const user = useUserDetailsStore((state) => state.user);
+	const [errorFirstnameMessage, setErrorFirstnameMessage] = useState("");
+	const [errorLastnameMessage, setErrorLastnameMessage] = useState("");
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
 
 	const [{ message }, formAction] = useFormState(userModificationServerAction, {
@@ -53,13 +63,26 @@ export const FormUserDetails = () => {
 		initializerArg,
 	);
 
-	useEffect(() => {
-		if (user) {
-			(Object.keys(initializerArg) as (keyof FormModifyState)[]).map((key) => {
-				dispatch({ type: key, payload: user[key] });
-			});
-		}
+	const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
+		if (formRef && formRef.current) {
+			if (!firstname) {
+				setErrorFirstnameMessage("Veuillez renseigner ce champ.");
+				event.preventDefault();
+			}
+			
+			if (!lastname) {
+				setErrorLastnameMessage("Veuillez renseigner ce champ.");
+				event.preventDefault();
+			}
 
+			if (!email) {
+				setErrorEmailMessage("Veuillez renseigner ce champ.");
+				event.preventDefault();
+			}
+		}
+	};
+
+	useEffect(() => {
 		if (message.includes("User")) {
 			if (message.includes("connected")) {
 				dispatch({ type: "email", payload: "" });
@@ -78,15 +101,19 @@ export const FormUserDetails = () => {
 			return;
 		}
 
-		if (message.includes("email")) {
-			setErrorEmailMessage("Veuillez renseigner ce champ.");
+		if (user) {
+			(Object.keys(initializerArg) as (keyof FormModifyState)[]).map((key) => {
+				dispatch({ type: key, payload: user[key] });
+			});
 		}
 	}, [message, user, initializerArg]);
 
 	return (
 		<form
+			ref={formRef}
 			action={formAction}
 			className="grid gap-4 p-10"
+			onSubmit={onSubmitHandler}
 		>
 			<Input
 				label="Prénom"
@@ -101,10 +128,10 @@ export const FormUserDetails = () => {
 						svgSize="xl"
 					/>
 				}
-				feedbackMessage={errorEmailMessage}
+				feedbackMessage={errorFirstnameMessage}
 				onInput={(event) => {
 					dispatch({ type: "firstname", payload: event.currentTarget.value });
-					if (errorEmailMessage) setErrorEmailMessage("");
+					if (errorFirstnameMessage) setErrorFirstnameMessage("");
 				}}
 			/>
 			<Input
@@ -120,10 +147,10 @@ export const FormUserDetails = () => {
 						svgSize="xl"
 					/>
 				}
-				feedbackMessage={errorEmailMessage}
+				feedbackMessage={errorLastnameMessage}
 				onInput={(event) => {
 					dispatch({ type: "lastname", payload: event.currentTarget.value });
-					if (errorEmailMessage) setErrorEmailMessage("");
+					if (errorLastnameMessage) setErrorLastnameMessage("");
 				}}
 			/>
 			<Input

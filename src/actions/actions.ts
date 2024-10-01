@@ -86,7 +86,7 @@ export const signInServerAction = async (
 };
 
 export const signUpServerAction = async (
-	prevState: { message: string },
+	_: { message: string },
 	formData: FormData,
 ) => {
 	let messageWarning = "";
@@ -141,5 +141,22 @@ export const userModificationServerAction = async (
 	prevState: { message: string },
 	formData: FormData,
 ) => {
+	let messageWarning = "";
+	const data: Record<string, string | string> = {};
+	const entries = formData.entries();
+
+	for (const [key, value] of entries) {
+		if (!value) {
+			messageWarning += `key ${key} is missing. `;
+			continue;
+		}
+
+		data[key] = value as string;
+	}
+
+	console.log("test action");
+	
+	if (messageWarning) return { message: messageWarning };
+	
 	return { message: "Ok" };
 };
