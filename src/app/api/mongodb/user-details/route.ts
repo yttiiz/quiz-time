@@ -21,3 +21,15 @@ export async function GET(req: NextRequest) {
 
 	return NextResponse.json({ message: "Incorrect value given." });
 }
+
+export async function PUT(req: NextRequest) {
+  const { value, isValueAstring } = await RouteHelper.getValueAsString(req);
+
+	if (isValueAstring) {
+		const { firstname, lastname, email } = JSON.parse(value);
+
+		return NextResponse.json({ message: "User has been updated." });
+	}
+
+	return NextResponse.json({ message: "Incorrect value given." });
+}

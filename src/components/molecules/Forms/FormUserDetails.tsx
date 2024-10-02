@@ -3,11 +3,13 @@
 import { userModificationServerAction } from "@/actions/actions";
 import {
 	Button,
+	Dialog,
 	FormModifyState,
 	IconUser,
 	Input,
 } from "@/components/mod";
 import { useUserDetailsStore } from "@/store/store";
+import { DomHelper } from "@/utils/mod";
 import {
 	FormEvent,
 	useEffect,
@@ -19,11 +21,11 @@ import {
 import { useFormState } from "react-dom";
 
 export const FormUserDetails = () => {
-	const formRef = useRef<HTMLFormElement | null>(null);
 	const user = useUserDetailsStore((state) => state.user);
 	const [errorFirstnameMessage, setErrorFirstnameMessage] = useState("");
 	const [errorLastnameMessage, setErrorLastnameMessage] = useState("");
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
+	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
 	const [{ message }, formAction] = useFormState(userModificationServerAction, {
 		message: "",
@@ -64,41 +66,25 @@ export const FormUserDetails = () => {
 	);
 
 	const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
-		if (formRef && formRef.current) {
-			if (!firstname) {
-				setErrorFirstnameMessage("Veuillez renseigner ce champ.");
-				event.preventDefault();
-			}
-			
-			if (!lastname) {
-				setErrorLastnameMessage("Veuillez renseigner ce champ.");
-				event.preventDefault();
-			}
+		if (!firstname) {
+			setErrorFirstnameMessage("Veuillez renseigner ce champ.");
+			event.preventDefault();
+		}
 
-			if (!email) {
-				setErrorEmailMessage("Veuillez renseigner ce champ.");
-				event.preventDefault();
-			}
+		if (!lastname) {
+			setErrorLastnameMessage("Veuillez renseigner ce champ.");
+			event.preventDefault();
+		}
+
+		if (!email) {
+			setErrorEmailMessage("Veuillez renseigner ce champ.");
+			event.preventDefault();
 		}
 	};
 
 	useEffect(() => {
-		if (message.includes("User")) {
-			if (message.includes("connected")) {
-				dispatch({ type: "email", payload: "" });
-
-				const userFirstname = message.split(": ")[1].trim();
-
-				// Set firstname.
-				globalThis.localStorage.setItem("userFirstname", userFirstname);
-
-				// Redirect to home page.
-				globalThis.location.href = "/";
-			} else {
-				setErrorEmailMessage("Email inconnu");
-			}
-
-			return;
+		if (message.includes("updated") && dialogRef && dialogRef.current) {
+			DomHelper.openDialog(dialogRef);
 		}
 
 		if (user) {
@@ -109,75 +95,82 @@ export const FormUserDetails = () => {
 	}, [message, user, initializerArg]);
 
 	return (
-		<form
-			ref={formRef}
-			action={formAction}
-			className="grid gap-4 p-10"
-			onSubmit={onSubmitHandler}
-		>
-			<Input
-				label="Prénom"
-				name="firstname"
-				type="firstname"
-				value={firstname}
-				required={true}
-				leadingIcon={
-					<IconUser
-						variant="primary"
-						model="content"
-						svgSize="xl"
-					/>
-				}
-				feedbackMessage={errorFirstnameMessage}
-				onInput={(event) => {
-					dispatch({ type: "firstname", payload: event.currentTarget.value });
-					if (errorFirstnameMessage) setErrorFirstnameMessage("");
-				}}
+		<>
+			<form
+				action={formAction}
+				className="grid gap-4 p-10"
+				onSubmit={onSubmitHandler}
+			>
+				<Input
+					label="Prénom"
+					name="firstname"
+					type="firstname"
+					value={firstname}
+					required={true}
+					leadingIcon={
+						<IconUser
+							variant="primary"
+							model="content"
+							svgSize="xl"
+						/>
+					}
+					feedbackMessage={errorFirstnameMessage}
+					onInput={(event) => {
+						dispatch({ type: "firstname", payload: event.currentTarget.value });
+						if (errorFirstnameMessage) setErrorFirstnameMessage("");
+					}}
+				/>
+				<Input
+					label="Nom"
+					name="lastname"
+					type="lastname"
+					value={lastname}
+					required={true}
+					leadingIcon={
+						<IconUser
+							variant="primary"
+							model="content"
+							svgSize="xl"
+						/>
+					}
+					feedbackMessage={errorLastnameMessage}
+					onInput={(event) => {
+						dispatch({ type: "lastname", payload: event.currentTarget.value });
+						if (errorLastnameMessage) setErrorLastnameMessage("");
+					}}
+				/>
+				<Input
+					label="Email"
+					name="email"
+					type="email"
+					value={email}
+					required={true}
+					leadingIcon={
+						<IconUser
+							variant="primary"
+							model="content"
+							svgSize="xl"
+						/>
+					}
+					feedbackMessage={errorEmailMessage}
+					onInput={(event) => {
+						dispatch({ type: "email", payload: event.currentTarget.value });
+						if (errorEmailMessage) setErrorEmailMessage("");
+					}}
+				/>
+				<Button
+					type="submit"
+					textContent="Envoyer"
+					variant="secondary"
+					spacing="4"
+				/>
+			</form>
+			<Dialog
+				ref={dialogRef}
+				header={{ title: "Mise à jour" }}
+				main={{ paragraph: "Votre profil a bien été mis à jour." }}
+				onCrossButtonClick={() => DomHelper.closeDialog(dialogRef)}
 			/>
-			<Input
-				label="Nom"
-				name="lastname"
-				type="lastname"
-				value={lastname}
-				required={true}
-				leadingIcon={
-					<IconUser
-						variant="primary"
-						model="content"
-						svgSize="xl"
-					/>
-				}
-				feedbackMessage={errorLastnameMessage}
-				onInput={(event) => {
-					dispatch({ type: "lastname", payload: event.currentTarget.value });
-					if (errorLastnameMessage) setErrorLastnameMessage("");
-				}}
-			/>
-			<Input
-				label="Email"
-				name="email"
-				type="email"
-				value={email}
-				required={true}
-				leadingIcon={
-					<IconUser
-						variant="primary"
-						model="content"
-						svgSize="xl"
-					/>
-				}
-				feedbackMessage={errorEmailMessage}
-				onInput={(event) => {
-					dispatch({ type: "email", payload: event.currentTarget.value });
-					if (errorEmailMessage) setErrorEmailMessage("");
-				}}
-			/>
-			<Button
-				type="submit"
-				textContent="Envoyer"
-				variant="secondary"
-				spacing="4"
-			/>
-		</form>
+		</>
 	);
 };

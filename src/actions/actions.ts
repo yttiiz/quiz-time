@@ -141,22 +141,22 @@ export const userModificationServerAction = async (
 	prevState: { message: string },
 	formData: FormData,
 ) => {
-	let messageWarning = "";
 	const data: Record<string, string | string> = {};
 	const entries = formData.entries();
 
 	for (const [key, value] of entries) {
-		if (!value) {
-			messageWarning += `key ${key} is missing. `;
-			continue;
-		}
-
 		data[key] = value as string;
 	}
 
-	console.log("test action");
-	
-	if (messageWarning) return { message: messageWarning };
-	
+	const response = await Fetcher.putData<{ message: string }>(
+		globalThis.location.origin + "/api/mongodb/user-details",
+		data,
+		"next",
+	);
+
+	if (response.ok) {
+		return { message: response.data.message };
+	}
+
 	return { message: "Ok" };
 };
