@@ -14,9 +14,15 @@ export type PostDocumentToParameterType<T> = GetDocumentsFromParameterType & {
 	data: T;
 };
 
-export type PutDocumentToParameterType<T> = GetDocumentFromParameterType<T> & {
+export type PutDocumentKeyToParameterType<T> =
+	GetDocumentFromParameterType<T> & {
+		id: ObjectId;
+	};
+	
+export type PutDocumentToParameterType<T> = GetDocumentsFromParameterType & {
 	id: ObjectId;
-};
+	data: T
+}
 
 // Question Schema
 export type QuestionDetailsType = {

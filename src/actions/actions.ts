@@ -138,7 +138,7 @@ export const signOutServerAction = () => {
 };
 
 export const userModificationServerAction = async (
-	prevState: { message: string },
+	_: { message: string },
 	formData: FormData,
 ) => {
 	const data: Record<string, string | string> = {};
@@ -158,5 +158,5 @@ export const userModificationServerAction = async (
 		return { message: response.data.message };
 	}
 
-	return { message: "Ok" };
+	return { message: "User has not been modified" };
 };

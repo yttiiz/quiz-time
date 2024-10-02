@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 		const newPassword = Crypto.generatePassword();
 		const newHash = await Crypto.hashPassword(newPassword);
 
-		const { acknowledged } = await Mongo.putDocumentTo<UserSchemaType>({
+		const { acknowledged } = await Mongo.putDocumentKeyTo<UserSchemaType>({
 			db: "main",
 			collection: "users",
 			key: "hash",
