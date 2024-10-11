@@ -160,3 +160,39 @@ export const userModificationServerAction = async (
 
 	return { message: "User has not been modified" };
 };
+
+export const changePasswordServerAction = async (
+	_: { message: string },
+	formData: FormData,
+) => {
+	let messageWarning = "";
+	const data: Record<string, string | string> = {};
+	const entries = formData.entries();
+
+	for (const [key, value] of entries) {
+		if (!value) {
+			messageWarning += `key ${key} is missing. `;
+			continue;
+		}
+
+		data[key] = value as string;
+	}
+
+	if (messageWarning) return { message: messageWarning };
+
+	if (data["create-password"] !== data["confirm-password"]) {
+		return { message: "Password is not confirmed" }
+	}
+
+	const response = await Fetcher.putData<{ message: string }>(
+		globalThis.location.origin + "/api/mongodb/user-password",
+		data,
+		"next",
+	);
+
+	if (response.ok) {
+		return { message: response.data.message };
+	}
+
+	return { message: "User password has not been modified" };
+};

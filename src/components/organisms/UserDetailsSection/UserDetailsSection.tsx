@@ -4,7 +4,8 @@ import { Fetcher } from "@yttiiz/utils";
 
 export const UserDetailsSection = async () => {
 	const { EMAIL_TEST, __NEXT_PRIVATE_ORIGIN: host } = process.env;
-	const email = EMAIL_TEST as string; // WIP way to retreive user email.
+	//TODO WIP way to retreive user email.
+	const email = EMAIL_TEST as string;
 
 	let user: UserType | null;
 	const response = await Fetcher.getData<UserType>(

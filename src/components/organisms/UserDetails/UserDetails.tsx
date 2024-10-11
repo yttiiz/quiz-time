@@ -1,6 +1,6 @@
 "use client";
 
-import { ErrorMessage, FormUserDetails } from "@/components/mod";
+import { ErrorMessage, FormUserDetails, FormUserPassword } from "@/components/mod";
 import { SetterType, store, useUserDetailsStore } from "@/store/mod";
 import { UserType } from "@/services/mod";
 import { useEffect } from "react";
@@ -30,6 +30,7 @@ export const UserDetails = ({ user }: { user: UserType | null }) => {
 				) : (
 					<>
 						<FormUserDetails />
+						<FormUserPassword />
 					</>
 				)
 			) : null}

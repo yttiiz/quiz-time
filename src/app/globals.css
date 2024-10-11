@@ -344,9 +344,12 @@ dialog {
 
 .hero-quiz,
 .user-login,
-.not-found,
-.user-details {
+.not-found {
   height: calc(100vh - var(--main-header-height));
+}
+
+.user-details {
+  padding: calc(var(--base-size) * 6) 0;
 }
 
 #hero-banner {

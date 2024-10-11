@@ -88,4 +88,9 @@ export type FormSignupState = FormLoginState & {
 	lastname: string;
 };
 
+export type FormPasswordConfim = {
+	password: string;
+	confirmPassword: string;
+};
+ 
 export type FormModifyState = Omit<FormSignupState, "password">;
