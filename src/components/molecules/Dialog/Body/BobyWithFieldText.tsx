@@ -7,7 +7,7 @@ import { Button, Input } from "@/components/mod";
 export const DialogBodyWithFieldText = ({
 	paragraph,
 	onClick,
-}: DialogMainPropsType & { onClick: MouseEventHandler<HTMLButtonElement> }) => {
+}: DialogMainPropsType & { onClick: MouseEventHandler<HTMLButtonElement> | undefined }) => {
 	const [inputValue, setInputValue] = useState("");
 
 	return (
@@ -23,8 +23,10 @@ export const DialogBodyWithFieldText = ({
         textContent="Envoyer"
         type="button"
         onClick={(event) => {
-          onClick(event);
-          setInputValue("");
+          if (onClick) {
+            onClick(event);
+            setInputValue("");
+          }
         }}
       />
 		</div>
