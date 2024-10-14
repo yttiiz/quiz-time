@@ -1,6 +1,7 @@
 import { create, UseBoundStore, StoreApi } from "zustand";
-import { HeaderAppStateType, UserDataAppStateType } from "./mod";
-import { ItemType } from "@/components/types";
+import { HeaderAppStateType, UserDataAppStateType, UserDetailsAppStateType } from "./mod";
+import { ItemType } from "@/components/mod";
+import { UserType } from "@/services/mod";
 
 export const useHeaderStore = create<HeaderAppStateType>((set) => ({
 	items: [],
@@ -11,6 +12,11 @@ export const useUserDataStore = create<UserDataAppStateType>((set) => ({
 	firstname: "",
 	setFirstname: (firstname: string) => set({ firstname }),
 }));
+
+export const useUserDetailsStore = create<UserDetailsAppStateType>((set) => ({
+	user: {} as UserType,
+	setUser: (user: UserType) => set({ user }),
+}))
 
 /**
  * Returns a `login` store of elements according to the given arguments.

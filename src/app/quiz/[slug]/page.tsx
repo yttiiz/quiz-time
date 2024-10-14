@@ -1,4 +1,4 @@
-import { MainLayout, QuizSection, QuizSectionPropsType } from "@/components/mod";
+import { MainLayout, QuizSection } from "@/components/mod";
 import { Fetcher } from "@yttiiz/utils";
 import style from "../quiz.module.css";
 import { QuestionSchemaType } from "@/services/mod";

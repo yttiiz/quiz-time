@@ -1,8 +1,3 @@
-/**
- * OpenWeather api model.
- * see exemple here : https://openweathermap.org/current
- */
-
 import { MouseEventHandler } from "react";
 
 type WeatherType = {
@@ -12,6 +7,10 @@ type WeatherType = {
 	icon: string;
 };
 
+/**
+ * OpenWeather api model.
+ * see exemple here : https://openweathermap.org/current
+ */
 export type WeatherApiType = {
 	coord: {
 		lon: number;
@@ -69,7 +68,7 @@ export type DialogPropsType = {
 	header: DialogHeaderPropsType;
 	main: DialogMainPropsType;
 	onCrossButtonClick: MouseEventHandler<HTMLButtonElement>;
-	onMainButtonClick: MouseEventHandler<HTMLButtonElement>;
+	onMainButtonClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export type QuizItemsPropsType = {
@@ -88,3 +87,10 @@ export type FormSignupState = FormLoginState & {
 	firstname: string;
 	lastname: string;
 };
+
+export type FormPasswordConfim = {
+	password: string;
+	confirmPassword: string;
+};
+ 
+export type FormModifyState = Omit<FormSignupState, "password">;

@@ -6,7 +6,7 @@ export const DialogBody = ({
 	paragraph,
 	buttons,
 	onClick,
-}: DialogMainPropsType & { onClick: MouseEventHandler<HTMLButtonElement> }) => {
+}: DialogMainPropsType & { onClick: MouseEventHandler<HTMLButtonElement> | undefined }) => {
 	return (
 		<div>
 			{buttons ? (

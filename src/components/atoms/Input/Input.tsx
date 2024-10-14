@@ -27,7 +27,7 @@ export const Input = ({
 						onInput={onInput}
 					/>
 					{trailingIcon ? (
-						name === "password" ? (
+						name?.includes("password") ? (
 							<button
 								type="button"
 								onClick={onClickPasswordButton}
