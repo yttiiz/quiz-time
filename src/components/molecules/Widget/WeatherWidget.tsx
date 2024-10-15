@@ -23,7 +23,6 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 	};
 	
 	useEffect(() => {
-
 		if (globalThis) {
 			if (globalThis.navigator.language) {
 				setIsFrenchBrowser(globalThis.navigator.language === "fr-FR");
