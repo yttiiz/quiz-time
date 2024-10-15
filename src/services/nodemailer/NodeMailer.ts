@@ -57,7 +57,7 @@ export class NodeMailer {
 		receiver: string,
 		newPassword: string | undefined,
 	) {
-		const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
+		const { APP_URL: host } = process.env;
 		const response = await Fetcher.postData<{
 			title: string;
 			contentText: string;

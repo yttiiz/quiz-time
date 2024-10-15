@@ -3,7 +3,7 @@ import { UserType } from "@/services/mod";
 import { Fetcher } from "@yttiiz/utils";
 
 export const UserDetailsSection = async () => {
-	const { EMAIL_TEST, __NEXT_PRIVATE_ORIGIN: host } = process.env;
+	const { EMAIL_TEST, APP_URL: host } = process.env;
 	//TODO WIP way to retreive user email.
 	const email = EMAIL_TEST as string;
 

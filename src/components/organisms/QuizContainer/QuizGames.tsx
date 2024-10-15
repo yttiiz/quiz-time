@@ -6,7 +6,7 @@ import {
 import { Fetcher } from "@yttiiz/utils";
 
 export const QuizGames = async () => {
-	const { __NEXT_PRIVATE_ORIGIN: host } = process.env;
+	const { APP_URL: host } = process.env;
 	const response = await Fetcher.postData<{
 		title: string;
 		options: SelectOptionsType[];
