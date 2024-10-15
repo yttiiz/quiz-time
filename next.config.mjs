@@ -4,6 +4,11 @@ const { protocol, hostname, port } = new URL(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	experimental: {
+		outputFileTracingIncludes: {
+			"/api/json": ["src/data/**"]
+		}
+	},
 	images: {
 		remotePatterns: [
 			{
