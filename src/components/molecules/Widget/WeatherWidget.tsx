@@ -12,30 +12,31 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 	const [isFrenchBrowser, setIsFrenchBrowser] = useState(true);
 	const [response, setResponse] = useState<ResponseType>(null);
 
+	const retreiveDataFromApi = (hostUrl: string, body: string) => {
+		Fetcher.postData<SetStateAction<ResponseType>>(
+			hostUrl + "/api/weather",
+			body,
+			"next",
+		)
+			.then((res) => (res.ok ? res.data : null))
+			.then((res) => setResponse(res));
+	};
+	
 	useEffect(() => {
-		const retreiveDataFromApi = (body: string) => {
-			Fetcher.postData<SetStateAction<ResponseType>>(
-				host + "/api/weather",
-				body,
-				"next",
-			)
-				.then((res) => (res.ok ? res.data : null))
-				.then((res) => setResponse(res));
-		};
 
 		if (globalThis) {
 			if (globalThis.navigator.language) {
 				setIsFrenchBrowser(globalThis.navigator.language === "fr-FR");
 			}
 
-			if (globalThis.navigator.geolocation) {
+			if (globalThis.navigator.geolocation && host) {
 				globalThis.navigator.geolocation.getCurrentPosition(
 					(data) => {
 						const { latitude, longitude } = data.coords;
-						retreiveDataFromApi(JSON.stringify({ latitude, longitude }));
+						retreiveDataFromApi(host, JSON.stringify({ latitude, longitude }));
 					},
 					(err) => {
-						retreiveDataFromApi(JSON.stringify({ message: err.message }));
+						retreiveDataFromApi(host, JSON.stringify({ message: err.message }));
 					},
 				);
 			}
