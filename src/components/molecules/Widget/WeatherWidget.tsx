@@ -15,7 +15,7 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 	useEffect(() => {
 		const retreiveDataFromApi = (body: string) => {
 			Fetcher.postData<SetStateAction<ResponseType>>(
-				host + "/api/weather",
+				"/api/weather",
 				body,
 				"next",
 			)
