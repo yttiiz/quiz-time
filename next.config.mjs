@@ -6,7 +6,8 @@ const { protocol, hostname, port } = new URL(
 const nextConfig = {
 	experimental: {
 		outputFileTracingIncludes: {
-			"/api/json": ["src/data/**"]
+			"/api/json": ["src/data/**"],
+			"/api/forgot-password": ["src/logs/**"]
 		}
 	},
 	images: {
