@@ -32,7 +32,7 @@ export class NodeMailer {
 
 		const { subject, messagePlainText, messageHtml } = emailContent;
 		const info = await transporter.sendMail({
-			from: `${username} - <${email}>`,
+			from: `${username} <${email}>`,
 			to,
 			subject,
 			text: messagePlainText,

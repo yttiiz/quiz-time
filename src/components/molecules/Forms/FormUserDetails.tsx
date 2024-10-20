@@ -104,7 +104,7 @@ export const FormUserDetails = () => {
 				<Input
 					label="Prénom"
 					name="firstname"
-					type="firstname"
+					type="text"
 					value={firstname}
 					required={true}
 					leadingIcon={
@@ -123,7 +123,7 @@ export const FormUserDetails = () => {
 				<Input
 					label="Nom"
 					name="lastname"
-					type="lastname"
+					type="text"
 					value={lastname}
 					required={true}
 					leadingIcon={
