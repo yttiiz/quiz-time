@@ -13,6 +13,7 @@ export class NodeMailer {
 	public static async send({
 		to,
 		emailContent,
+		needToWriteLog = true,
 	}: SendParameterType) {
 		const {
 			EMAIL_ADDRESS: email,
@@ -38,10 +39,15 @@ export class NodeMailer {
 			text: messagePlainText,
 			html: messageHtml,
 		});
+		
+		if (needToWriteLog) {
+			const content = NodeMailer.generateLogContent(info, to);
 
-		const content = NodeMailer.generateLogContent(info, to);
-
-		return await FileHelper.writeLog("src/logs/emails.txt", content);
+			return {
+				isWriteLogOk: await FileHelper.writeLog("src/logs/emails.txt", content),
+				content,
+			}
+		}
 	}
 
 	private static generateLogContent(

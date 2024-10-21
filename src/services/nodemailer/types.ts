@@ -5,6 +5,7 @@ export type SendParameterType = {
 		messagePlainText: string;
 		messageHtml: string;
 	};
+	needToWriteLog?: boolean;
 };
 
 export type MailConfigType = {

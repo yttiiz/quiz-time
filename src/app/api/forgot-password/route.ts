@@ -31,18 +31,33 @@ export async function POST(req: NextRequest) {
 		});
 
 		let message = "";
-		let isWriteLogOk = false;
 
-		acknowledged
-			? isWriteLogOk = await NodeMailer.send({
-					to: email,
-					emailContent: await NodeMailer.createResetPasswordEmailContent(user.firstname, newPassword),
-				})
-			: (message = "Modification failed.");
+		// Check if user data has been modified.
+		if (acknowledged) {
+			const { isWriteLogOk, content } = (await NodeMailer.send({
+				to: email,
+				emailContent: await NodeMailer.createResetPasswordEmailContent(user.firstname, newPassword),
+			})) as { isWriteLogOk: boolean; content: string };
 
-		return isWriteLogOk
-			? NextResponse.json({ message: message ?? "Email send & write log successfully" })
-			: NextResponse.json({ message: message ?? "Email send" })
+			if (isWriteLogOk) {
+				return NextResponse.json({ message: message ?? "Email send & write log successfully" }); 
+			}
+
+			const { ADMIN_EMAIL } = process.env;
+			
+			await NodeMailer.send({
+				to: ADMIN_EMAIL as string,
+				needToWriteLog: false,
+				emailContent: {
+					subject: "Email send to user",
+					messageHtml: content,
+					messagePlainText: content,
+				}
+			});
+				
+			return NextResponse.json({ message: message ?? "Email send" });
+
+		} else (message = "Modification failed.");
 	}
 
 	return NextResponse.json({ message: "Incorrect value given." });
