@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
 				to: ADMIN_EMAIL as string,
 				needToWriteLog: false,
 				emailContent: {
-					subject: "Email send to user",
+					subject: "Email envoyé à l'utilisateur",
 					messageHtml: content,
 					messagePlainText: content,
 				}
