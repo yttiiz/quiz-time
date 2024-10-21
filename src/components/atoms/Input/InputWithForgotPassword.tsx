@@ -5,6 +5,8 @@ import { InputPropsType } from "../mod";
 import { MouseEvent, useRef, useState } from "react";
 import { DomHelper } from "@/utils/mod";
 import { Fetcher } from "@yttiiz/utils";
+import { store, useDialogFieldDisplayStore } from "@/store/store";
+import { SetterType } from "@/store/types";
 
 export const InputWithForgotPassword = ({
 	value,
@@ -22,6 +24,10 @@ export const InputWithForgotPassword = ({
 	const [dialogParagraph, setDialogParagraph] = useState<string | null>(
 		originalMessage,
 	);
+	const [setIsFieldDisplay] = store(
+		useDialogFieldDisplayStore,
+		"setIsFieldDisplay",
+	) as [SetterType<boolean>];
 
 	const sendEmailHandler = async (event: MouseEvent<HTMLButtonElement>) => {
 		const email = event.currentTarget.dataset["bind"];
@@ -34,9 +40,8 @@ export const InputWithForgotPassword = ({
 			);
 
 			if (response.ok && dialogRef.current) {
-				setDialogParagraph(
-					`Un message a été envoyé à l'adresse ${email}.`,
-				);
+				setDialogParagraph(`Un message a été envoyé à l'adresse ${email}.`);
+				setIsFieldDisplay(false);
 
 				return;
 			} else {
@@ -91,7 +96,7 @@ export const InputWithForgotPassword = ({
 				header={{ title: "Mot de passe oublié ?" }}
 				main={{
 					paragraph: dialogParagraph ?? "",
-					buttons: ["Continuer"],
+					buttons: ["Envoyer"],
 				}}
 			/>
 		</div>

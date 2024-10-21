@@ -1,5 +1,10 @@
 import { create, UseBoundStore, StoreApi } from "zustand";
-import { HeaderAppStateType, UserDataAppStateType, UserDetailsAppStateType } from "./mod";
+import {
+	DisplayDialogFieldAppStateType,
+	HeaderAppStateType,
+	UserDataAppStateType,
+	UserDetailsAppStateType,
+} from "./mod";
 import { ItemType } from "@/components/mod";
 import { UserType } from "@/services/mod";
 
@@ -16,7 +21,13 @@ export const useUserDataStore = create<UserDataAppStateType>((set) => ({
 export const useUserDetailsStore = create<UserDetailsAppStateType>((set) => ({
 	user: {} as UserType,
 	setUser: (user: UserType) => set({ user }),
-}))
+}));
+
+export const useDialogFieldDisplayStore =
+	create<DisplayDialogFieldAppStateType>((set) => ({
+		isFieldDisplay: true,
+		setIsFieldDisplay: (isFieldDisplay: boolean) => set({ isFieldDisplay }),
+	}));
 
 /**
  * Returns a `login` store of elements according to the given arguments.

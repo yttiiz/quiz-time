@@ -16,4 +16,9 @@ export type UserDataAppStateType = {
 export type UserDetailsAppStateType = {
 	user: UserType;
 	setUser: SetterType<UserType>;
-}
+};
+
+export type DisplayDialogFieldAppStateType = {
+	isFieldDisplay: boolean;
+	setIsFieldDisplay: SetterType<boolean>;
+};
