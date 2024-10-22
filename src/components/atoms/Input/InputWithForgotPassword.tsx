@@ -90,6 +90,7 @@ export const InputWithForgotPassword = ({
 				onCrossButtonClick={() => {
 					DomHelper.closeDialog(dialogRef);
 					setDialogParagraph(originalMessage);
+					setIsFieldDisplay(true);
 				}}
 				onMainButtonClick={sendEmailHandler}
 				ref={dialogRef}
