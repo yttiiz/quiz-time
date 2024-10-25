@@ -55,7 +55,9 @@ export const FormLogin = () => {
 			const result = await handleCredentialsSignIn({ email, password });
 
 			if (result) {
-				console.log(result.message);
+				result.message.includes("credentials")
+				 ? setErrorPasswordMessage("Mot de passe incorrect.")
+				 : null;
 			}
 		}
 	};
