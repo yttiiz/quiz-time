@@ -1,5 +1,7 @@
-import NextAuth, { User } from "next-auth";
+import { UserSchemaType } from "@/services/mod";
+import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { Fetcher } from "@yttiiz/utils";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
 	providers: [
@@ -9,19 +11,34 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 				password: {},
 			},
 			authorize: async (credentials) => {
-				let user = null;
+				const { email, password } = credentials;
+				const { APP_URL: host } = process.env;
 
-        //TODO WIP - User test example.
-				user = {
-					id: 1,
-					firstname: "John",
-					lastname: "Doe",
-				} as unknown as User;
+				const response = await Fetcher.getData<
+					{ message: string } | { user: UserSchemaType }
+				>(
+					host + "/api/mongodb/user",
+					`email=${encodeURIComponent(email as string)}&password=${encodeURIComponent(password as string)}`,
+				);
 
-				if (!user) return null;
+				if (response.ok) {
+					if ("user" in response.data) {
+						const { _id, firstname, lastname, email } = response.data.user;
 
-				return user;
+						return {
+							id: _id.toString(),
+							name: `${firstname} ${lastname}`,
+							email,
+						};
+					}
+					return null;
+				}
+
+				return null;
 			},
 		}),
 	],
+	pages: {
+		signIn: "/login",
+	},
 });

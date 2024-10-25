@@ -1,7 +1,7 @@
 import { Burger, ItemType, Logo, UserDetailsLink, WeatherWidget } from "@/components/mod";
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 
-export const Header = async ({
+export const Header = ({
 	title,
 	host,
 	response,
