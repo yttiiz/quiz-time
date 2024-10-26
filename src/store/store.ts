@@ -2,20 +2,21 @@ import { create, UseBoundStore, StoreApi } from "zustand";
 import {
 	DisplayDialogFieldAppStateType,
 	HeaderAppStateType,
-	UserDataAppStateType,
 	UserDetailsAppStateType,
+	UserSessionAppStateType,
 } from "./mod";
 import { ItemType } from "@/components/mod";
 import { UserType } from "@/services/mod";
+import { Session } from "next-auth";
 
 export const useHeaderStore = create<HeaderAppStateType>((set) => ({
 	items: [],
 	setItems: (items: ItemType[]) => set({ items }),
 }));
 
-export const useUserDataStore = create<UserDataAppStateType>((set) => ({
-	firstname: "",
-	setFirstname: (firstname: string) => set({ firstname }),
+export const useUserSession = create<UserSessionAppStateType>((set) => ({
+	session: null,
+	setSession: (session: Session) => set({ session }),
 }));
 
 export const useUserDetailsStore = create<UserDetailsAppStateType>((set) => ({

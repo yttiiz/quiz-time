@@ -1,23 +1,37 @@
 "use client";
 
 /* eslint-disable react/display-name */
-import { NavbarItem } from "@/components/mod";
+import { ItemType, NavbarItem } from "@/components/mod";
 import { ForwardedRef, forwardRef, useEffect } from "react";
-import { useHeaderStore } from "@/store/mod";
+import { SetterType, store, useHeaderStore, useUserSession } from "@/store/mod";
 
 export const Navbar = forwardRef(
-	(_, ref: ForwardedRef<HTMLDivElement | null>) => {
-		const items = useHeaderStore((state) => state.items);
+	(
+		_,
+		ref: ForwardedRef<HTMLDivElement | null>,
+	) => {
+		const session = useUserSession((state) => state.session);
+		const [items, setItems] = store(useHeaderStore, "items", "setItems") as [
+			ItemType[],
+			SetterType<ItemType[]>,
+		];
 
 		useEffect(() => {
-			if (globalThis.localStorage.getItem("userFirstname")) {
+			if (session) {
 				const index = items.findIndex(
 					(item) => item.textContent === "Connexion",
 				);
 
-				items[index] = { textContent: "Déconnexion", url: "", isFormConnexion: true };
+				if (index >= 0) {
+					items[index] = {
+						textContent: "Déconnexion",
+						url: "",
+						isFormConnexion: true,
+					};
+					setItems(items);
+				}
 			}
-		}, [items]);
+		}, [session, items, setItems]);
 
 		return (
 			<nav

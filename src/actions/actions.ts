@@ -82,12 +82,6 @@ export const signUpServerAction = async (
 	return { message: response.message };
 };
 
-export const signOutServerAction = () => {
-	globalThis.localStorage.removeItem("userFirstname");
-
-	return { message: "User disconnected" };
-};
-
 export const userModificationServerAction = async (
 	_: { message: string },
 	formData: FormData,

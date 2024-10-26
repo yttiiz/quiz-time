@@ -4,8 +4,6 @@ export const UserDetailsLink = async () => {
 	const session = await auth();
 	const firstname = session?.user?.name?.split(" ").at(0);
 
-	console.log(session);
-	
   const greets = () => {
 		const hours = new Date().getHours();
 		return hours >= 18 || hours < 6 ? "Bonsoir" : "Bonjour";

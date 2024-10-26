@@ -1,5 +1,5 @@
 import { Button, ErrorMessage } from "@/components/mod";
-import { useUserDataStore } from "@/store/store";
+import { useUserSession } from "@/store/store";
 
 export const QuizResult = ({
 	points,
@@ -10,7 +10,8 @@ export const QuizResult = ({
 }) => {
 	points = +((points / max) * 20).toFixed();
 
-	const firstname = useUserDataStore((state) => state.firstname);
+	const session = useUserSession((state) => state.session);
+	const firstname = session?.user?.name?.split(" ").at(0);
 	const congrats = (note: number) => {
 		if (note >= 16) return "Félicitations";
 		if (note >= 12 && note < 16) return "C'est très bien";

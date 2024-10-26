@@ -1,17 +1,23 @@
 "use client"
 
 import { Navbar, ItemType } from "@/components/mod";
-import { SetterType, store, useHeaderStore } from "@/store/mod";
+import { SetterType, store, useHeaderStore, useUserSession } from "@/store/mod";
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
+import { Session } from "next-auth";
 import { useRef, useEffect, useState } from "react";
 
 export const Burger = ({
+	session,
 	response,
 }: {
 	response: SuccessResponseType<{ items: ItemType[] }> | ErrorResponseType;
+	session: Session | null;
 }) => {
 	const [setItems] = store(useHeaderStore, "setItems") as [
 		SetterType<ItemType[]>,
+	];
+	const [setSession] = store(useUserSession, "setSession") as [
+		SetterType<Session>,
 	];
 
 	const line1 = useRef<HTMLSpanElement | null>(null);
@@ -50,6 +56,10 @@ export const Burger = ({
 
 	useEffect(() => {
 		const burgerElement = burger.current;
+		
+		if (session) {
+			setSession(session);
+		}
 
 		if (response.ok) {
 			const { items } = response.data;
