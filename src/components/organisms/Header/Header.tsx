@@ -28,7 +28,10 @@ export const Header = async ({
 				</div>
 				<div className="flex items-center gap-4">
 					<WeatherWidget host={host} />
-					<Burger response={response} session={session}/>
+					<Burger
+						response={response}
+						session={session}
+					/>
 				</div>
 			</div>
 		</header>

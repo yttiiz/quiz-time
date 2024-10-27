@@ -1,7 +1,17 @@
 import { UserSchemaType } from "@/services/mod";
-import NextAuth from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { Fetcher } from "@yttiiz/utils";
+import { NextResponse } from "next/server";
+
+// Extends User properties.
+declare module "next-auth" {
+	interface Session {
+		user: {
+			role: string;
+		} & DefaultSession["user"];
+	}
+}
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
 	providers: [
@@ -23,12 +33,14 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
 				if (response.ok) {
 					if ("user" in response.data) {
-						const { _id, firstname, lastname, email } = response.data.user;
+						const { _id, firstname, lastname, email, role } =
+							response.data.user;
 
 						return {
 							id: _id.toString(),
 							name: `${firstname} ${lastname}`,
 							email,
+							role,
 						};
 					}
 					return null;
@@ -38,6 +50,19 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 			},
 		}),
 	],
+	callbacks: {
+		authorized: async ({ request, auth }) => {
+			const isLoggedIn = !!auth?.user;
+			const { pathname } = request.nextUrl;
+			const role = auth?.user.role;
+
+			if (pathname.includes("/login") && isLoggedIn) {
+				return NextResponse.redirect(new URL("/", request.nextUrl));
+			}
+
+			return !!auth;
+		},
+	},
 	pages: {
 		signIn: "/login",
 	},
