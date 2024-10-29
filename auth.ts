@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 declare module "next-auth" {
 	interface Session {
 		user: {
-			role: string;
+			role: "admin" | "user";
 		} & DefaultSession["user"];
 	}
 }
@@ -51,16 +51,20 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 		}),
 	],
 	callbacks: {
-		authorized: async ({ request, auth }) => {
+		authorized: async ({ request: { nextUrl }, auth }) => {
 			const isLoggedIn = !!auth?.user;
-			const { pathname } = request.nextUrl;
+			const { pathname } = nextUrl;
 			const role = auth?.user.role;
 
 			if (pathname.includes("/login") && isLoggedIn) {
-				return NextResponse.redirect(new URL("/", request.nextUrl));
+				return NextResponse.redirect(new URL("/", nextUrl));
+			}
+			
+			if (pathname.includes("/admin") && role !== "admin") {
+				return NextResponse.redirect(new URL("/", nextUrl));
 			}
 
-			return !!auth;
+			return true;
 		},
 	},
 	pages: {
