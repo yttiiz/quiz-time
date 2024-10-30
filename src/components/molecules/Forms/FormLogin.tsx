@@ -1,6 +1,6 @@
 "use client";
 
-import { signInServerAction } from "@/actions/actions";
+import { handleCredentialsSignIn } from "@/actions/authActions";
 import {
 	Button,
 	FormLoginState,
@@ -11,18 +11,13 @@ import {
 	Input,
 	InputWithForgotPassword,
 } from "@/components/mod";
-import { useEffect, useReducer, useState } from "react";
-import { useFormState } from "react-dom";
+import { FormEvent, useReducer, useState } from "react";
 
 export const FormLogin = () => {
 	const [isEyeOpen, setIsEyeOpen] = useState(false);
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
 	const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
 
-	const [{ message }, formAction] = useFormState(signInServerAction, {
-		message: "",
-	});
-	
 	const [{ email, password }, dispatch] = useReducer(
 		(
 			state: FormLoginState,
@@ -44,42 +39,48 @@ export const FormLogin = () => {
 		},
 	);
 
-	useEffect(() => {
-		if (message.includes("User")) {
-			if (message.includes("connected")) {
-				dispatch({ type: "email", payload: "" });
-				dispatch({ type: "password", payload: "" });
+	const getData = (formData: FormData) => {
+		return {
+			email: formData.get("email"),
+			password: formData.get("password"),
+		};
+	};
 
-				const userFirstname = message.split(": ")[1].trim();
-				
-				// Set firstname.
-				globalThis.localStorage.setItem("userFirstname", userFirstname);
+	const formServerAction = async (formData: FormData) => {
+		const { email, password } = getData(formData);
+		const isDataIsString =
+			typeof email === "string" && typeof password === "string";
 
-				// Redirect to home page.
-				globalThis.location.href = "/";
+		if (isDataIsString) {
+			const result = await handleCredentialsSignIn({ email, password });
 
-			} else {
-				setErrorEmailMessage("Email inconnu");
+			if (result) {
+				result.message.includes("credentials")
+				 ? setErrorPasswordMessage("Mot de passe incorrect.")
+				 : null;
 			}
-
-			return;
 		}
+	};
 
-		if (message.includes("email")) {
+	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+		const formData = new FormData(event.currentTarget);
+		const { email, password } = getData(formData);
+
+		if (!email) {
 			setErrorEmailMessage("Veuillez renseigner ce champ.");
+			event.preventDefault();
 		}
 
-		if (message.includes("password")) {
-			message.includes("is missing")
-				? setErrorPasswordMessage("Veuillez renseigner ce champ.")
-				: setErrorPasswordMessage("Votre mot de passe est incorrect");
+		if (!password) {
+			setErrorPasswordMessage("Veuillez renseigner ce champ.");
+			event.preventDefault();
 		}
-
-	}, [message]);
+	};
 
 	return (
 		<form
-			action={formAction}
+			action={formServerAction}
+			onSubmit={onSubmit}
 			className="grid gap-4 p-10"
 		>
 			<Input

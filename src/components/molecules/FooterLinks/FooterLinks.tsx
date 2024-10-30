@@ -1,14 +1,14 @@
 "use client";
 
 import { ItemType } from "@/components/mod";
-import { useUserDataStore } from "@/store/mod";
+import { useUserSession } from "@/store/mod";
 
 export const FooterLinks = ({ links }: { links: ItemType[] }) => {
-	const firstname = useUserDataStore((state) => state.firstname);
+	const session = useUserSession((state) => state.session);
 
 	// If user is connected, remove 'connexion' item in the list.
-	if (firstname) {
-		links = links.filter(links => links.textContent !== "Connexion")
+	if (session) {
+		links = links.filter(link => link.textContent !== "Connexion")
 	}
 
 	return (

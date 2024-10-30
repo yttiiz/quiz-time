@@ -17,7 +17,7 @@ export const ErrorMessage = ({
 	const [isFrenchBrowser, setIsFrenchBrowser] = useState<boolean | null>(null);
 
 	useEffect(() => {
-		setIsFrenchBrowser(globalThis.navigator?.language === "fr-FR" ?? true);
+		setIsFrenchBrowser(globalThis.navigator?.language === "fr-FR" || true);
 	}, [setIsFrenchBrowser]);
 
 	return isFrenchBrowser != null ? (

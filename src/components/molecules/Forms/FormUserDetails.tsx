@@ -8,8 +8,8 @@ import {
 	IconUser,
 	Input,
 } from "@/components/mod";
-import { useUserDetailsStore } from "@/store/store";
 import { DomHelper } from "@/utils/mod";
+import { User } from "next-auth";
 import {
 	FormEvent,
 	useEffect,
@@ -20,8 +20,7 @@ import {
 } from "react";
 import { useFormState } from "react-dom";
 
-export const FormUserDetails = () => {
-	const user = useUserDetailsStore((state) => state.user);
+export const FormUserDetails = ({ user }: { user: User }) => {
 	const [errorFirstnameMessage, setErrorFirstnameMessage] = useState("");
 	const [errorLastnameMessage, setErrorLastnameMessage] = useState("");
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
@@ -87,9 +86,16 @@ export const FormUserDetails = () => {
 			DomHelper.openDialog(dialogRef);
 		}
 
-		if (user) {
+		if (user && user.name && user.email) {
+			const [firstname, lastname] = user.name?.split(" ");
+			const userToForm = {
+				firstname,
+				lastname,
+				email: user.email,
+			};
+
 			(Object.keys(initializerArg) as (keyof FormModifyState)[]).map((key) => {
-				dispatch({ type: key, payload: user[key] });
+				dispatch({ type: key, payload: userToForm[key] });
 			});
 		}
 	}, [message, user, initializerArg]);

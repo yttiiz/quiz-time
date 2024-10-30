@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { Burger, ItemType, Logo, UserDetailsLink, WeatherWidget } from "@/components/mod";
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 
@@ -10,6 +11,8 @@ export const Header = async ({
 	host: string | undefined;
 	response: SuccessResponseType<{ items: ItemType[] }> | ErrorResponseType;
 }) => {
+	const session = await auth();
+
 	return (
 		<header id="main-header">
 			<div className="container flex justify-between items-center h-full">
@@ -25,7 +28,10 @@ export const Header = async ({
 				</div>
 				<div className="flex items-center gap-4">
 					<WeatherWidget host={host} />
-					<Burger response={response} />
+					<Burger
+						response={response}
+						session={session}
+					/>
 				</div>
 			</div>
 		</header>

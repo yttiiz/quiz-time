@@ -1,29 +1,13 @@
-"use client";
+import { auth } from "@/auth";
 
-import { SetterType } from "@/store/mod";
-import { store, useUserDataStore } from "@/store/mod";
-import { useEffect } from "react";
-
-export const UserDetailsLink = () => {
-	const [firstname, setFirstname] = store(useUserDataStore, "firstname", "setFirstname") as [
-		string,
-		SetterType<string>,
-	];
+export const UserDetailsLink = async () => {
+	const session = await auth();
+	const firstname = session?.user?.name?.split(" ").at(0);
 
   const greets = () => {
 		const hours = new Date().getHours();
 		return hours >= 18 || hours < 6 ? "Bonsoir" : "Bonjour";
 	};
-
-	useEffect(() => {
-		if (!firstname) {
-			if (globalThis.localStorage.getItem("userFirstname")) {
-				setFirstname(
-					globalThis.localStorage.getItem("userFirstname") as string,
-				);
-			}
-		}
-	}, [firstname, setFirstname]);
 
 	return !!firstname ? (
 		<div className="flex items-center gap-3">

@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 		if (!user) return NextResponse.json({ message: "User not found" });
 		
 		return (user && await Crypto.isPasswordOk(password, user.hash))
-			? NextResponse.json({ message: user.firstname })
+			? NextResponse.json({ user })
 			: NextResponse.json({ message: "Incorrect password" });
 	}
 
