@@ -36,52 +36,6 @@ export const selectItemServerAction = async (
 	return { message: "valid - id: " + keyGen() };
 };
 
-export const signUpServerAction = async (
-	_: { message: string },
-	formData: FormData,
-) => {
-	let messageWarning = "";
-	const data: Record<string, string | string> = {};
-	const entries = formData.entries();
-
-	for (const [key, value] of entries) {
-		if (!value) {
-			messageWarning += `key ${key} is missing. `;
-			continue;
-		}
-
-		data[key] = value as string;
-	}
-
-	if (messageWarning) return { message: messageWarning };
-
-	const response = await Fetcher.postData<{ message: string }>(
-		globalThis.location.origin + "/api/mongodb/user",
-		data,
-		"next",
-	);
-
-	if (response.ok) {
-		let message = "";
-
-		switch (response.data["message"]) {
-			case "User not created": {
-				message = response.data["message"];
-				break;
-			}
-
-			default: {
-				message = "User connected | firstname: " + response.data["message"];
-				break;
-			}
-		}
-
-		return { message };
-	}
-
-	return { message: response.message };
-};
-
 export const userModificationServerAction = async (
 	_: { message: string },
 	formData: FormData,

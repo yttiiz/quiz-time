@@ -1,0 +1,7 @@
+{
+	"title": "Inscription validée",
+	"contentText": "{{ userFirstname }}, votre inscription a bien été prise en compte.",
+	"contentHtml": "<h1>{{ userFirstname }},</h1><p>votre inscription a bien été prise en compte.</p>",
+	"greetings": "Cordialement.<br />",
+	"team": "L'équipe de Yz Quiz"
+}
