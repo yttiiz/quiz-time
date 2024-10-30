@@ -54,7 +54,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 		authorized: async ({ request: { nextUrl }, auth }) => {
 			const isLoggedIn = !!auth?.user;
 			const { pathname } = nextUrl;
-			const role = auth?.user.role;
+			const role = auth?.user.role ?? "user";
 
 			if (pathname.includes("/login") && isLoggedIn) {
 				return NextResponse.redirect(new URL("/", nextUrl));
