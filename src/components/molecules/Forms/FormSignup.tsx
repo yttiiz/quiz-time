@@ -1,8 +1,9 @@
 "use client";
 
-import { signUpServerAction } from "@/actions/actions";
+import { handleSignUp } from "@/actions/authActions";
 import {
 	Button,
+	Dialog,
 	FormSignupState,
 	IconCrossEye,
 	IconEye,
@@ -10,8 +11,14 @@ import {
 	IconUser,
 	Input,
 } from "@/components/mod";
-import { useEffect, useMemo, useReducer, useState } from "react";
-import { useFormState } from "react-dom";
+import { DomHelper } from "@/utils/mod";
+import {
+	FormEvent,
+	useMemo,
+	useReducer,
+	useRef,
+	useState,
+} from "react";
 
 export const FormSignup = () => {
 	const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -19,17 +26,17 @@ export const FormSignup = () => {
 	const [errorLastnameMessage, setErrorLastnameMessage] = useState("");
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
 	const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
+	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-	const [{ message }, formAction] = useFormState(signUpServerAction, {
-		message: "",
-	});
-
-	const initializerArg = useMemo(() => ({
-		firstname: "",
-		lastname: "",
-		email: "",
-		password: "",
-	}), []);
+	const initializerArg = useMemo(
+		() => ({
+			firstname: "",
+			lastname: "",
+			email: "",
+			password: "",
+		}),
+		[],
+	);
 
 	const [{ firstname, lastname, email, password }, dispatch] = useReducer(
 		(
@@ -60,148 +67,158 @@ export const FormSignup = () => {
 		initializerArg,
 	);
 
-	useEffect(() => {
-		if (message.includes("User")) {
-			if (message.includes("connected")) {
-				
-				for (const key of (Object.keys(initializerArg) as (keyof typeof initializerArg)[])) {
-					dispatch({ type: key, payload: "" });
+	const formServerAction = async (formData: FormData) => {
+		const result = await handleSignUp(formData);
+
+		if (result) {
+			return DomHelper.openDialog(dialogRef);
+		}
+	};
+
+	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+		const formData = new FormData(event.currentTarget);
+
+		for (const [key, value] of formData) {
+			if (!value) {
+				switch (key) {
+					case "firstname": {
+						setErrorFirstnameMessage("Veuillez renseigner ce champ");
+						break;
+					}
+
+					case "lastname": {
+						setErrorLastnameMessage("Veuillez renseigner ce champ");
+						break;
+					}
+
+					case "email": {
+						setErrorEmailMessage("Veuillez renseigner ce champ");
+						break;
+					}
+
+					case "password": {
+						setErrorPasswordMessage("Veuillez renseigner ce champ");
+						break;
+					}
 				}
 
-				const userFirstname = message.split(": ")[1].trim();
-
-				// Set firstname.
-				globalThis.localStorage.setItem("userFirstname", userFirstname);
-
-				// Redirect to home page.
-				globalThis.location.href = "/";
-			} else {
-				setErrorEmailMessage("Email inconnu");
+				event.preventDefault();
 			}
-
-			return;
 		}
-
-		if (message.includes("firstname")) {
-			setErrorFirstnameMessage("Veuillez renseigner ce champ");
-		}
-
-		if (message.includes("lastname")) {
-			setErrorLastnameMessage("Veuillez renseigner ce champ");
-		}
-
-		if (message.includes("email")) {
-			setErrorEmailMessage("Veuillez renseigner ce champ");
-		}
-
-		if (message.includes("password")) {
-			setErrorPasswordMessage("Veuillez renseigner ce champ");
-		}
-	}, [message, initializerArg]);
+	};
 
 	return (
-		<form
-			action={formAction}
-			className="grid gap-4 p-10"
-		>
-			<Input
-				label="Prénom"
-				name="firstname"
-				type="firstname"
-				value={firstname}
-				required={true}
-				leadingIcon={
-					<IconUser
-						variant="primary"
-						model="content"
-						svgSize="xl"
-					/>
-				}
-				feedbackMessage={errorFirstnameMessage}
-				onInput={(event) => {
-					dispatch({ type: "firstname", payload: event.currentTarget.value });
-					if (errorFirstnameMessage) setErrorFirstnameMessage("");
-				}}
-			/>
-			<Input
-				label="Nom"
-				name="lastname"
-				type="lastname"
-				value={lastname}
-				required={true}
-				leadingIcon={
-					<IconUser
-						variant="primary"
-						model="content"
-						svgSize="xl"
-					/>
-				}
-				feedbackMessage={errorLastnameMessage}
-				onInput={(event) => {
-					dispatch({ type: "lastname", payload: event.currentTarget.value });
-					if (errorLastnameMessage) setErrorLastnameMessage("");
-				}}
-			/>
-			<Input
-				label="Email"
-				name="email"
-				type="email"
-				value={email}
-				required={true}
-				leadingIcon={
-					<IconUser
-						variant="primary"
-						model="content"
-						svgSize="xl"
-					/>
-				}
-				feedbackMessage={errorEmailMessage}
-				onInput={(event) => {
-					dispatch({ type: "email", payload: event.currentTarget.value });
-					if (errorEmailMessage) setErrorEmailMessage("");
-				}}
-			/>
-			<Input
-				label="Mot de passe"
-				name="password"
-				type={isEyeOpen ? "text" : "password"}
-				value={password}
-				required={true}
-				leadingIcon={
-					<IconUnlocked
-						variant="primary"
-						model="content"
-						svgSize="xl"
-					/>
-				}
-				trailingIcon={
-					isEyeOpen ? (
-						<IconEye
+		<>
+			<form
+				action={formServerAction}
+				onSubmit={onSubmit}
+				className="grid gap-4 p-10"
+			>
+				<Input
+					label="Prénom"
+					name="firstname"
+					type="firstname"
+					value={firstname}
+					required={true}
+					leadingIcon={
+						<IconUser
 							variant="primary"
 							model="content"
-							svgSize="lg"
+							svgSize="xl"
 						/>
-					) : (
-						<IconCrossEye
+					}
+					feedbackMessage={errorFirstnameMessage}
+					onInput={(event) => {
+						dispatch({ type: "firstname", payload: event.currentTarget.value });
+						if (errorFirstnameMessage) setErrorFirstnameMessage("");
+					}}
+				/>
+				<Input
+					label="Nom"
+					name="lastname"
+					type="lastname"
+					value={lastname}
+					required={true}
+					leadingIcon={
+						<IconUser
 							variant="primary"
 							model="content"
-							svgSize="lg"
+							svgSize="xl"
 						/>
-					)
-				}
-				feedbackMessage={errorPasswordMessage}
-				onClickPasswordButton={() => setIsEyeOpen(!isEyeOpen)}
-				onInput={(event) => {
-					dispatch({ type: "password", payload: event.currentTarget.value });
-					if (errorPasswordMessage) setErrorPasswordMessage("");
-				}}
+					}
+					feedbackMessage={errorLastnameMessage}
+					onInput={(event) => {
+						dispatch({ type: "lastname", payload: event.currentTarget.value });
+						if (errorLastnameMessage) setErrorLastnameMessage("");
+					}}
+				/>
+				<Input
+					label="Email"
+					name="email"
+					type="email"
+					value={email}
+					required={true}
+					leadingIcon={
+						<IconUser
+							variant="primary"
+							model="content"
+							svgSize="xl"
+						/>
+					}
+					feedbackMessage={errorEmailMessage}
+					onInput={(event) => {
+						dispatch({ type: "email", payload: event.currentTarget.value });
+						if (errorEmailMessage) setErrorEmailMessage("");
+					}}
+				/>
+				<Input
+					label="Mot de passe"
+					name="password"
+					type={isEyeOpen ? "text" : "password"}
+					value={password}
+					required={true}
+					leadingIcon={
+						<IconUnlocked
+							variant="primary"
+							model="content"
+							svgSize="xl"
+						/>
+					}
+					trailingIcon={
+						isEyeOpen ? (
+							<IconEye
+								variant="primary"
+								model="content"
+								svgSize="lg"
+							/>
+						) : (
+							<IconCrossEye
+								variant="primary"
+								model="content"
+								svgSize="lg"
+							/>
+						)
+					}
+					feedbackMessage={errorPasswordMessage}
+					onClickPasswordButton={() => setIsEyeOpen(!isEyeOpen)}
+					onInput={(event) => {
+						dispatch({ type: "password", payload: event.currentTarget.value });
+						if (errorPasswordMessage) setErrorPasswordMessage("");
+					}}
+				/>
+				<Button
+					type="submit"
+					textContent="Envoyer"
+					variant="secondary"
+					spacing="4"
+				/>
+			</form>
+			<Dialog
+				ref={dialogRef}
+				header={{ title: "Inscription" }}
+				main={{ paragraph: "Quelque chose s'est mal passé durant votre inscription. Veuillez réessayer ultérieurement." }}
+				onCrossButtonClick={() => DomHelper.closeDialog(dialogRef)}
 			/>
-			<Button
-				type="submit"
-				textContent="Envoyer"
-				variant="secondary"
-				spacing="4"
-			/>
-		</form>
+		</>
 	);
 };
