@@ -17,7 +17,7 @@ export const Burger = ({
 		SetterType<ItemType[]>,
 	];
 	const [setSession] = store(useUserSession, "setSession") as [
-		SetterType<Session>,
+		SetterType<Session | null>,
 	];
 
 	const line1 = useRef<HTMLSpanElement | null>(null);
@@ -57,9 +57,7 @@ export const Burger = ({
 	useEffect(() => {
 		const burgerElement = burger.current;
 		
-		if (session) {
-			setSession(session);
-		}
+		setSession(session);
 
 		if (response.ok) {
 			const { items } = response.data;
