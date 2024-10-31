@@ -344,7 +344,7 @@ dialog {
 .hero-quiz,
 .user-login,
 .not-found {
-  height: calc(100vh - var(--main-header-height));
+  min-height: calc(100vh - var(--main-header-height));
 }
 
 .user-details {
