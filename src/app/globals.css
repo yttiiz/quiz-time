@@ -335,7 +335,6 @@ dialog {
 }
 
 #quiz-games,
-.hero-quiz,
 .user-login,
 .not-found {
   display: flex;
@@ -356,9 +355,9 @@ dialog {
   background: url(/img/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
 
   & h1 {
-    font-size: calc(var(--base-size) * 8);
+    font-size: calc(var(--base-size) * 5);
     font-weight: 700;
-    line-height: calc(var(--base-size) * 9);
+    line-height: calc(var(--base-size) * 5.5);
   }
   
   & p {
@@ -534,6 +533,14 @@ dialog {
   #burger > nav > svg {
     right: 50%;
     transform: translateX(50%);
+  }
+
+  #hero-banner {
+    & h1 {
+      font-size: calc(var(--base-size) * 8);
+      font-weight: 700;
+      line-height: calc(var(--base-size) * 9);
+    }
   }
 }
 

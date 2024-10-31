@@ -63,7 +63,7 @@ export const QuizQuestions = ({ list }: { list: QuestionSchemaType[] }) => {
 
 	return (
 		<>
-			<div className="w-full relative overflow-hidden">
+			<div className="w-full pb-12 md:pb-0 mb-4 md:mb-0 relative overflow-hidden">
 				{isQuizEnded ? (
 					<>
 						<h3>{list[count].question.title}</h3>
@@ -74,7 +74,7 @@ export const QuizQuestions = ({ list }: { list: QuestionSchemaType[] }) => {
 							questions={list[count].question.propositions}
 							name={list[count].question.title}
 						/>
-						<span className="absolute flex justify-center items-center bottom-0 right-0 w-[3.5rem] h-[3.5rem] border-2 rounded-full border-primary-content/20">
+						<span className="absolute flex justify-center items-center bottom-0 md:right-0 w-[3.5rem] h-[3.5rem] border-2 rounded-full border-primary-content/20">
 							{`${count + 1}/${list.length}`}
 						</span>
 					</>

@@ -12,7 +12,7 @@ export const QuizSection = ({
 			id={id}
 			className="hero-quiz"
 		>
-			<div className="container grid py-24 px-6 gap-4">
+			<div className="container grid py-24 md:px-6 gap-4">
 				<h1>{title}</h1>
 				<div>
 					{response.ok ? (
