@@ -353,7 +353,8 @@ dialog {
 
 #hero-banner {
   background: url(/img/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
-
+  display: flex;
+  
   & h1 {
     font-size: calc(var(--base-size) * 5);
     font-weight: 700;
