@@ -2,15 +2,17 @@ import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { RouteHelper } from "@/utils/route-helper";
 import { Mongo, UserSchemaType } from "@/services/mod";
+import { auth } from "@/auth";
 import { Crypto } from "@/utils/crypto";
 
 export async function PUT(req: NextRequest) {
+	const session = await auth();
 	const { value, isValueAstring } = await RouteHelper.getValueAsString(req);
-  //TODO  WIP - To be removed.
-  const email = process.env.EMAIL_TEST as string;
-
-	if (isValueAstring) {
+	
+	if (isValueAstring && session) {
+		const email = session.user.email as string;
 		const { "create-password": password } = JSON.parse(value);
+		
 		const user = await Mongo.getDocumentFrom<UserSchemaType>({
 			db: "main",
 			collection: "users",
