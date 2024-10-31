@@ -54,8 +54,8 @@ export const WeatherWidget = ({ host }: { host: string | undefined }) => {
 		);
 
 		return (
-			<div className="main-header-openweather-container flex items-center gap-2">
-				<span className="hidden md:block">{location}</span>
+			<div className="main-header-openweather-container hidden md:flex items-center gap-2">
+				<span>{location}</span>
 				<Image
 					src={iconUrl}
 					width={30}

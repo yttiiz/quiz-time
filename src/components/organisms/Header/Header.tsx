@@ -22,7 +22,7 @@ export const Header = async ({
 						className="flex gap-3 items-center"
 					>
 						<Logo />
-						<p>{title}</p>
+						<p className="hidden md:block">{title}</p>
 					</a>
 					<UserDetailsLink />
 				</div>
