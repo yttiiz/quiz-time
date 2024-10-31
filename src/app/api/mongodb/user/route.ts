@@ -39,9 +39,9 @@ export async function POST(req: NextRequest) {
 			data: { _id: new ObjectId(), firstname, lastname, email, hash, role: "user" }
 		});
 
-		if (!acknowledged) return NextResponse.json({ message: "User not created" });
-		
-		return NextResponse.json({ message: "User created" })
+		return acknowledged
+			? NextResponse.json({ message: "User created" })
+			: NextResponse.json({ message: "User not created" });
 	}
 
 	return NextResponse.json({ message: "Incorrect value given." });
