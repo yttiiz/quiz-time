@@ -361,6 +361,12 @@ dialog {
     line-height: calc(var(--base-size) * 5.5);
   }
   
+  & h2 {
+    font-size: calc(var(--base-size) * 1.75);
+    font-weight: 700;
+    line-height: calc(var(--base-size) * 2.5);
+  }
+  
   & p {
     font-size: var(--base-size);
     line-height: calc(var(--base-size) * 2);
@@ -541,6 +547,12 @@ dialog {
       font-size: calc(var(--base-size) * 8);
       font-weight: 700;
       line-height: calc(var(--base-size) * 9);
+    }
+
+    h2 {
+      font-size: calc(var(--base-size) * 2.5);
+      line-height: calc(var(--base-size) * 3.25);
+      font-weight: 700;
     }
   }
 }

@@ -14,7 +14,7 @@ export const Hero = async () => {
 			id="hero-banner"
 			className="hero-quiz"
 		>
-			<div className="container grid py-24 px-6 gap-4">
+			<div className="container grid md:py-24 md:px-6 gap-4">
 				{response.ok ? (
 					<>
 						<h1 className="text-center text-secondary-default">
