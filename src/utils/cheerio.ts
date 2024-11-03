@@ -45,7 +45,8 @@ export class Cheerio {
 						.children(secondarySelector)
 						.find("h2")
 						.children("a")
-						.text();
+						.text()
+						.replace(" : le résumé de la semaine", "");
 
 					const { src, width, height } = $image;
 
