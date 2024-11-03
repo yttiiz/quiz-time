@@ -343,7 +343,8 @@ dialog {
 
 .hero-quiz,
 .user-login,
-.not-found {
+.not-found,
+.news {
   min-height: calc(100vh - var(--main-header-height));
 }
 

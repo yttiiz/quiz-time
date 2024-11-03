@@ -1,5 +1,9 @@
-const { protocol, hostname, port } = new URL(
+const openWeather = new URL(
   process.env.OPENWEATHER_URL,
+);
+
+const news = new URL(
+	process.env.RATTRAPAGE_ACTU_URL,
 );
 
 /** @type {import('next').NextConfig} */
@@ -13,9 +17,14 @@ const nextConfig = {
 	images: {
 		remotePatterns: [
 			{
-				protocol: protocol.slice(0, -1),
-				hostname,
-				port,
+				protocol: openWeather.protocol.slice(0, -1),
+				hostname: openWeather.hostname,
+				port: openWeather.port,
+			},
+			{
+				protocol: news.protocol.slice(0, -1),
+				hostname: news.hostname,
+				port: news.port,
 			},
 		],
 	},
