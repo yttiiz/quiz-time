@@ -1,6 +1,6 @@
 {
-	"name": "courses",
-	"version": "0.1.0",
+	"name": "quiz-time",
+	"version": "1.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
