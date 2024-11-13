@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export const NewsDetails = async () => {
   const url = process.env.RATTRAPAGE_ACTU_URL;
-	const data = await Cheerio.getDataFrom(
-    url,
+	const data = await Cheerio.getNewsDataFrom(
+		url,
 		".et_pb_slide .et_pb_container",
 	);
 

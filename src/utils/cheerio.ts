@@ -15,7 +15,7 @@ export class Cheerio {
 		return load(content);
 	}
 
-	public static async getDataFrom(
+	public static async getNewsDataFrom(
 		address: string | undefined,
 		selectors: string,
 	) {
@@ -40,7 +40,7 @@ export class Cheerio {
 						.children(secondarySelector)
 						.find(".et_pb_button_wrapper")
 						.children("a")["0"]["attribs"]["href"];
-						
+
 					const $title = $this
 						.children(secondarySelector)
 						.find("h2")
