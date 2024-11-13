@@ -8,6 +8,7 @@ export * from "./Login/Login";
 export * from "./NotFound/NotFound";
 export * from "./NewsSection/NewsSection";
 export * from "./NewsDetails/NewsDetails";
+export * from "./AboutSection/AboutSection";
 export * from "./UserDetailsLink/UserDetailsLink";
 export * from "./UserDetails/UserDetails";
 export * from "./UserDetailsSection/UserDetailsSection";
