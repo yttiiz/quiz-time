@@ -1,9 +1,9 @@
 import { AboutDetails } from "../mod";
 
-export const AboutSection = ({ id }: { id: string }) => {
+export const AboutSection = () => {
 	return (
-		<section id={id}>
-			<div className="container grid gap-6 h-full items-center py-24 md:px-6">
+		<section id={"about"}>
+			<div className="container about py-24 md:px-6">
 				<AboutDetails />
 			</div>
 		</section>

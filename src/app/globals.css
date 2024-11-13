@@ -344,13 +344,15 @@ dialog {
 .hero-quiz,
 .user-login,
 .not-found,
-.news {
+.news,
+.about {
   min-height: calc(100vh - var(--main-header-height));
 }
 
 .hero-quiz,
 .user-login,
-.not-found {
+.not-found,
+.about {
   padding: calc(var(--main-header-height) * .75) 0;
 }
 
