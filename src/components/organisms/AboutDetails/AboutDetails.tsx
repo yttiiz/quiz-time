@@ -10,9 +10,9 @@ export const AboutDetails = async () => {
     return (
 			<>
 				<h1 className="mb-6">Qui sommes-nous ?</h1>
-				<div className="flex flex-col gap-4">
-					<h2>{fullname}</h2>
-					<h3>{pseudo}</h3>
+				<div className="flex flex-col p-6 gap-2 border-2 border-primary-content/10 rounded-2xl">
+					<h2>{pseudo}</h2>
+					<h3>{fullname}</h3>
 					<p>{description}</p>
 				</div>
 			</>
