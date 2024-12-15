@@ -39,7 +39,7 @@ export const FormSelectQuiz = ({
 	return (
 		<>
 			<form action={formAction}>
-				<h3 className="flex gap-4 items-center">
+				<h3 className="flex flex-col md:flex-row text-center md:text-left gap-4 items-center">
 					<IconElearning variant="secondary" />
 					{title}
 				</h3>
@@ -53,7 +53,7 @@ export const FormSelectQuiz = ({
 					type="submit"
 					spacing="2"
 					radius="md"
-					className="w-max"
+					className="w-full md:w-max"
 				/>
 			</form>
 			<Dialog
