@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@yttiiz/utils':
-        specifier: npm:@jsr/yttiiz__utils@^0.2.0
-        version: '@jsr/yttiiz__utils@0.2.0'
+        specifier: npm:@jsr/yttiiz__utils@^0.2.1
+        version: '@jsr/yttiiz__utils@0.2.1'
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1
@@ -149,8 +149,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@jsr/yttiiz__utils@0.2.0':
-    resolution: {integrity: sha512-FOnzSNV625S+G4v6fmBgkiVmOJaOo11i/TRidS6H0pHqsw0ZF07IuY6ei6FEdaBXaZbJlHi4Vyz2BLnpgDOH9Q==, tarball: https://npm.jsr.io/~/11/@jsr/yttiiz__utils/0.2.0.tgz}
+  '@jsr/yttiiz__utils@0.2.1':
+    resolution: {integrity: sha512-nleMbkey0Z1OWBL4eADCch0x2lOkFbhtoHezX5Xi3irpMmahjDanxJo2eb70Bj5aP+UPI1b4yFRttL8Md3h8SQ==, tarball: https://npm.jsr.io/~/11/@jsr/yttiiz__utils/0.2.1.tgz}
 
   '@mapbox/node-pre-gyp@1.0.11':
     resolution: {integrity: sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==}
@@ -1992,7 +1992,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@jsr/yttiiz__utils@0.2.0': {}
+  '@jsr/yttiiz__utils@0.2.1': {}
 
   '@mapbox/node-pre-gyp@1.0.11':
     dependencies:
