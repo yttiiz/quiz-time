@@ -10,7 +10,7 @@
 		"reset": "rm -rf .next && next dev"
 	},
 	"dependencies": {
-		"@yttiiz/utils": "npm:@jsr/yttiiz__utils@^0.2.0",
+		"@yttiiz/utils": "npm:@jsr/yttiiz__utils@^0.2.1",
 		"bcrypt": "^5.1.1",
 		"cheerio": "^1.0.0",
 		"mongodb": "^6.8.1",
