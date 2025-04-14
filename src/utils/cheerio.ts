@@ -37,36 +37,37 @@ export class Cheerio {
 
 				$(mainSelector, dom).each(function () {
 					const $this = $(this);
+					const $imageElement = $this.children(secondarySelector).find("img")["0"];
 
-					const $image = $this.children(secondarySelector).find("img")["0"][
-						"attribs"
-					];
-
-					const $link = $this
-						.children(secondarySelector)
-						.find(".et_pb_button_wrapper")
-						.children("a")["0"]["attribs"]["href"];
-
-					const $title = $this
-						.children(secondarySelector)
-						.find("h2")
-						.children("a")
-						.text()
-						.replace(" : le résumé de la semaine", "");
-
-					const { src, width, height } = $image;
-
-					data[index] = {
-						image: {
-							src,
-							width,
-							height,
-						},
-						title: $title,
-						link: $link,
-					};
-
-					index++;
+					if ($imageElement) {
+						const $image = $imageElement["attribs"];
+	
+						const $link = $this
+							.children(secondarySelector)
+							.find(".et_pb_button_wrapper")
+							.children("a")["0"]["attribs"]["href"];
+	
+						const $title = $this
+							.children(secondarySelector)
+							.find("h2")
+							.children("a")
+							.text()
+							.replace(" : le résumé de la semaine", "");
+	
+						const { src, width, height } = $image;
+	
+						data[index] = {
+							image: {
+								src,
+								width,
+								height,
+							},
+							title: $title,
+							link: $link,
+						};
+	
+						index++;
+					}
 				});
 
 				return data;
