@@ -1,4 +1,4 @@
-import { GetStartedButton } from "@/components/mod";
+import { GetStartedButton } from "@/components/client.mod";
 import { Fetcher } from "@yttiiz/utils";
 
 export const Hero = async () => {

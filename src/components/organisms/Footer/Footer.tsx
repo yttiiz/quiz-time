@@ -1,4 +1,5 @@
-import { FooterLinks, FooterSocialMedia, ItemType } from "@/components/mod";
+import { FooterSocialMedia, ItemType } from "@/components/mod";
+import { FooterLinks } from "@/components/client.mod"
 import { FooterCopyrights } from "@/components/molecules/FooterCopyrights/FooterCopyrights";
 import { ErrorResponseType, Fetcher, SuccessResponseType } from "@yttiiz/utils";
 

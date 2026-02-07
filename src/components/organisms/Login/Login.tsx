@@ -1,9 +1,8 @@
 import {
-	FormLogin,
-	FormSignup,
 	LoginPropsType,
 	SignupLink,
 } from "@/components/mod";
+import { FormLogin, FormSignup } from "@/components/client.mod";
 
 export const Login = ({ title, form = "signin" }: LoginPropsType) => {
 	return (

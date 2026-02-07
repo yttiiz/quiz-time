@@ -1,8 +1,8 @@
 import {
 	ErrorMessage,
-	FormSelectQuiz,
 	SelectOptionsType,
 } from "@/components/mod";
+import { FormSelectQuiz } from "@/components/client.mod"
 import { Fetcher } from "@yttiiz/utils";
 
 export const QuizGames = async () => {
