@@ -3,8 +3,8 @@ import { Fetcher } from "@yttiiz/utils";
 import style from "../quiz.module.css";
 import { QuestionSchemaType } from "@/services/mod";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-	const { slug } = params;
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
 	const title = `${slug[0].toLocaleUpperCase()}${slug.slice(1)} Quiz`;
 	
 	const { APP_URL: host } = process.env;
