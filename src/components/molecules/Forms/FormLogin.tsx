@@ -11,7 +11,7 @@ import {
 	Input,
 	InputWithForgotPassword,
 } from "@/components/mod";
-import { FormEvent, useReducer, useState } from "react";
+import { SubmitEvent, useReducer, useState } from "react";
 
 export const FormLogin = () => {
 	const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -62,7 +62,7 @@ export const FormLogin = () => {
 		}
 	};
 
-	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+	const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {
 		const formData = new FormData(event.currentTarget);
 		const { email, password } = getData(formData);
 

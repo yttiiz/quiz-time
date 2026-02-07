@@ -13,7 +13,7 @@ import {
 } from "@/components/mod";
 import { DomHelper } from "@/utils/mod";
 import {
-	FormEvent,
+	SubmitEvent,
 	useMemo,
 	useReducer,
 	useRef,
@@ -75,7 +75,7 @@ export const FormSignup = () => {
 		}
 	};
 
-	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+	const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {
 		const formData = new FormData(event.currentTarget);
 
 		for (const [key, value] of formData) {

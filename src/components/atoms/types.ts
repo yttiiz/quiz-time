@@ -1,4 +1,4 @@
-import { FormEventHandler, HTMLInputTypeAttribute, MouseEventHandler, ReactNode } from "react";
+import { SubmitEventHandler, HTMLInputTypeAttribute, MouseEventHandler, ReactNode } from "react";
 import { SizeType, SpacingType, VariantType } from "../types";
 
 type CommonPropsType = {
@@ -48,6 +48,6 @@ export type InputPropsType = {
 	leadingIcon?: ReactNode;
 	trailingIcon?: ReactNode;
 	feedbackMessage?: string;
-	onInput: FormEventHandler<HTMLInputElement>;
+	onInput: SubmitEventHandler<HTMLInputElement>;
 	onClickPasswordButton?: () => void;
 };

@@ -7,7 +7,7 @@ import {
 	Dialog,
 	SelectOptionsType,
 } from "@/components/mod";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { selectQuizServerAction } from "@/actions/actions";
 import { useEffect, useRef } from "react";
 import { DomHelper } from "@/utils/mod";
@@ -20,7 +20,7 @@ export const FormSelectQuiz = ({
 		options: SelectOptionsType[];
 	};
 }) => {
-	const [{ message }, formAction] = useFormState(selectQuizServerAction, {
+	const [{ message }, formAction] = useActionState(selectQuizServerAction, {
 		message: "",
 	});
 	const { title, options } = data;

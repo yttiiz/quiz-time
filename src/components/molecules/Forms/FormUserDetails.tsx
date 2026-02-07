@@ -11,14 +11,14 @@ import {
 import { DomHelper } from "@/utils/mod";
 import { User } from "next-auth";
 import {
-	FormEvent,
+	SubmitEvent,
 	useEffect,
 	useMemo,
 	useReducer,
 	useRef,
 	useState,
 } from "react";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 export const FormUserDetails = ({ user }: { user: User }) => {
 	const [errorFirstnameMessage, setErrorFirstnameMessage] = useState("");
@@ -26,7 +26,7 @@ export const FormUserDetails = ({ user }: { user: User }) => {
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-	const [{ message }, formAction] = useFormState(userModificationServerAction, {
+	const [{ message }, formAction] = useActionState(userModificationServerAction, {
 		message: "",
 	});
 
@@ -64,7 +64,7 @@ export const FormUserDetails = ({ user }: { user: User }) => {
 		initializerArg,
 	);
 
-	const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = (event: SubmitEvent<HTMLFormElement>) => {
 		if (!firstname) {
 			setErrorFirstnameMessage("Veuillez renseigner ce champ.");
 			event.preventDefault();

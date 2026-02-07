@@ -4,7 +4,7 @@ import { Button, QuizItems, QuizResult } from "@/components/mod";
 import { QuestionSchemaType } from "@/services/mod";
 import { useEffect, useRef, useState } from "react";
 import { selectItemServerAction } from "@/actions/actions";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 export const QuizQuestions = ({ list }: { list: QuestionSchemaType[] }) => {
 	const formRef = useRef<HTMLFormElement | null>(null);
@@ -12,7 +12,7 @@ export const QuizQuestions = ({ list }: { list: QuestionSchemaType[] }) => {
 	const [points, setPoints] = useState(0);
 
 	const isQuizEnded = count < list.length;
-	const [{ message }, formAction] = useFormState(selectItemServerAction, {
+	const [{ message }, formAction] = useActionState(selectItemServerAction, {
 		message: "",
 	});
 
