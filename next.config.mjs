@@ -8,12 +8,11 @@ const news = new URL(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	experimental: {
-		outputFileTracingIncludes: {
-			"/api/json": ["src/data/**"],
-			"/api/forgot-password": ["src/logs/**"]
-		}
+	outputFileTracingIncludes: {
+		"/api/json": ["src/data/**"],
+		"/api/forgot-password": ["src/logs/**"]
 	},
+	turbopack: {},
 	images: {
 		remotePatterns: [
 			{
