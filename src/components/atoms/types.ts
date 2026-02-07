@@ -1,4 +1,4 @@
-import { SubmitEventHandler, HTMLInputTypeAttribute, MouseEventHandler, ReactNode, InputEventHandler } from "react";
+import { HTMLInputTypeAttribute, MouseEventHandler, ReactNode, InputEventHandler } from "react";
 import { SizeType, SpacingType, VariantType } from "../types";
 
 type CommonPropsType = {

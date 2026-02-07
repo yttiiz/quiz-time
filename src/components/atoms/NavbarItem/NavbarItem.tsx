@@ -6,11 +6,9 @@ import { handleSignOut } from "@/actions/authActions";
 
 export const NavbarItem = (
 	{ textContent, url, isFormConnexion }: NavbarItemPropsType,
-	key: string,
 ) => {
 	return (
 		<li
-			key={key}
 			className="w-full h-max"
 		>
 			{isFormConnexion ? (
