@@ -1,4 +1,5 @@
-import { Button, ErrorMessage } from "@/components/mod";
+import { Button } from "@/components/mod";
+import { ErrorMessage } from "@/components/client.mod";
 import { useUserSession } from "@/store/store";
 
 export const QuizResult = ({

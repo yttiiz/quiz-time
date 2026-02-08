@@ -1,4 +1,4 @@
-import { ErrorMessage } from "@/components/mod";
+import { ErrorMessage } from "@/components/client.mod";
 import { QuizQuestions, QuizSectionPropsType } from "../mod";
 import { QuestionSchemaType } from "@/services/mod";
 

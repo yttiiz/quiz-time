@@ -16,7 +16,7 @@ export const Select = ({
 				<option value={""}>{placeholder}</option>
 				{options.map(({ value, label }) => (
 					<option
-						key={((Math.random() + 1) * 1000).toFixed()}
+						key={value}
 						value={value}
 					>
 						{label}

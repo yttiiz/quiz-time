@@ -1,7 +1,5 @@
-import {
-	ErrorMessage,
-	SelectOptionsType,
-} from "@/components/mod";
+import { SelectOptionsType } from "@/components/mod";
+import { ErrorMessage } from "@/components/client.mod";
 import { FormSelectQuiz } from "@/components/client.mod"
 import { Fetcher } from "@yttiiz/utils";
 

@@ -1,8 +1,8 @@
 import {
-	ErrorMessage,
 	FormUserDetails,
 	FormUserPassword,
 } from "@/components/mod";
+import { ErrorMessage } from "@/components/client.mod"
 import { auth } from "@/auth";
 
 export const UserDetails = async () => {
