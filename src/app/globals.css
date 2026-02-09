@@ -361,7 +361,7 @@ dialog {
 }
 
 #hero-banner {
-  background: url(/img/stars.svg), radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
+  background: radial-gradient(rgb(var(--background-alt)) -10%, rgb(var(--background)) 60%);
   display: flex;
   
   & h1 {
