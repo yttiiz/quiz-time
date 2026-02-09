@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 import { DialogMainPropsType } from "../../types";
-import { Button } from "@/components/mod";
+import { Button } from "@/components/client.mod";
 
 export const DialogBody = ({
 	paragraph,

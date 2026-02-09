@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
-import { Burger, ItemType, Logo, UserDetailsLink, WeatherWidget } from "@/components/mod";
+import { ItemType, Logo, UserDetailsLink } from "@/components/mod";
+import { Burger, WeatherWidget } from "@/components/client.mod"
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 
 export const Header = async ({

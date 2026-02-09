@@ -1,5 +1,5 @@
-import { ErrorMessage } from "@/components/client.mod";
-import { QuizQuestions, QuizSectionPropsType } from "../mod";
+import { ErrorMessage, QuizQuestions } from "@/components/client.mod";
+import { QuizSectionPropsType } from "../mod";
 import { QuestionSchemaType } from "@/services/mod";
 
 export const QuizSection = ({

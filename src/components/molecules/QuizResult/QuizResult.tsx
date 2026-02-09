@@ -1,4 +1,4 @@
-import { Button } from "@/components/mod";
+import { Button } from "@/components/client.mod";
 import { ErrorMessage } from "@/components/client.mod";
 import { useUserSession } from "@/store/store";
 
