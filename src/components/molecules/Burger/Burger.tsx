@@ -1,101 +1,99 @@
-"use client"
+"use client";
 
-import { Navbar, ItemType } from "@/components/mod";
+import { Navbar } from "@/components/client.mod";
+import { ItemType } from "@/components/mod";
 import { SetterType, store, useHeaderStore, useUserSession } from "@/store/mod";
 import { ErrorResponseType, SuccessResponseType } from "@yttiiz/utils";
 import { Session } from "next-auth";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Burger = ({
-	session,
-	response,
+  session,
+  response,
 }: {
-	response: SuccessResponseType<{ items: ItemType[] }> | ErrorResponseType;
-	session: Session | null;
+  response: SuccessResponseType<{ items: ItemType[] }> | ErrorResponseType;
+  session: Session | null;
 }) => {
-	const [setItems] = store(useHeaderStore, "setItems") as [
-		SetterType<ItemType[]>,
-	];
-	const [setSession] = store(useUserSession, "setSession") as [
-		SetterType<Session | null>,
-	];
+  const [setItems] = store(useHeaderStore, "setItems") as [
+    SetterType<ItemType[]>,
+  ];
+  const [setSession] = store(useUserSession, "setSession") as [
+    SetterType<Session | null>,
+  ];
 
-	const line1 = useRef<HTMLSpanElement | null>(null);
-	const line2 = useRef<HTMLSpanElement | null>(null);
-	const line3 = useRef<HTMLSpanElement | null>(null);
-	const navBar = useRef<HTMLDivElement | null>(null);
-	const burger = useRef<HTMLDivElement | null>(null);
-	const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const line1 = useRef<HTMLSpanElement | null>(null);
+  const line2 = useRef<HTMLSpanElement | null>(null);
+  const line3 = useRef<HTMLSpanElement | null>(null);
+  const navBar = useRef<HTMLDivElement | null>(null);
+  const burger = useRef<HTMLDivElement | null>(null);
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
-	const handleBurgerAndNavigationAnimation = () => {
-		if (line1.current && line2.current && line3.current) {
-			line1.current.classList.toggle("line-1");
-			line2.current.classList.toggle("line-2");
-			line3.current.classList.toggle("line-3");
-		}
+  const handleBurgerAndNavigationAnimation = () => {
+    if (line1.current && line2.current && line3.current) {
+      line1.current.classList.toggle("line-1");
+      line2.current.classList.toggle("line-2");
+      line3.current.classList.toggle("line-3");
+    }
 
-		if (navBar.current) {
-			navBar.current.classList.toggle("none");
-		}
-	};
+    if (navBar.current) {
+      navBar.current.classList.toggle("none");
+    }
+  };
 
-	const handleClickInsideBurgerAndNavigation = () => {
-		handleBurgerAndNavigationAnimation();
-		setIsNavbarOpen(!isNavbarOpen);
-	};
+  const handleClickInsideBurgerAndNavigation = () => {
+    handleBurgerAndNavigationAnimation();
+    setIsNavbarOpen(!isNavbarOpen);
+  };
 
-	const handleClickOutsideBurgerAndNavigation = (
-		event: globalThis.MouseEvent,
-	) => {
-		if ((event.target as HTMLElement).closest("#burger")) return;
-		if (isNavbarOpen) {
-			handleBurgerAndNavigationAnimation();
-			setIsNavbarOpen(!isNavbarOpen);
-		}
-	};
+  const handleClickOutsideBurgerAndNavigation = (
+    event: globalThis.MouseEvent,
+  ) => {
+    if ((event.target as HTMLElement).closest("#burger")) return;
+    if (isNavbarOpen) {
+      handleBurgerAndNavigationAnimation();
+      setIsNavbarOpen(!isNavbarOpen);
+    }
+  };
 
-	useEffect(() => {
-		const burgerElement = burger.current;
-		
-		setSession(session);
+  useEffect(() => {
+    const burgerElement = burger.current;
 
-		if (response.ok) {
-			const { items } = response.data;
-			setItems(items);
-		}
+    setSession(session);
 
-		if (burgerElement) {
-			globalThis.addEventListener(
-				"click",
-				handleClickOutsideBurgerAndNavigation,
-			);
-		}
+    if (response.ok) {
+      const { items } = response.data;
+      setItems(items);
+    }
 
-		return () => {
-			if (burgerElement) {
-				globalThis.removeEventListener(
-					"click",
-					handleClickOutsideBurgerAndNavigation,
-				);
-			}
-		};
-	});
+    if (burgerElement) {
+      globalThis.addEventListener(
+        "click",
+        handleClickOutsideBurgerAndNavigation,
+      );
+    }
 
-	return (
-		<div
-			id="burger"
-			ref={burger}
-		>
-			<button
-				type="button"
-				className="cursor-pointer"
-				onClick={handleClickInsideBurgerAndNavigation}
-			>
-				<span ref={line1}></span>
-				<span ref={line2}></span>
-				<span ref={line3}></span>
-			</button>
-			<Navbar ref={navBar} />
-		</div>
-	);
+    return () => {
+      if (burgerElement) {
+        globalThis.removeEventListener(
+          "click",
+          handleClickOutsideBurgerAndNavigation,
+        );
+      }
+    };
+  });
+
+  return (
+    <div id="burger" ref={burger}>
+      <button
+        type="button"
+        className="cursor-pointer"
+        onClick={handleClickInsideBurgerAndNavigation}
+      >
+        <span ref={line1}></span>
+        <span ref={line2}></span>
+        <span ref={line3}></span>
+      </button>
+      <Navbar ref={navBar} />
+    </div>
+  );
 };

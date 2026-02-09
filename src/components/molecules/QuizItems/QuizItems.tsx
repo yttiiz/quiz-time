@@ -1,8 +1,9 @@
 "use client";
 
-import { forwardRef, ForwardedRef, useRef, useEffect } from "react";
-import { Dialog, QuizItemsPropsType } from "../mod";
+import { Dialog } from "@/components/client.mod";
 import { DomHelper } from "@/utils/mod";
+import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
+import { QuizItemsPropsType } from "../mod";
 
 // eslint-disable-next-line react/display-name
 export const QuizItems = forwardRef(

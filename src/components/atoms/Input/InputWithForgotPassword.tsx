@@ -1,12 +1,12 @@
 "use client";
 
-import { DialogWithFieldText } from "@/components/mod";
-import { InputPropsType } from "../mod";
-import { MouseEvent, useRef, useState } from "react";
-import { DomHelper } from "@/utils/mod";
-import { Fetcher } from "@yttiiz/utils";
+import { DialogWithFieldText } from "@/components/client.mod";
 import { store, useDialogFieldDisplayStore } from "@/store/store";
 import { SetterType } from "@/store/types";
+import { DomHelper } from "@/utils/mod";
+import { Fetcher } from "@yttiiz/utils";
+import { MouseEvent, useRef, useState } from "react";
+import { InputPropsType } from "../mod";
 
 export const InputWithForgotPassword = ({
 	value,
